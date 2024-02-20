@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 function Login() {
   return (
     <main className="page__main page__main--login">

@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 function Favorites() {
   return (
     <main className="page__main page__main--favorites">

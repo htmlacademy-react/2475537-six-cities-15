@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Main from '../../pages/main/main';
 
 type AppProps = {

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import RentCard from '../../components/rentCard/rentCard';
 
 type MainProps = {
