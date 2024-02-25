@@ -7,11 +7,11 @@ const root = ReactDOM.createRoot(
 );
 
 const AppSettings = {
-  CardToShow: 6
+  cardsCount: 6
 } as const;
 
 root.render(
   <React.StrictMode>
-    <App CardsToShow={AppSettings.CardToShow} />
+    <App cardsCount={AppSettings.cardsCount} />
   </React.StrictMode>
 );

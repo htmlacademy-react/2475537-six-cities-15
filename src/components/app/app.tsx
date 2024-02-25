@@ -1,11 +1,11 @@
 import Main from '../../pages/main/main';
 
 type AppProps = {
-  CardsToShow: number;
+  cardsCount: number;
 };
 
-function App(props: AppProps) {
-  return <Main CardsToShow={props.CardsToShow} />;
+function App({ cardsCount }: AppProps) {
+  return <Main cardsCount={cardsCount} />;
 }
 
 export default App;

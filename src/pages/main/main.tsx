@@ -1,10 +1,10 @@
 import RentCard from '../../components/rentCard/rentCard';
 
 type MainProps = {
-  CardsToShow: number;
+  cardsCount: number;
 };
 
-function Main(props: MainProps) {
+function Main({ cardsCount }: MainProps) {
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -73,7 +73,7 @@ function Main(props: MainProps) {
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              {Array.from({ length: props.CardsToShow }, (_, i) => <RentCard key={i}/>)}
+              {Array.from({ length: cardsCount }, (_, i) => <RentCard key={i}/>)}
             </div>
           </section>
           <div className="cities__right-section">
