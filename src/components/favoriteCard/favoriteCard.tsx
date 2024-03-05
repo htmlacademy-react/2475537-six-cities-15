@@ -1,41 +1,40 @@
 import { Link } from 'react-router-dom';
 import { OfferInfo } from '../../types/offer';
 
-type RentCardProps = {
+type FavoriteCardProps = {
   offer: OfferInfo;
-  onActiveCardChanged?: (activeCard: number) => void;
 };
 
 
-function RentCard({ offer, onActiveCardChanged }: RentCardProps) {
+function FavoriteCard({ offer }: FavoriteCardProps) {
   const [mainImage] = offer.images;
 
   return (
-    <article className="cities__card place-card" onMouseOver={() => onActiveCardChanged(offer.id)} onMouseOut={() => onActiveCardChanged(0)}>
+    <article className="favorites__card place-card">
       {offer.isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       )}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className="favorites__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img
             className="place-card__image"
             src={mainImage.src}
-            width={260}
-            height={200}
+            width={150}
+            height={110}
             alt={mainImage.description}
           />
         </a>
       </div>
-      <div className="place-card__info">
+      <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">{offer.priceCurrency}{offer.price}</b>
             <span className="place-card__price-text">/&nbsp;{offer.priceType}</span>
           </div>
           <button
-            className={`place-card__bookmark-button button ${offer.isFavorite ? 'place-card__bookmark-button--active' : ''}`}
+            className="place-card__bookmark-button place-card__bookmark-button--active button"
             type="button"
           >
             <svg
@@ -45,7 +44,7 @@ function RentCard({ offer, onActiveCardChanged }: RentCardProps) {
             >
               <use xlinkHref="#icon-bookmark" />
             </svg>
-            <span className="visually-hidden">To bookmarks</span>
+            <span className="visually-hidden">In bookmarks</span>
           </button>
         </div>
         <div className="place-card__rating rating">
@@ -62,4 +61,4 @@ function RentCard({ offer, onActiveCardChanged }: RentCardProps) {
     </article>);
 }
 
-export default RentCard;
+export default FavoriteCard;
