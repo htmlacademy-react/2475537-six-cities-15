@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import RentCardList from '../../components/rentCardList/rentCardList';
 import { OfferInfo } from '../../types/offer';
+import Map from '../../components/map/map';
 
 type MainProps = {
   cardsCount: number;
@@ -7,6 +9,12 @@ type MainProps = {
 };
 
 function Main({ cardsCount, offers }: MainProps) {
+  const [activeCard, setActiveCard] = useState(-1);
+
+  const handleCardChanged = (newActiveCard: number) => {
+    setActiveCard(newActiveCard);
+  };
+
   return (
     <main className="page__main page__main--index">
       <div className="cities">
@@ -37,10 +45,10 @@ function Main({ cardsCount, offers }: MainProps) {
                 </li>
               </ul>
             </form>
-            <RentCardList cardsCount={cardsCount} offers={offers} />
+            <RentCardList cardsCount={cardsCount} offers={offers} onActiveCardChanged={handleCardChanged}/>
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map" />
+            <Map offers={offers} activeOffer={activeCard}/>
           </div>
         </div>
       </div>

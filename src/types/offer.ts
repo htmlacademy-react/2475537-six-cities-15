@@ -15,6 +15,7 @@ export type OfferInfo = {
   bedrooms: number;
   maxGuests: number;
   inside: string[];
+  coords: Coords;
 };
 
 export type OfferImage = {
@@ -37,4 +38,9 @@ export type Review = {
   rating: number;
   review: string;
   date: Date;
+}
+
+export type Coords = {
+  lat: number;
+  lng: number;
 }
