@@ -22,7 +22,11 @@ function Favorites({ offers }: FavoritesProps) {
   const generateGroups = () => {
     const result: React.JSX.Element[] = [];
     for (const [city, cityOffers] of groupOffers()) {
-      result.push(<FavoriteGroup city={city} offers={cityOffers} key={`group_${city}`} />);
+      result.push(
+        <li className="favorites__locations-items" key={`group_${city}`}>
+          <FavoriteGroup city={city} offers={cityOffers} />
+        </li>
+      );
     }
     return result;
   };

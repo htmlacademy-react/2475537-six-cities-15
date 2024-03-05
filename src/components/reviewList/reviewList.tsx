@@ -20,7 +20,11 @@ function ReviewList(props: ReviewListProps) {
         Reviews · <span className="reviews__amount">{reviews.length}</span>
       </h2>
       <ul className="reviews__list">
-        {reviews.map((r) => (<ReviewCard review={r} key={r.id} />))}
+        {reviews.map((r) => (
+          <li className="reviews__item" key={r.id}>
+            <ReviewCard review={r} />
+          </li>
+        ))}
       </ul>
       <ReviewForm onReviewAdded={reviewAdded}/>
     </section>

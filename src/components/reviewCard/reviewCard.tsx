@@ -6,7 +6,7 @@ type ReviewCardProps = {
 
 function ReviewCard({ review }: ReviewCardProps) {
   return (
-    <li className="reviews__item">
+    <>
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
           <img
@@ -29,7 +29,7 @@ function ReviewCard({ review }: ReviewCardProps) {
         <p className="reviews__text">{review.review}</p>
         <time className="reviews__time" dateTime={review.date.toISOString()}>{review.date.toLocaleString('en-us', { month: 'long', year: 'numeric' })}</time>
       </div>
-    </li>
+    </>
   );
 }
 
