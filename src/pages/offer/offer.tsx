@@ -10,8 +10,8 @@ type OfferProps = {
 };
 
 function Offer({ offers, reviews }: OfferProps) {
-  const { id } = useParams<{ id: string }>();
-  const selectedId = parseInt(id, 10);
+  const { id } = useParams();
+  const selectedId = parseInt(id ?? 0, 10);
 
   const offer = offers.find((o) => o.id === selectedId);
   const nearOffers = offers.filter((o) => o.id !== selectedId);
