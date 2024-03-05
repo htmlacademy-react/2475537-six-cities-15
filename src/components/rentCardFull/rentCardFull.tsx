@@ -12,8 +12,8 @@ function RentCardFull({ offer, reviews }: RentCardFullProps) {
     <section className="offer">
       <div className="offer__gallery-container container">
         <div className="offer__gallery">
-          {offer.images.map((img, i) => (
-            <div className="offer__image-wrapper" key={i}>
+          {offer.images.map((img) => (
+            <div className="offer__image-wrapper" key={Math.random()}>
               <img className="offer__image" src={img.src} alt={img.description} />
             </div>
           ))}
@@ -58,7 +58,7 @@ function RentCardFull({ offer, reviews }: RentCardFullProps) {
           <div className="offer__inside">
             <h2 className="offer__inside-title">What&apos;s inside</h2>
             <ul className="offer__inside-list">
-              {offer.inside.map((item, i) => (<li className="offer__inside-item" key={i}>{item}</li>))}
+              {offer.inside.map((item) => (<li className="offer__inside-item" key={Math.random()}>{item}</li>))}
             </ul>
           </div>
           <HostCard host={offer.host} />

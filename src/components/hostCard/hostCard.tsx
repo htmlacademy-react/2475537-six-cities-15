@@ -23,7 +23,7 @@ function HostCard({ host }: HostCardProps) {
         <span className="offer__user-status">{host.category}</span>
       </div>
       <div className="offer__description">
-        {host.description.split('\n').map((str, i) => (<p className="offer__text" key={i}>{str}</p>))}
+        {host.description.split('\n').map((str) => (<p className="offer__text" key={Math.random()}>{str}</p>))}
       </div>
     </div>
   );

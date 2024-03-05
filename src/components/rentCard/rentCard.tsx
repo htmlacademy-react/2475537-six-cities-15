@@ -11,14 +11,16 @@ function RentCard({ offer, onActiveCardChanged }: RentCardProps) {
   const [mainImage] = offer.images;
 
   const onMouseOver = () => {
-    if (onActiveCardChanged)
+    if (onActiveCardChanged) {
       onActiveCardChanged(offer.id);
-  }
+    }
+  };
 
   const onMouseOut = () => {
-    if (onActiveCardChanged)
+    if (onActiveCardChanged) {
       onActiveCardChanged(0);
-  }
+    }
+  };
 
   return (
     <article className="cities__card place-card" onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
