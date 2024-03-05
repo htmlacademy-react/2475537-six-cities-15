@@ -10,8 +10,18 @@ type RentCardProps = {
 function RentCard({ offer, onActiveCardChanged }: RentCardProps) {
   const [mainImage] = offer.images;
 
+  const onMouseOver = () => {
+    if (onActiveCardChanged)
+      onActiveCardChanged(offer.id);
+  }
+
+  const onMouseOut = () => {
+    if (onActiveCardChanged)
+      onActiveCardChanged(0);
+  }
+
   return (
-    <article className="cities__card place-card" onMouseOver={() => onActiveCardChanged(offer.id)} onMouseOut={() => onActiveCardChanged(0)}>
+    <article className="cities__card place-card" onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
       {offer.isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>

@@ -15,7 +15,7 @@ function RentCardList({ cardsCount, offers }: RentCardListProps) {
   };
 
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className="cities__places-list places__list tabs__content" activeCard={activeCard}>
       {Array.from({ length: cardsCount }, (_, i) => i < offers.length ? <RentCard key={i} offer={offers[i]} onActiveCardChanged={activeCardChanged} /> : undefined)}
     </div>);
 }
