@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, MutableRefObject } from 'react';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/useMap';
 import useMapMarkers from '../../hooks/useMapMarkers';
@@ -13,7 +13,7 @@ type MapProps = {
 function Map({ offers, activeOffer, height }: MapProps) {
   const [firstOffer] = offers;
 
-  const mapRef = useRef<string | HTMLElement>(null);
+  const mapRef = useRef<MutableRefObject<string | HTMLElement>>(null);
   const map = useMap(mapRef, {
     lat: firstOffer.coords.lat,
     lng: firstOffer.coords.lng,
