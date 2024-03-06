@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef, RefObject } from 'react';
-import leaflet, { LayerGroup, TileLayer } from 'leaflet';
+import leaflet, { Map } from 'leaflet';
 import { Coords } from '../types/offer';
 
 function useMap(mapRef: RefObject<string | HTMLElement>, center: Coords, zoom: number) {
-  const [map, setMap] = useState<LayerGroup<TileLayer> | null>(null);
+  const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef(false);
 
   useEffect(() => {

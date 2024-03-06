@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import leaflet, { LayerGroup, TileLayer } from 'leaflet';
+import leaflet, { Map } from 'leaflet';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../const';
 import { OfferInfo } from '../types/offer';
 
-function useMapMarkers(map: LayerGroup<TileLayer> | null, offers: OfferInfo[], activeOffer: number | null) {
+function useMapMarkers(map: Map | null, offers: OfferInfo[], activeOffer: number | null) {
   const defaultCustomIcon = leaflet.icon({
     iconUrl: URL_MARKER_DEFAULT,
     iconSize: [40, 40],
