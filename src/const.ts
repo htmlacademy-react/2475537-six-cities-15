@@ -10,3 +10,8 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export enum CardType {
+  Regular = 0,
+  Favorite = 1,
+}

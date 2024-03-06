@@ -8,15 +8,15 @@ type RentCardListProps = {
 };
 
 function RentCardList({ cardsCount, offers }: RentCardListProps) {
-  const [activeCard, setActiveCard] = useState(0);
+  const [activeCard, setActiveCard] = useState<number | null>(null);
 
-  const activeCardChanged = (newActiveCard: number) => {
+  const activeCardChanged = (newActiveCard: number | null) => {
     setActiveCard(newActiveCard);
   };
 
   return (
     <div className={`cities__places-list places__list tabs__content active-card-${activeCard}`}>
-      {Array.from({ length: cardsCount }, (_, i) => i < offers.length ? <RentCard key={offers[i].id} offer={offers[i]} onActiveCardChanged={activeCardChanged} /> : undefined)}
+      {offers.map((offer, i) => i < cardsCount ? <RentCard key={offer.id} offer={offer} onActiveCardChanged={activeCardChanged} /> : null)}
     </div>);
 }
 

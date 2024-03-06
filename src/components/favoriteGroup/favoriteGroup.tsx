@@ -1,5 +1,5 @@
 import { OfferInfo } from '../../types/offer';
-import FavoriteCard from '../favoriteCard/favoriteCard';
+import RentCard from '../rentCard/rentCard';
 
 type FavoriteGroupProps = {
   offers: OfferInfo[];
@@ -17,7 +17,7 @@ function FavoriteGroup({ offers, city }: FavoriteGroupProps) {
         </div>
       </div>
       <div className="favorites__places">
-        {offers.map((o) => (<FavoriteCard offer={o} key={`favorite_${o.id}`}/>))}
+        {offers.map((o) => (<RentCard offer={o} key={o.id} />))}
       </div>
     </>
   );
