@@ -13,7 +13,7 @@ type MapProps = {
 function Map({ offers, activeOffer, height }: MapProps) {
   const [firstOffer] = offers;
 
-  const mapRef = useRef<string | HTMLElement>(null);
+  const mapRef = useRef<HTMLDivElement>(null);
   const map = useMap(mapRef, {
     lat: firstOffer.coords.lat,
     lng: firstOffer.coords.lng,
