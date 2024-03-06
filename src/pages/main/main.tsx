@@ -1,10 +1,12 @@
-import RentCard from '../../components/rentCard/rentCard';
+import RentCardList from '../../components/rentCardList/rentCardList';
+import { OfferInfo } from '../../types/offer';
 
 type MainProps = {
   cardsCount: number;
+  offers: OfferInfo[];
 };
 
-function Main({ cardsCount }: MainProps) {
+function Main({ cardsCount, offers }: MainProps) {
   return (
     <main className="page__main page__main--index">
       <div className="cities">
@@ -20,7 +22,7 @@ function Main({ cardsCount }: MainProps) {
                   <use xlinkHref="#icon-arrow-select" />
                 </svg>
               </span>
-              <ul className="places__options places__options--custom places__options--opened">
+              <ul className="places__options places__options--custom places__options--closed">
                 <li className="places__option places__option--active" tabIndex={0}>
                   Popular
                 </li>
@@ -35,9 +37,7 @@ function Main({ cardsCount }: MainProps) {
                 </li>
               </ul>
             </form>
-            <div className="cities__places-list places__list tabs__content">
-              {Array.from({ length: cardsCount }, (_, i) => <RentCard key={i}/>)}
-            </div>
+            <RentCardList cardsCount={cardsCount} offers={offers} />
           </section>
           <div className="cities__right-section">
             <section className="cities__map map" />
