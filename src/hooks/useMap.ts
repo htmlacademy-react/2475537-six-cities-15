@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, RefObject } from 'react';
-import leaflet, { Map } from 'leaflet';
+import { Map, TileLayer } from 'leaflet';
 import { Coords } from '../types/offer';
 
 function useMap(mapRef: RefObject<string | HTMLElement>, center: Coords, zoom: number) {
@@ -8,7 +8,7 @@ function useMap(mapRef: RefObject<string | HTMLElement>, center: Coords, zoom: n
 
   useEffect(() => {
     if (mapRef.current !== null && !isRenderedRef.current) {
-      const instance = leaflet.map(mapRef.current, {
+      const instance = new Map(mapRef.current, {
         center: {
           lat: center.lat,
           lng: center.lng,
@@ -16,14 +16,13 @@ function useMap(mapRef: RefObject<string | HTMLElement>, center: Coords, zoom: n
         zoom,
       });
 
-      leaflet
-        .tileLayer(
-          'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-          {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-          },
-        )
-        .addTo(instance);
+      const layer = new TileLayer(
+        'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+        {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        },
+      );
+      layer.addTo(instance);
 
       setMap(instance);
       isRenderedRef.current = true;
