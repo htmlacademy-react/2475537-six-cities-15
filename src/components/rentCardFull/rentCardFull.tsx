@@ -65,7 +65,6 @@ function RentCardFull({ offer, reviews }: RentCardFullProps) {
           <ReviewList reviews={reviews}/>
         </div>
       </div>
-      <section className="offer__map map" />
     </section>);
 }
 
