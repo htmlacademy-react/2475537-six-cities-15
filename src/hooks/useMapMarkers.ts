@@ -3,7 +3,7 @@ import leaflet, { LayerGroup, TileLayer } from 'leaflet';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../const';
 import { OfferInfo } from '../types/offer';
 
-function useMapMarkers(map: LayerGroup<TileLayer>, offers: OfferInfo[], activeOffer: number) {
+function useMapMarkers(map: LayerGroup<TileLayer> | null, offers: OfferInfo[], activeOffer: number) {
   const defaultCustomIcon = leaflet.icon({
     iconUrl: URL_MARKER_DEFAULT,
     iconSize: [40, 40],

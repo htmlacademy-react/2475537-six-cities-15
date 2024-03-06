@@ -7,9 +7,10 @@ import { OfferInfo } from '../../types/offer';
 type MapProps = {
   offers: OfferInfo[];
   activeOffer: number;
+  height: number;
 };
 
-function Map({ offers, activeOffer }: MapProps) {
+function Map({ offers, activeOffer, height }: MapProps) {
   const [firstOffer] = offers;
 
   const mapRef = useRef(null);
@@ -20,7 +21,7 @@ function Map({ offers, activeOffer }: MapProps) {
   useMapMarkers(map, offers, activeOffer);
 
   return (
-    <section className="cities__map map" ref={mapRef} />
+    <div ref={mapRef} style={{ height: `${height}px` }}></div>
   );
 }
 
