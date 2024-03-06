@@ -36,7 +36,7 @@ function RentCardFull({ offer, reviews }: RentCardFullProps) {
               <span className="visually-hidden">To bookmarks</span>
             </button>
           </div>
-          <Rating rating={offer.rating} className="offer" showNumberValue={true} />
+          <Rating rating={offer.rating} className="offer" showNumberValue />
           <ul className="offer__features">
             <li className="offer__feature offer__feature--entire">Apartment</li>
             <li className="offer__feature offer__feature--bedrooms">
