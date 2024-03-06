@@ -63,7 +63,7 @@ function RentCard({ offer, onActiveCardChanged, cardType }: RentCardProps) {
             <span className="visually-hidden">To bookmarks</span>
           </button>
         </div>
-        <Rating rating={offer.rating} className="place-card" showNmberValue={false} />
+        <Rating rating={offer.rating} className="place-card" showNumberValue={false} />
         <h2 className="place-card__name">
           <Link to={`offer/${offer.id}`}>{offer.name}</Link>
         </h2>
@@ -110,7 +110,7 @@ function RentCard({ offer, onActiveCardChanged, cardType }: RentCardProps) {
             <span className="visually-hidden">In bookmarks</span>
           </button>
         </div>
-        <Rating rating={offer.rating} className="place-card" showNmberValue={false} />
+        <Rating rating={offer.rating} className="place-card" showNumberValue={false} />
         <h2 className="place-card__name">
           <Link to={`offer/${offer.id}`}>{offer.name}</Link>
         </h2>

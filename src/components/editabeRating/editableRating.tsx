@@ -7,7 +7,7 @@ type EditableRatingProps = {
 
 function EditableRating({ value, onRatingChanged }: EditableRatingProps) {
   const renderStars = () => {
-    const stars: Element[] = [];
+    const stars: JSX.Element[] = [];
     for (let i = 1; i < 6; i++) {
       stars.push((<Star rating={i} value={value} onRatingChanged={onRatingChanged} />));
     }
