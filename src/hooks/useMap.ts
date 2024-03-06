@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef, MutableRefObject } from 'react';
-import leaflet from 'leaflet';
+import leaflet, { LayerGroup, TileLayer } from 'leaflet';
 import { Coords } from '../types/offer';
 
-function useMap(mapRef: MutableRefObject<null>, center: Coords, zoom: number) {
+function useMap(mapRef: MutableRefObject<LayerGroup<TileLayer> | null>, center: Coords, zoom: number) {
   const [map, setMap] = useState(null);
   const isRenderedRef = useRef(false);
 

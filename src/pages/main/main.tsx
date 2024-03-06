@@ -11,7 +11,7 @@ type MainProps = {
 function Main({ cardsCount, offers }: MainProps) {
   const [activeCard, setActiveCard] = useState<number | null>(null);
 
-  const handleCardChanged = (newActiveCard: number) => {
+  const handleCardChanged = (newActiveCard: number | null) => {
     setActiveCard(newActiveCard);
   };
 
