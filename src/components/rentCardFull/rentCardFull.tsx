@@ -1,5 +1,6 @@
 import { OfferInfo, Review } from '../../types/offer';
 import HostCard from '../hostCard/hostCard';
+import Rating from '../rating/rating';
 import ReviewList from '../reviewList/reviewList';
 
 type RentCardFullProps = {
@@ -35,20 +36,14 @@ function RentCardFull({ offer, reviews }: RentCardFullProps) {
               <span className="visually-hidden">To bookmarks</span>
             </button>
           </div>
-          <div className="offer__rating rating">
-            <div className="offer__stars rating__stars">
-              <span style={{ width: `${offer.rating * 20}%` }} />
-              <span className="visually-hidden">Rating</span>
-            </div>
-            <span className="offer__rating-value rating__value">{offer.rating}</span>
-          </div>
+          <Rating rating={offer.rating} className="offer" showNumberValue />
           <ul className="offer__features">
             <li className="offer__feature offer__feature--entire">Apartment</li>
             <li className="offer__feature offer__feature--bedrooms">
-              3 Bedrooms
+              {offer.bedrooms} Bedrooms
             </li>
             <li className="offer__feature offer__feature--adults">
-              Max 4 adults
+              Max {offer.maxGuests} adults
             </li>
           </ul>
           <div className="offer__price">
