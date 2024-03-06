@@ -3,7 +3,7 @@ import leaflet, { LayerGroup, TileLayer } from 'leaflet';
 import { Coords } from '../types/offer';
 
 function useMap(mapRef: MutableRefObject<LayerGroup<TileLayer> | null>, center: Coords, zoom: number) {
-  const [map, setMap] = useState(null);
+  const [map, setMap] = useState<LayerGroup<TileLayer> | null>(null);
   const isRenderedRef = useRef(false);
 
   useEffect(() => {
