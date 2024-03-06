@@ -1,3 +1,4 @@
+import { CardType } from '../../const';
 import { OfferInfo } from '../../types/offer';
 import RentCard from '../rentCard/rentCard';
 
@@ -17,7 +18,7 @@ function FavoriteGroup({ offers, city }: FavoriteGroupProps) {
         </div>
       </div>
       <div className="favorites__places">
-        {offers.map((o) => (<RentCard offer={o} key={o.id} />))}
+        {offers.map((o) => (<RentCard offer={o} key={o.id} cardType={CardType.Favorite} />))}
       </div>
     </>
   );

@@ -1,6 +1,6 @@
 import { useParams, Navigate } from 'react-router-dom';
 import { OfferInfo, Review } from '../../types/offer';
-import { AppRoute } from '../../const';
+import { AppRoute, CardType } from '../../const';
 import RentCardFull from '../../components/rentCardFull/rentCardFull';
 import RentCard from '../../components/rentCard/rentCard';
 
@@ -24,7 +24,7 @@ function Offer({ offers, reviews }: OfferProps) {
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
-            {nearOffers.map((o) => (<RentCard offer={o} key={o.id} />))}
+            {nearOffers.map((o) => (<RentCard offer={o} key={o.id} cardType={CardType.Regular} />))}
           </div>
         </section>
       </div>
