@@ -20,7 +20,7 @@ function Offer({ offers, reviews }: OfferProps) {
   const offer = offers.find((o) => o.id === selectedId);
   const nearOffers = offers.filter((o) => o.id !== selectedId);
 
-  const handleCardChanged = (newActiveCard: number) => {
+  const handleCardChanged = (newActiveCard: number | null) => {
     setActiveCard(newActiveCard);
   };
 
