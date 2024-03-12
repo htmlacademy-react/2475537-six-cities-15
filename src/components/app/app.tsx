@@ -8,6 +8,7 @@ import Favorites from '../../pages/favorites/favorites';
 import Login from '../../pages/login/login';
 import NotFound from '../../pages/notFound/notFound';
 import Offer from '../../pages/offer/offer';
+import ScrollTop from '../scrollTop/scrollTop';
 
 type AppProps = {
   cardsCount: number;
@@ -18,6 +19,7 @@ type AppProps = {
 function App({ cardsCount, offers, reviews }: AppProps) {
   return (
     <BrowserRouter>
+      <ScrollTop />
       <Routes>
         <Route
           path={AppRoute.Root}

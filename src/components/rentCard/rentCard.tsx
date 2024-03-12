@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { CardType } from '../../const';
 import { OfferInfo } from '../../types/offer';
+import Rating from '../rating/rating';
 
 type RentCardProps = {
   offer: OfferInfo;
@@ -62,14 +63,9 @@ function RentCard({ offer, onActiveCardChanged, cardType }: RentCardProps) {
             <span className="visually-hidden">To bookmarks</span>
           </button>
         </div>
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-            <span style={{ width: `${offer.rating * 20}%` }} />
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <Rating rating={offer.rating} className="place-card" showNumberValue={false} />
         <h2 className="place-card__name">
-          <Link to={`offer/${offer.id}`}>{offer.name}</Link>
+          <Link to={`/offer/${offer.id}`}>{offer.name}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
@@ -114,14 +110,9 @@ function RentCard({ offer, onActiveCardChanged, cardType }: RentCardProps) {
             <span className="visually-hidden">In bookmarks</span>
           </button>
         </div>
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-            <span style={{ width: `${offer.rating * 20}%` }} />
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <Rating rating={offer.rating} className="place-card" showNumberValue={false} />
         <h2 className="place-card__name">
-          <Link to={`offer/${offer.id}`}>{offer.name}</Link>
+          <Link to={`/offer/${offer.id}`}>{offer.name}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
