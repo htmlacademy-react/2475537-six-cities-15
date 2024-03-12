@@ -14,7 +14,6 @@ function ReviewForm({ onReviewAdded }: ReviewFormProps) {
   const onSubmit = (evt: React.MouseEvent) => {
     evt.preventDefault();
     onReviewAdded({
-      id: -1,
       authorImage: 'img/avatar-max.jpg',
       authorName: 'Petr',
       date: new Date(),

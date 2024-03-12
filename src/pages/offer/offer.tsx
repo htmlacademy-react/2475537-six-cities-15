@@ -27,12 +27,11 @@ function Offer({ offers, reviews }: OfferProps) {
   return (
     <main className="page__main page__main--offer">
       {!offer && (<Navigate to={AppRoute.Root} />)}
-      {offer && (<RentCardFull offer={offer} reviews={reviews} />)}
-      <section className="offer__map map" style={{backround: 'none'}}>
-        <div style={{ width: '1140px', height: '540px', marginLeft: 'auto', marginRight: 'auto' }}>
-          <Map offers={nearOffers} activeOffer={activeCard} height={580} />
-        </div>
-      </section>
+      {offer && (
+        <RentCardFull offer={offer} reviews={reviews}>
+          <Map activeOffer={activeCard} className="offer" offers={nearOffers} />
+        </RentCardFull>
+      )}
       <div className="container">
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
