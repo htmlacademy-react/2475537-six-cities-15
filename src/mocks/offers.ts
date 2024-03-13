@@ -146,7 +146,7 @@ An independent House, strategically located between Rembrand Square and National
     price: 105,
     priceType: 'night',
     priceCurrency: '€',
-    city: 'Paris',
+    city: 'Amsterdam',
     host: {
       name: 'Maria',
       image: '/img/avatar-angelina.jpg',
@@ -200,7 +200,7 @@ An independent House, strategically located between Rembrand Square and National
     price: 75,
     priceType: 'night',
     priceCurrency: '€',
-    city: 'Cologne',
+    city: 'Amsterdam',
     host: {
       name: 'Angela',
       image: '/img/avatar-angelina.jpg',

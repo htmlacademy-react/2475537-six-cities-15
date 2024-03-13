@@ -1,18 +1,19 @@
 import { useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
-import { OfferInfo, Review } from '../../types/offer';
+import { Review } from '../../types/offer';
 import { AppRoute, CardType } from '../../const';
 import RentCardFull from '../../components/rentCardFull/rentCardFull';
 import RentCard from '../../components/rentCard/rentCard';
 import Map from '../../components/map/map';
+import { useAppSelector } from '../../hooks';
 
 type OfferProps = {
-  offers: OfferInfo[];
   reviews: Review[];
 };
 
-function Offer({ offers, reviews }: OfferProps) {
+function Offer({ reviews }: OfferProps) {
   const [activeCard, setActiveCard] = useState<number | null>(null);
+  const offers = useAppSelector((state) => state.offers);
 
   const { id } = useParams();
   const selectedId = parseInt(id ?? '0', 10);
@@ -29,7 +30,7 @@ function Offer({ offers, reviews }: OfferProps) {
       {!offer && (<Navigate to={AppRoute.Root} />)}
       {offer && (
         <RentCardFull offer={offer} reviews={reviews}>
-          <Map activeOffer={activeCard} className="offer" offers={nearOffers} />
+          <Map activeOffer={activeCard} className="offer" offers={nearOffers} center={offer.coords} />
         </RentCardFull>
       )}
       <div className="container">

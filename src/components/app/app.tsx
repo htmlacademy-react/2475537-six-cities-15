@@ -1,6 +1,7 @@
+import { useEffect } from 'react';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { OfferInfo, Review } from '../../types/offer';
+import { Review } from '../../types/offer';
 import Layout from '../layout/layout';
 import PrivateRoute from '../privateRoute/privateRoute';
 import Main from '../../pages/main/main';
@@ -9,14 +10,23 @@ import Login from '../../pages/login/login';
 import NotFound from '../../pages/notFound/notFound';
 import Offer from '../../pages/offer/offer';
 import ScrollTop from '../scrollTop/scrollTop';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { fillOffers } from '../../store/actions';
+import { offers as mockOffers } from '../../mocks/offers';
 
 type AppProps = {
   cardsCount: number;
-  offers: OfferInfo[];
   reviews: Review[];
 };
 
-function App({ cardsCount, offers, reviews }: AppProps) {
+function App({ cardsCount, reviews }: AppProps) {
+  const offers = useAppSelector((state) => state.offers);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fillOffers(mockOffers));
+  }, [offers]);
+
   return (
     <BrowserRouter>
       <ScrollTop />
@@ -27,7 +37,7 @@ function App({ cardsCount, offers, reviews }: AppProps) {
         >
           <Route
             index
-            element={<Main cardsCount={cardsCount} offers={offers} />}
+            element={<Main cardsCount={cardsCount} />}
           />
           <Route
             path={AppRoute.Favorites}

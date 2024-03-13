@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, RefObject } from 'react';
 import { Map, TileLayer } from 'leaflet';
-import { Coords } from '../types/offer';
+import { Coords } from '../types/location';
 
 function useMap(mapRef: RefObject<string | HTMLElement>, center: Coords, zoom: number) {
   const [map, setMap] = useState<Map | null>(null);
@@ -27,7 +27,13 @@ function useMap(mapRef: RefObject<string | HTMLElement>, center: Coords, zoom: n
       setMap(instance);
       isRenderedRef.current = true;
     }
-  }, [mapRef, center]);
+  }, [mapRef]);
+
+  useEffect(() => {
+    if (map) {
+      map.setView([center.lat, center.lng], zoom);
+    }
+  }, [map, center]);
 
   return map;
 }
