@@ -15,7 +15,7 @@ type MapProps = {
 const INITIAL_MAP_ZOOM = 10;
 
 function Map({ offers, activeOffer, className, center }: MapProps) {
-  const mapRef = useRef<HTMLDivElement>(null);
+  const mapRef = useRef<HTMLElement>(null);
   const map = useMap(mapRef, center, INITIAL_MAP_ZOOM);
   useMapMarkers(map, offers, activeOffer);
 

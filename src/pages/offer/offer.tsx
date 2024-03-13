@@ -19,7 +19,7 @@ function Offer({ reviews }: OfferProps) {
   const selectedId = parseInt(id ?? '0', 10);
 
   const offer = offers.find((o) => o.id === selectedId);
-  const nearOffers = offers.filter((o) => o.id !== selectedId);
+  const nearOffers = offers.filter((o) => o.city === offer.city && o.id !== selectedId);
 
   const handleCardChanged = (newActiveCard: number | null) => {
     setActiveCard(newActiveCard);
