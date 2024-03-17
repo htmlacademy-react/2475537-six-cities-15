@@ -25,7 +25,7 @@ function App({ cardsCount, reviews }: AppProps) {
 
   useEffect(() => {
     dispatch(fillOffers(mockOffers));
-  }, [offers]);
+  }, []);
 
   return (
     <BrowserRouter>
