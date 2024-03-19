@@ -49,7 +49,7 @@ function App({ cardsCount, reviews }: AppProps) {
           />
           <Route
             path={AppRoute.Offer}
-            element={<Offer offers={offers} reviews={reviews}/>}
+            element={<Offer reviews={reviews}/>}
           />
         </Route>
         <Route
