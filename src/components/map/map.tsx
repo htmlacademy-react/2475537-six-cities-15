@@ -9,7 +9,7 @@ type MapProps = {
   offers: OfferInfo[];
   activeOffer: number | null;
   className: string;
-  center: Coords;
+  center: Coords | undefined;
 };
 
 const INITIAL_MAP_ZOOM = 10;

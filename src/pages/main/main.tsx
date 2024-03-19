@@ -11,7 +11,7 @@ function Main({ cardsCount }: MainProps) {
   const [activeCard, setActiveCard] = useState<number | null>(null);
   const { offers, currentCity } = useAppSelector((state) => state);
 
-  const filteredOffers = offers.filter((o) => o.city === currentCity?.code);
+  const filteredOffers = offers.filter((o) => o.city === currentCity.code);
 
   const handleCardChanged = (newActiveCard: number | null) => {
     setActiveCard(newActiveCard);
@@ -23,7 +23,7 @@ function Main({ cardsCount }: MainProps) {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{filteredOffers.length} places to stay in {currentCity?.title}</b>
+            <b className="places__found">{filteredOffers.length} places to stay in {currentCity.title}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>
@@ -50,7 +50,7 @@ function Main({ cardsCount }: MainProps) {
             <RentCardList cardsCount={cardsCount} offers={filteredOffers} onActiveCardChanged={handleCardChanged}/>
           </section>
           <div className="cities__right-section">
-            <Map offers={filteredOffers} activeOffer={activeCard} className="cities" center={currentCity?.coords} />
+            <Map offers={filteredOffers} activeOffer={activeCard} className="cities" center={currentCity.coords} />
           </div>
         </div>
       </div>
