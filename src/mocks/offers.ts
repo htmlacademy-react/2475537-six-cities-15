@@ -33,7 +33,7 @@ export const offers: OfferInfo[] = [
     ],
     rating: 3.5,
     type: 'Apartment',
-    name: 'Beautiful &amp; luxurious apartment at great location',
+    name: 'Beautiful & luxurious apartment at great location',
     description: 'Beautiful &amp; luxurious apartment at great location',
     price: 90,
     priceType: 'night',

@@ -1,3 +1,4 @@
+import { PropsWithChildren } from 'react';
 import { OfferInfo, Review } from '../../types/offer';
 import HostCard from '../hostCard/hostCard';
 import Rating from '../rating/rating';
@@ -8,7 +9,7 @@ type RentCardFullProps = {
   reviews: Review[];
 };
 
-function RentCardFull({ offer, reviews }: RentCardFullProps) {
+function RentCardFull({ offer, reviews, children }: PropsWithChildren<RentCardFullProps>) {
   return (
     <section className="offer">
       <div className="offer__gallery-container container">
@@ -60,7 +61,7 @@ function RentCardFull({ offer, reviews }: RentCardFullProps) {
           <ReviewList reviews={reviews}/>
         </div>
       </div>
-      <section className="offer__map map" />
+      {children}
     </section>);
 }
 

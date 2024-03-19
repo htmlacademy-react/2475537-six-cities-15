@@ -7,21 +7,23 @@ import { OfferInfo } from '../../types/offer';
 type MapProps = {
   offers: OfferInfo[];
   activeOffer: number | null;
-  height: number;
+  className: string;
 };
 
-function Map({ offers, activeOffer, height }: MapProps) {
+const INITIAL_MAP_ZOOM = 10;
+
+function Map({ offers, activeOffer, className }: MapProps) {
   const [firstOffer] = offers;
 
   const mapRef = useRef<HTMLDivElement>(null);
   const map = useMap(mapRef, {
     lat: firstOffer.coords.lat,
     lng: firstOffer.coords.lng,
-  }, 10);
+  }, INITIAL_MAP_ZOOM);
   useMapMarkers(map, offers, activeOffer);
 
   return (
-    <div ref={mapRef} style={{ height: `${height}px` }}></div>
+    <section className={`${className}__map map`} ref={mapRef} />
   );
 }
 

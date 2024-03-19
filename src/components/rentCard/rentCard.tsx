@@ -25,20 +25,24 @@ function RentCard({ offer, onActiveCardChanged, cardType }: RentCardProps) {
     }
   };
 
-  const renderRegularCard = () => (
-    <article className="cities__card place-card" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+  const className = cardType === CardType.Regular ? 'cities' : 'favorites';
+  const imageWidth = cardType === CardType.Regular ? 260 : 150;
+  const imageHeight = cardType === CardType.Regular ? 200 : 110;
+
+  return (
+    <article className={`${className}__card place-card`} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
       {offer.isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       )}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <a href="#">
           <img
             className="place-card__image"
             src={mainImage.src}
-            width={260}
-            height={200}
+            width={imageWidth}
+            height={imageHeight}
             alt={mainImage.description}
           />
         </a>
@@ -71,55 +75,6 @@ function RentCard({ offer, onActiveCardChanged, cardType }: RentCardProps) {
       </div>
     </article>
   );
-
-  const renderFavoriteCard = () => (
-    <article className="favorites__card place-card">
-      {offer.isPremium && (
-        <div className="place-card__mark">
-          <span>Premium</span>
-        </div>
-      )}
-      <div className="favorites__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <img
-            className="place-card__image"
-            src={mainImage.src}
-            width={150}
-            height={110}
-            alt={mainImage.description}
-          />
-        </a>
-      </div>
-      <div className="favorites__card-info place-card__info">
-        <div className="place-card__price-wrapper">
-          <div className="place-card__price">
-            <b className="place-card__price-value">{offer.priceCurrency}{offer.price}</b>
-            <span className="place-card__price-text">/&nbsp;{offer.priceType}</span>
-          </div>
-          <button
-            className="place-card__bookmark-button place-card__bookmark-button--active button"
-            type="button"
-          >
-            <svg
-              className="place-card__bookmark-icon"
-              width={18}
-              height={19}
-            >
-              <use xlinkHref="#icon-bookmark" />
-            </svg>
-            <span className="visually-hidden">In bookmarks</span>
-          </button>
-        </div>
-        <Rating rating={offer.rating} className="place-card" showNumberValue={false} />
-        <h2 className="place-card__name">
-          <Link to={`/offer/${offer.id}`}>{offer.name}</Link>
-        </h2>
-        <p className="place-card__type">{offer.type}</p>
-      </div>
-    </article>
-  );
-
-  return cardType === CardType.Regular ? renderRegularCard() : renderFavoriteCard();
 }
 
 export default RentCard;

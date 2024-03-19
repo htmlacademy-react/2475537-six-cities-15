@@ -32,7 +32,7 @@ export type Host = {
 }
 
 export type Review = {
-  id: number;
+  id?: number;
   authorName: string;
   authorImage: string;
   rating: number;

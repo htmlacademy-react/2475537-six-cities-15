@@ -48,9 +48,7 @@ function Main({ cardsCount, offers }: MainProps) {
             <RentCardList cardsCount={cardsCount} offers={offers} onActiveCardChanged={handleCardChanged}/>
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map" style={{background: 'none'}}>
-              <Map offers={offers} activeOffer={activeCard} height={800} />
-            </section>
+            <Map offers={offers} activeOffer={activeCard} className="cities" />
           </div>
         </div>
       </div>
