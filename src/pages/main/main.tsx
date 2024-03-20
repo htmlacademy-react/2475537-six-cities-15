@@ -2,6 +2,7 @@ import { useState } from 'react';
 import RentCardList from '../../components/rentCardList/rentCardList';
 import Map from '../../components/map/map';
 import { useAppSelector } from '../../hooks';
+import { State } from '../../types/state';
 
 type MainProps = {
   cardsCount: number;
@@ -9,7 +10,7 @@ type MainProps = {
 
 function Main({ cardsCount }: MainProps) {
   const [activeCard, setActiveCard] = useState<number | null>(null);
-  const { offers, currentCity } = useAppSelector((state) => ({
+  const { offers, currentCity } = useAppSelector<State>((state) => ({
     currentCity: state.currentCity,
     offers: state.offers.filter((o) => o.city === currentCity.code)
   }));
