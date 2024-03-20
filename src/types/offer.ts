@@ -1,3 +1,5 @@
+import { Coords } from './location';
+
 export type OfferInfo = {
   id: number;
   isPremium: boolean;
@@ -38,9 +40,4 @@ export type Review = {
   rating: number;
   review: string;
   date: Date;
-}
-
-export type Coords = {
-  lat: number;
-  lng: number;
 }

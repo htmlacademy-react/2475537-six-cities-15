@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import RentCardList from '../../components/rentCardList/rentCardList';
-import { OfferInfo } from '../../types/offer';
 import Map from '../../components/map/map';
+import { useAppSelector } from '../../hooks';
 
 type MainProps = {
   cardsCount: number;
-  offers: OfferInfo[];
 };
 
-function Main({ cardsCount, offers }: MainProps) {
+function Main({ cardsCount }: MainProps) {
   const [activeCard, setActiveCard] = useState<number | null>(null);
+  const { offers, currentCity } = useAppSelector((state) => ({
+    currentCity: state.currentCity,
+    offers: state.offers.filter((o) => o.city === state.currentCity.code)
+  }));
 
   const handleCardChanged = (newActiveCard: number | null) => {
     setActiveCard(newActiveCard);
@@ -21,7 +24,7 @@ function Main({ cardsCount, offers }: MainProps) {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">312 places to stay in Amsterdam</b>
+            <b className="places__found">{offers.length} places to stay in {currentCity.title}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>
@@ -48,7 +51,7 @@ function Main({ cardsCount, offers }: MainProps) {
             <RentCardList cardsCount={cardsCount} offers={offers} onActiveCardChanged={handleCardChanged}/>
           </section>
           <div className="cities__right-section">
-            <Map offers={offers} activeOffer={activeCard} className="cities" />
+            <Map offers={offers} activeOffer={activeCard} className="cities" center={currentCity.coords} />
           </div>
         </div>
       </div>
