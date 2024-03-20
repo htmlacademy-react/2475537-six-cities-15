@@ -9,9 +9,9 @@ type MainProps = {
 
 function Main({ cardsCount }: MainProps) {
   const [activeCard, setActiveCard] = useState<number | null>(null);
-  const { offers, currentCity } = useAppSelector(({ offers, currentCity }) => ({
-    currentCity,
-    offers: offers.filter((o) => o.city === currentCity.code)
+  const { offers, currentCity } = useAppSelector((state) => ({
+    currentCity: state.currentCity,
+    offers: state.offers.filter((o) => o.city === currentCity.code)
   }));
 
   const handleCardChanged = (newActiveCard: number | null) => {
