@@ -12,6 +12,7 @@ type MainProps = {
 
 function Main({ cardsCount }: MainProps) {
   const [activeCard, setActiveCard] = useState<number | null>(null);
+  const [currentSorting, setCurrentSorting] = useState(allowedSorting[0]);
   const { offers, currentCity } = useAppSelector((state) => ({
     currentCity: state.currentCity,
     offers: state.offers.filter((o) => o.city === state.currentCity.code)
