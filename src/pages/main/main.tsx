@@ -2,7 +2,6 @@ import { useState } from 'react';
 import RentCardList from '../../components/rentCardList/rentCardList';
 import Map from '../../components/map/map';
 import { useAppSelector } from '../../hooks';
-import { State } from '../../types/state';
 import { OfferInfo } from '../../types/offer';
 import { City } from '../../types/location';
 
