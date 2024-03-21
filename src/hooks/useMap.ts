@@ -10,8 +10,8 @@ function useMap(mapRef: RefObject<string | HTMLElement>, center: Coords, zoom: n
     if (mapRef.current !== null && !isRenderedRef.current) {
       const instance = new Map(mapRef.current, {
         center: {
-          lat: center.lat,
-          lng: center.lng,
+          lat: center.latitude,
+          lng: center.longitude,
         },
         zoom,
       });
@@ -31,7 +31,7 @@ function useMap(mapRef: RefObject<string | HTMLElement>, center: Coords, zoom: n
 
   useEffect(() => {
     if (map) {
-      map.setView([center.lat, center.lng], zoom);
+      map.setView([center.latitude, center.longitude], zoom);
     }
   }, [map, center]);
 

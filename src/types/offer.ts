@@ -1,23 +1,44 @@
 import { Coords } from './location';
 
-export type OfferInfo = {
-  id: number;
-  isPremium: boolean;
-  isFavorite: boolean;
-  images: OfferImage[];
-  rating: number;
+export type OfferPreview = {
+  id: string;
+  title: string;
   type: string;
-  name: string;
-  description: string;
   price: number;
-  priceType: string;
-  priceCurrency: string;
-  city: string;
-  host: Host;
+  city: {
+    name: string;
+    location: Coords;
+  };
+  location: Coords;
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+  previewImage: string;
+};
+
+export type OfferInfo = {
+  id: string;
+  title: string;
+  type: string;
+  price: number;
+  city: {
+    name: string;
+    location: Coords;
+  };
+  location: Coords;
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+  description: string;
   bedrooms: number;
-  maxGuests: number;
-  inside: string[];
-  coords: Coords;
+  goods: [string];
+  host: {
+    name: string;
+    avatarUrl: string;
+    isPro: boolean;
+  };
+  images: [string];
+  maxAdults: number;
 };
 
 export type OfferImage = {

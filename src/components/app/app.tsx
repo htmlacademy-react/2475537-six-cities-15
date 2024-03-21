@@ -11,8 +11,7 @@ import NotFound from '../../pages/notFound/notFound';
 import Offer from '../../pages/offer/offer';
 import ScrollTop from '../scrollTop/scrollTop';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { fillOffers } from '../../store/actions';
-import { offers as mockOffers } from '../../mocks/offers';
+import { fetchOffers } from '../../api/api-actions';
 
 type AppProps = {
   cardsCount: number;
@@ -24,7 +23,7 @@ function App({ cardsCount, reviews }: AppProps) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fillOffers(mockOffers));
+    dispatch(fetchOffers());
   }, [dispatch]);
 
   return (

@@ -12,16 +12,15 @@ type OfferProps = {
 };
 
 function Offer({ reviews }: OfferProps) {
-  const [activeCard, setActiveCard] = useState<number | null>(null);
+  const [activeCard, setActiveCard] = useState<string | null>(null);
   const offers = useAppSelector((state) => state.offers);
 
   const { id } = useParams();
-  const selectedId = parseInt(id ?? '0', 10);
 
-  const offer = offers.find((o) => o.id === selectedId);
-  const nearOffers = offers.filter((o) => o.city === offer?.city && o.id !== selectedId);
+  const offer = offers.find((o) => o.id === id);
+  const nearOffers = offers.filter((o) => o.city === offer?.city && o.id !== id);
 
-  const handleCardChanged = (newActiveCard: number | null) => {
+  const handleCardChanged = (newActiveCard: string | null) => {
     setActiveCard(newActiveCard);
   };
 
@@ -30,7 +29,7 @@ function Offer({ reviews }: OfferProps) {
       {!offer && (<Navigate to={AppRoute.Root} />)}
       {offer && (
         <RentCardFull offer={offer} reviews={reviews}>
-          <Map activeOffer={activeCard} className="offer" offers={nearOffers} center={offer.coords} />
+          <Map activeOffer={activeCard} className="offer" offers={nearOffers} center={offer.location} />
         </RentCardFull>
       )}
       <div className="container">

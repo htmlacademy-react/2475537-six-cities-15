@@ -1,12 +1,22 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, fillOffers } from './actions';
+import { changeCity, fillOffers, setAuthorizationStatus, setDataLoading } from './actions';
 import { cities } from '../mocks/cities';
-import { OfferInfo } from '../types/offer';
+import { OfferPreview } from '../types/offer';
 import { City } from '../types/location';
+import { AuthorizationStatus } from '../const';
 
-const initialState = {
-  currentCity: cities.find((c) => c.code === 'Paris') as City,
-  offers: [] as OfferInfo[],
+type InitialState = {
+  currentCity: City | undefined;
+  offers: OfferPreview[];
+  authorizationStatus: AuthorizationStatus;
+  isDataLoading: boolean;
+}
+
+const initialState: InitialState = {
+  currentCity: cities.find((c) => c.code === 'Paris'),
+  offers: [],
+  authorizationStatus: AuthorizationStatus.Unknown,
+  isDataLoading: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -16,6 +26,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(fillOffers, (state, action) => {
       state.offers = action.payload;
+    })
+    .addCase(setAuthorizationStatus, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setDataLoading, (state, action) => {
+      state.isDataLoading = action.payload;
     });
 });
 

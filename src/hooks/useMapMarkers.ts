@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { Map, Icon, Marker} from 'leaflet';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../const';
-import { OfferInfo } from '../types/offer';
+import { OfferPreview } from '../types/offer';
 
-function useMapMarkers(map: Map | null, offers: OfferInfo[], activeOffer: number | null) {
+function useMapMarkers(map: Map | null, offers: OfferPreview[], activeOffer: string | null) {
   const defaultCustomIcon = new Icon({
     iconUrl: URL_MARKER_DEFAULT,
     iconSize: [40, 40],
@@ -20,8 +20,8 @@ function useMapMarkers(map: Map | null, offers: OfferInfo[], activeOffer: number
     if (map) {
       offers.forEach((offer) => {
         const marker = new Marker({
-          lat: offer.coords.lat,
-          lng: offer.coords.lng,
+          lat: offer.location.latitude,
+          lng: offer.location.longitude,
         }, {
           icon: (offer.id === activeOffer)
             ? currentCustomIcon
