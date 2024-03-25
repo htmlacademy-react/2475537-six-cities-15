@@ -32,11 +32,7 @@ export type OfferInfo = {
   description: string;
   bedrooms: number;
   goods: [string];
-  host: {
-    name: string;
-    avatarUrl: string;
-    isPro: boolean;
-  };
+  host: Host;
   images: [string];
   maxAdults: number;
 };
