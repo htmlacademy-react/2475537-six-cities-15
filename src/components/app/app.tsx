@@ -19,7 +19,6 @@ type AppProps = {
 };
 
 function App({ cardsCount, reviews }: AppProps) {
-  const offers = useAppSelector((state) => state.offers);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -42,7 +41,7 @@ function App({ cardsCount, reviews }: AppProps) {
             path={AppRoute.Favorites}
             element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <Favorites offers={offers} />
+                <Favorites />
               </PrivateRoute>
             }
           />

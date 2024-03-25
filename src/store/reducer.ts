@@ -6,7 +6,7 @@ import { City } from '../types/location';
 import { AuthorizationStatus } from '../const';
 
 type InitialState = {
-  currentCity: City | undefined;
+  currentCity: City;
   offers: OfferPreview[];
   authorizationStatus: AuthorizationStatus;
   isDataLoading: boolean;
