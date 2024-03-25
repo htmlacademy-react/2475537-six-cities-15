@@ -13,7 +13,7 @@ type InitialState = {
 }
 
 const initialState: InitialState = {
-  currentCity: cities.find((c) => c.code === 'Paris'),
+  currentCity: cities.find((c) => c.code === 'Paris') as City,
   offers: [],
   authorizationStatus: AuthorizationStatus.Unknown,
   isDataLoading: false,
