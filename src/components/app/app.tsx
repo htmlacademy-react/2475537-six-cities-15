@@ -10,7 +10,7 @@ import Login from '../../pages/login/login';
 import NotFound from '../../pages/notFound/notFound';
 import Offer from '../../pages/offer/offer';
 import ScrollTop from '../scrollTop/scrollTop';
-import { useAppSelector, useAppDispatch } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 import { fetchOffers } from '../../api/api-actions';
 
 type AppProps = {
