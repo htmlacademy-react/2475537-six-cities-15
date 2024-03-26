@@ -28,8 +28,8 @@ function Offer({ reviews }: OfferProps) {
     <main className="page__main page__main--offer">
       {!offer && (<Navigate to={AppRoute.Root} />)}
       {offer && (
-        <RentCardFull offer={offer} reviews={reviews}>
-          <Map activeOffer={activeCard} className="offer" offers={nearOffers} center={offer.location} />
+        <RentCardFull offer={null} reviews={reviews}>
+          <Map activeOffer={activeCard} className="offer" offers={nearOffers} center={offer.city.location} />
         </RentCardFull>
       )}
       <div className="container">

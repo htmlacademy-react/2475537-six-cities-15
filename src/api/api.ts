@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosError, AxiosResponse } from '../../node_modules/axios/index';
+import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosError, AxiosResponse } from 'axios';
 import { getToken } from '../services/token';
 import { processErrorHandle } from '../services/errorHandler';
 import { StatusCodes } from 'http-status-codes';
@@ -32,7 +32,7 @@ export const createApi = (): AxiosInstance => {
     timeout: TIMEOUT,
   });
 
-  api.interceptors.request.use((config: AxiosRequestConfig) => {
+  api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
     const token = getToken();
     if (token && config?.headers) {
       config.headers['x-token'] = token;

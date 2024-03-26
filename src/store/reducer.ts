@@ -7,7 +7,7 @@ import { AuthorizationStatus } from '../const';
 import { UserInfo } from '../types/user';
 
 type InitialState = {
-  currentCity: City | null;
+  currentCity: City;
   offers: OfferPreview[];
   authorizationStatus: AuthorizationStatus;
   isDataLoading: boolean;
@@ -16,7 +16,7 @@ type InitialState = {
 }
 
 const initialState: InitialState = {
-  currentCity: cities.find((c) => c.code === 'Paris'),
+  currentCity: cities.find((c) => c.code === 'Paris') as City,
   offers: [],
   authorizationStatus: AuthorizationStatus.Unknown,
   isDataLoading: false,

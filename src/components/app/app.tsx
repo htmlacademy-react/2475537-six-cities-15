@@ -45,7 +45,7 @@ function App({ cardsCount }: AppProps) {
             path={AppRoute.Favorites}
             element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <Favorites offers={[]} />
+                <Favorites />
               </PrivateRoute>
             }
           />
