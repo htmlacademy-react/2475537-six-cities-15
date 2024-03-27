@@ -10,9 +10,8 @@ import Login from '../../pages/login/login';
 import NotFound from '../../pages/notFound/notFound';
 import Offer from '../../pages/offer/offer';
 import ScrollTop from '../scrollTop/scrollTop';
-import { useAppSelector, useAppDispatch } from '../../hooks';
-import { fillOffers } from '../../store/actions';
-import { offers as mockOffers } from '../../mocks/offers';
+import { useAppDispatch } from '../../hooks';
+import { fetchOffers } from '../../api/api-actions';
 
 type AppProps = {
   cardsCount: number;
@@ -20,11 +19,10 @@ type AppProps = {
 };
 
 function App({ cardsCount, reviews }: AppProps) {
-  const offers = useAppSelector((state) => state.offers);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fillOffers(mockOffers));
+    dispatch(fetchOffers());
   }, [dispatch]);
 
   return (
@@ -43,7 +41,7 @@ function App({ cardsCount, reviews }: AppProps) {
             path={AppRoute.Favorites}
             element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <Favorites offers={offers} />
+                <Favorites />
               </PrivateRoute>
             }
           />

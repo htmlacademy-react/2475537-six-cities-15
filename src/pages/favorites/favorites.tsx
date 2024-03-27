@@ -1,19 +1,19 @@
 import FavoriteGroup from '../../components/favoriteGroup/favoriteGroup';
-import { OfferInfo } from '../../types/offer';
+import Loader from '../../components/loader/loader';
+import { useAppSelector } from '../../hooks';
+import { OfferPreview } from '../../types/offer';
 
-type FavoritesProps = {
-  offers: OfferInfo[];
-};
-
-function Favorites({ offers }: FavoritesProps) {
+function Favorites() {
+  const { offers, isDataLoading } = useAppSelector((state) => ({
+    offers: state.offers.filter((o) => o.isFavorite),
+    isDataLoading: state.isDataLoading,
+  }));
 
   const groupOffers = () => {
-    const onlyFavorites = offers.filter((o) => o.isFavorite);
-
-    const cities = new Set(onlyFavorites.map((o) => o.city));
-    const groupedOffers = new Map<string, OfferInfo[]>();
+    const cities = new Set(offers.map((o) => o.city.name));
+    const groupedOffers = new Map<string, OfferPreview[]>();
     for (const city of cities) {
-      groupedOffers.set(city, onlyFavorites.filter((o) => o.city === city));
+      groupedOffers.set(city, offers.filter((o) => o.city.name === city));
     }
 
     return groupedOffers;
@@ -30,6 +30,10 @@ function Favorites({ offers }: FavoritesProps) {
     }
     return result;
   };
+
+  if (isDataLoading) {
+    return (<Loader />);
+  }
 
   return (
     <main className="page__main page__main--favorites">

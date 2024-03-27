@@ -1,9 +1,9 @@
 import { CardType } from '../../const';
-import { OfferInfo } from '../../types/offer';
+import { OfferPreview } from '../../types/offer';
 import RentCard from '../rentCard/rentCard';
 
 type FavoriteGroupProps = {
-  offers: OfferInfo[];
+  offers: OfferPreview[];
   city: string;
 };
 

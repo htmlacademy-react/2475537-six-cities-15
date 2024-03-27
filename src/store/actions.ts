@@ -1,6 +1,11 @@
 import { createAction } from '@reduxjs/toolkit';
+import { AuthorizationStatus } from '../const';
 import { City } from '../types/location';
-import { OfferInfo } from '../types/offer';
+import { OfferPreview } from '../types/offer';
 
-export const changeCity = createAction<City>('changeCity');
-export const fillOffers = createAction<OfferInfo[]>('fillOffers');
+export const changeCity = createAction<City>('app/changeCity');
+
+export const fillOffers = createAction<OfferPreview[]>('data/fillOffers');
+export const setDataLoading = createAction<boolean>('data/setDataLoading');
+
+export const setAuthorizationStatus = createAction<AuthorizationStatus>('user/setAuthorizationStatus');

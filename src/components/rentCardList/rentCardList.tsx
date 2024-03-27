@@ -1,11 +1,11 @@
 import RentCard from '../../components/rentCard/rentCard';
 import { CardType } from '../../const';
-import { OfferInfo } from '../../types/offer';
+import { OfferPreview } from '../../types/offer';
 
 type RentCardListProps = {
   cardsCount: number;
-  offers: OfferInfo[];
-  onActiveCardChanged?: (activeCard: number | null) => void;
+  offers: OfferPreview[];
+  onActiveCardChanged?: (activeCard: string | null) => void;
 };
 
 function RentCardList({ cardsCount, offers, onActiveCardChanged }: RentCardListProps) {
