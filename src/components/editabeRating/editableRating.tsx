@@ -11,7 +11,7 @@ function EditableRating({ value, onRatingChanged }: EditableRatingProps) {
   const renderStars = () => {
     const stars: JSX.Element[] = [];
     for (let i = 0; i < STARS_COUNT; i++) {
-      stars.push((<Star rating={STARS_COUNT - i} value={value} onRatingChanged={onRatingChanged} />));
+      stars.push((<Star rating={STARS_COUNT - i} value={value} onRatingChanged={onRatingChanged} key={STARS_COUNT - i} />));
     }
     return stars;
   };

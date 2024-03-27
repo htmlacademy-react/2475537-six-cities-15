@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Review } from '../../types/offer';
+import { NewReview } from '../../types/offer';
 import EditableRating from '../editabeRating/editableRating';
 
 type ReviewFormProps = {
-  onReviewAdded: (newReview: Review) => void;
+  onReviewAdded: (newReview: NewReview) => void;
 };
 
 function ReviewForm({ onReviewAdded }: ReviewFormProps) {
@@ -14,10 +14,7 @@ function ReviewForm({ onReviewAdded }: ReviewFormProps) {
   const handleSubmit = (evt: React.MouseEvent) => {
     evt.preventDefault();
     onReviewAdded({
-      authorImage: 'img/avatar-max.jpg',
-      authorName: 'Petr',
-      date: new Date(),
-      review: review.text,
+      comment: review.text,
       rating: review.rating,
     });
     setReview(emptyReview);

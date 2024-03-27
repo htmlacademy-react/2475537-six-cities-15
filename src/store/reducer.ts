@@ -10,18 +10,18 @@ type InitialState = {
   currentCity: City;
   offers: OfferPreview[];
   authorizationStatus: AuthorizationStatus;
-  isDataLoading: boolean;
   user: UserInfo | null;
   error: string | null;
+  isDataLoading: boolean;
 }
 
 const initialState: InitialState = {
   currentCity: cities.find((c) => c.code === 'Paris') as City,
   offers: [],
   authorizationStatus: AuthorizationStatus.Unknown,
-  isDataLoading: false,
   user: null,
   error: null,
+  isDataLoading: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
