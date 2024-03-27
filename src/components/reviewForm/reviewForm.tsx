@@ -11,7 +11,7 @@ function ReviewForm({ onReviewAdded }: ReviewFormProps) {
 
   const [review, setReview] = useState(emptyReview);
 
-  const onSubmit = (evt: React.MouseEvent) => {
+  const handleSubmit = (evt: React.MouseEvent) => {
     evt.preventDefault();
     onReviewAdded({
       authorImage: 'img/avatar-max.jpg',
@@ -51,7 +51,7 @@ function ReviewForm({ onReviewAdded }: ReviewFormProps) {
           className="reviews__submit form__submit button"
           type="submit"
           disabled={review.text.length < 50}
-          onClick={onSubmit}
+          onClick={handleSubmit}
         >
           Submit
         </button>

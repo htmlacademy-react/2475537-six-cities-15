@@ -1,5 +1,7 @@
 export enum APIRoutes {
-  offersList = '/offers',
-  offer = '/offers/{offerId}',
-  nearByOffers = '/offers/{offerId}/nearby',
+  OffersList = '/offers',
+  Offer = '/offers/{offerId}',
+  NearByOffers = '/offers/{offerId}/nearby',
+  Login = '/login',
+  Logout = '/logout',
 }
