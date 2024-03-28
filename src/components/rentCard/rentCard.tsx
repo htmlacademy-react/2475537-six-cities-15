@@ -6,11 +6,12 @@ import Rating from '../rating/rating';
 type RentCardProps = {
   offer: OfferPreview;
   onActiveCardChanged?: (activeCard: string | null) => void;
+  onFavoriteStatusChanged?: (offerId: string, isFavorite: boolean) => void;
   cardType: CardType;
 };
 
 
-function RentCard({ offer, onActiveCardChanged, cardType }: RentCardProps) {
+function RentCard({ offer, onActiveCardChanged, onFavoriteStatusChanged, cardType }: RentCardProps) {
   const handleMouseOver = () => {
     if (onActiveCardChanged) {
       onActiveCardChanged(offer.id);
@@ -22,6 +23,12 @@ function RentCard({ offer, onActiveCardChanged, cardType }: RentCardProps) {
       onActiveCardChanged(null);
     }
   };
+
+  const handleFavoriteStatusChanged = (offerId: string, isFavorite: boolean) => {
+    if (onFavoriteStatusChanged) {
+      onFavoriteStatusChanged(offerId, isFavorite);
+    }
+  }
 
   const className = cardType === CardType.Regular ? 'cities' : 'favorites';
   const imageWidth = cardType === CardType.Regular ? 260 : 150;
@@ -54,6 +61,7 @@ function RentCard({ offer, onActiveCardChanged, cardType }: RentCardProps) {
           <button
             className={`place-card__bookmark-button button ${offer.isFavorite ? 'place-card__bookmark-button--active' : ''}`}
             type="button"
+            onClick={() => handleFavoriteStatusChanged(offer.id, !offer.isFavorite)}
           >
             <svg
               className="place-card__bookmark-icon"

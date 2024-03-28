@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import { OfferInfo, Review } from '../../types/offer';
+import { OfferInfo } from '../../types/offer';
 import HostCard from '../hostCard/hostCard';
 import Rating from '../rating/rating';
 import ReviewList from '../reviewList/reviewList';

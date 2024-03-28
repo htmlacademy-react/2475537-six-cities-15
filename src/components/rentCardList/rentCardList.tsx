@@ -6,12 +6,15 @@ type RentCardListProps = {
   cardsCount: number;
   offers: OfferPreview[];
   onActiveCardChanged?: (activeCard: string | null) => void;
+  onFavoriteStatusChanged?: (offerId: string, isFavorite: boolean) => void;
 };
 
-function RentCardList({ cardsCount, offers, onActiveCardChanged }: RentCardListProps) {
+function RentCardList({ cardsCount, offers, onActiveCardChanged, onFavoriteStatusChanged }: RentCardListProps) {
   return (
     <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer, i) => i < cardsCount ? <RentCard key={offer.id} offer={offer} onActiveCardChanged={onActiveCardChanged} cardType={CardType.Regular} /> : null)}
+      {offers.map((offer, i) => i < cardsCount
+        ? <RentCard key={offer.id} offer={offer} onActiveCardChanged={onActiveCardChanged} cardType={CardType.Regular} onFavoriteStatusChanged={onFavoriteStatusChanged}/>
+        : null)}
     </div>);
 }
 

@@ -25,3 +25,14 @@ export const fetchAddReview = (offerId: string, review: NewReview): Promise<Revi
   return api.post<Review>(APIRoutes.Comments.replace('{offerId}', offerId), review)
     .then(({ data }) => data);
 };
+
+export const fetchFavorites = (): Promise<OfferPreview[]> => {
+  const api = createApi();
+  return api.get<OfferPreview[]>(APIRoutes.Favorites)
+    .then(({ data }) => data);
+};
+
+export const fetchSetFavoriteStatus = (offerId: string, isFavorite: boolean): Promise<void> => {
+  const api = createApi();
+  return api.post(APIRoutes.SetFavoriteStatus.replace('{offerId}', offerId).replace('{status}', isFavorite ? '1' : '0'));
+};

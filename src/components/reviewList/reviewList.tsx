@@ -20,7 +20,7 @@ function ReviewList({ offerId }: ReviewListProps) {
     fetchAddReview(offerId, newReview)
       .then((createdReview) => {
         setReviews([...reviews, ...[createdReview]]);
-      });    
+      });
   };
 
   useEffect(() => {
