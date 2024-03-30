@@ -28,7 +28,7 @@ function RentCard({ offer, onActiveCardChanged, onFavoriteStatusChanged, cardTyp
     if (onFavoriteStatusChanged) {
       onFavoriteStatusChanged(offerId, isFavorite);
     }
-  }
+  };
 
   const className = cardType === CardType.Regular ? 'cities' : 'favorites';
   const imageWidth = cardType === CardType.Regular ? 260 : 150;
