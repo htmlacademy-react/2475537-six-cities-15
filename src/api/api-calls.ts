@@ -3,7 +3,9 @@ import { createApi } from './api';
 import { APIRoutes } from './routes';
 
 export const fetchSingleOffer = (offerId: string | undefined): Promise<OfferInfo | null> => {
-  if (!offerId) return Promise.resolve(null);
+  if (!offerId) {
+    return Promise.resolve(null);
+  }
 
   const api = createApi();
   return api.get<OfferInfo>(APIRoutes.Offer.replace('{offerId}', offerId))
@@ -11,7 +13,9 @@ export const fetchSingleOffer = (offerId: string | undefined): Promise<OfferInfo
 };
 
 export const fetchNearOffers = (offerId: string | undefined): Promise<OfferPreview[]> => {
-  if (!offerId) return Promise.resolve([]);
+  if (!offerId) {
+    return Promise.resolve([]);
+  }
 
   const api = createApi();
   return api.get<OfferPreview[]>(APIRoutes.NearByOffers.replace('{offerId}', offerId))
@@ -19,7 +23,9 @@ export const fetchNearOffers = (offerId: string | undefined): Promise<OfferPrevi
 };
 
 export const fetchOfferReviews = (offerId: string | undefined): Promise<Review[]> => {
-  if (!offerId) return Promise.resolve([]);
+  if (!offerId) {
+    return Promise.resolve([]);
+  }
 
   const api = createApi();
   return api.get<Review[]>(APIRoutes.Comments.replace('{offerId}', offerId))
