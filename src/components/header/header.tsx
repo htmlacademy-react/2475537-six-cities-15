@@ -2,45 +2,16 @@ import { Link } from 'react-router-dom';
 import { signOut } from '../../api/api-actions';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
+import Logged from './logged';
+import NotLogged from './notLogged';
 
-function AppHeader(): JSX.Element {
+function AppHeader() {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const dispatch = useAppDispatch();
 
   const handleLogout = (evt: React.MouseEvent) => {
     evt.preventDefault();
     dispatch(signOut());
-  };
-
-  const renderChilds = () => {
-    if (authorizationStatus === AuthorizationStatus.Auth) {
-      return (
-        <>
-          <li className="header__nav-item user">
-            <a className="header__nav-link header__nav-link--profile" href="#">
-              <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-              <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-              <span className="header__favorite-count">3</span>
-            </a>
-          </li>
-          <li className="header__nav-item">
-            <a className="header__nav-link" href="#" onClick={handleLogout}>
-              <span className="header__signout">Sign out</span>
-            </a>
-          </li>
-        </>
-      );
-    }
-
-    return (
-      <li className="header__nav-item user">
-        <Link to={AppRoute.Login} className="header__nav-link header__nav-link--profile" href="#">
-          <div className="header__avatar-wrapper user__avatar-wrapper">
-          </div>
-          <span className="header__login">Sign in</span>
-        </Link>
-      </li>
-    );
   };
 
   return (
@@ -54,7 +25,7 @@ function AppHeader(): JSX.Element {
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
-              {renderChilds()}
+              {authorizationStatus === AuthorizationStatus.Auth ? <Logged onLogout={handleLogout} /> : <NotLogged />}
             </ul>
           </nav>
         </div>
