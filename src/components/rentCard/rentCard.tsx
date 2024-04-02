@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { CardType } from '../../const';
 import { OfferPreview } from '../../types/offer';
@@ -6,7 +7,7 @@ import Rating from '../rating/rating';
 type RentCardProps = {
   offer: OfferPreview;
   onActiveCardChanged?: (activeCard: string | null) => void;
-  onFavoriteStatusChanged?: (offerId: string, isFavorite: boolean) => void;
+  onFavoriteStatusChanged?: (offer: OfferPreview) => void;
   cardType: CardType;
 };
 
@@ -24,9 +25,9 @@ function RentCard({ offer, onActiveCardChanged, onFavoriteStatusChanged, cardTyp
     }
   };
 
-  const handleFavoriteStatusChanged = (offerId: string, isFavorite: boolean) => {
+  const handleFavoriteStatusChanged = (offer: OfferPreview) => {
     if (onFavoriteStatusChanged) {
-      onFavoriteStatusChanged(offerId, isFavorite);
+      onFavoriteStatusChanged(offer);
     }
   };
 
@@ -61,7 +62,7 @@ function RentCard({ offer, onActiveCardChanged, onFavoriteStatusChanged, cardTyp
           <button
             className={`place-card__bookmark-button button ${offer.isFavorite ? 'place-card__bookmark-button--active' : ''}`}
             type="button"
-            onClick={() => handleFavoriteStatusChanged(offer.id, !offer.isFavorite)}
+            onClick={() => handleFavoriteStatusChanged(offer)}
           >
             <svg
               className="place-card__bookmark-icon"
@@ -83,4 +84,4 @@ function RentCard({ offer, onActiveCardChanged, onFavoriteStatusChanged, cardTyp
   );
 }
 
-export default RentCard;
+export default memo(RentCard);

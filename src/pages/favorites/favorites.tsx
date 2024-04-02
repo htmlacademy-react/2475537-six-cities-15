@@ -17,10 +17,10 @@ function Favorites() {
       .catch(() => setIsFavoritesLoading(false));
   }, []);
 
-  const handleFavoriteStatusChanged = (offerId: string, isFavorite: boolean) => {
-    fetchSetFavoriteStatus(offerId, isFavorite)
+  const handleFavoriteStatusChanged = (offer: OfferPreview) => {
+    fetchSetFavoriteStatus(offer.id, !offer.isFavorite)
       .then(() => {
-        setFavorites(favorites.filter((f) => f.id !== offerId));
+        setFavorites(favorites.filter((f) => f.id !== offer.id));
       });
   };
 

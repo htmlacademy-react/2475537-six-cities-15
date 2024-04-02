@@ -5,7 +5,7 @@ import RentCard from '../rentCard/rentCard';
 type FavoriteGroupProps = {
   offers: OfferPreview[];
   city: string;
-  onFavoriteStatusChanged?: (offerId: string, isFavorite: boolean) => void;
+  onFavoriteStatusChanged?: (offer: OfferPreview) => void;
 };
 
 function FavoriteGroup({ offers, city, onFavoriteStatusChanged }: FavoriteGroupProps) {

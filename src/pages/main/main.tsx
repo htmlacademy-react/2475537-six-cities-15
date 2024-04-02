@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import RentCardList from '../../components/rentCardList/rentCardList';
 import Map from '../../components/map/map';
 import Loader from '../../components/loader/loader';
@@ -8,8 +8,9 @@ import { allowedSorting, SortOrder } from '../../types/sort';
 import OfferSorting from '../../components/offerSorting/offerSorting';
 import { fetchSetFavoriteStatus } from '../../api/api-calls';
 import { OfferPreview } from '../../types/offer';
-import { changeOffer } from '../../store/actions';
+import { changeOffer } from '../../store/reducer/data/reducer';
 import { store } from '../../store/index';
+import { Namespace } from '../../store/const';
 
 type MainProps = {
   cardsCount: number;
@@ -20,33 +21,32 @@ function Main({ cardsCount }: MainProps) {
   const [currentSorting, setCurrentSorting] = useState(allowedSorting[0]);
 
   const { offers, currentCity, isDataLoading } = useAppSelector((state) => ({
-    currentCity: state.currentCity,
-    offers: state.offers.filter((o) => o.city.name === state.currentCity.code),
-    isDataLoading: state.isDataLoading,
+    currentCity: state[Namespace.Application].currentCity,
+    offers: state[Namespace.Data].offers.filter((o) => o.city.name === state[Namespace.Application].currentCity.code),
+    isDataLoading: state[Namespace.Data].isDataLoading,
   }));
 
   const filteredOffers = sortOffers(offers, currentSorting);
 
-  const handleActiveCardChanged = (newActiveCard: string | null) => {
+  const handleActiveCardChanged = useCallback((newActiveCard: string | null) => {
     setActiveCard(newActiveCard);
-  };
+  }, []);
 
-  const handleSortingChanged = (newSorting: SortOrder) => {
+  const handleSortingChanged = useCallback((newSorting: SortOrder) => {
     setCurrentSorting(newSorting);
-  };
+  }, []);
 
-  const handleFavoriteStatusChanged = (offerId: string, isFavorite: boolean) => {
-    fetchSetFavoriteStatus(offerId, isFavorite)
+  const handleFavoriteStatusChanged = useCallback((offer: OfferPreview) => {
+    fetchSetFavoriteStatus(offer.id, !offer.isFavorite)
       .then(() => {
-        const changedOffer = offers.find((o) => o.id === offerId) as OfferPreview;
-        store.dispatch(changeOffer({ ...changedOffer, isFavorite }));
+        store.dispatch(changeOffer({ ...offer, isFavorite: !offer.isFavorite}));
       });
-  };
+  }, []);
 
   if (isDataLoading) {
     return (<Loader />);
   }
-
+ 
   return (
     <main className="page__main page__main--index">
       <div className="cities">

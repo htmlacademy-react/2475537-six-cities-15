@@ -1,7 +1,9 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ErrorType } from '../api/api';
-import { clearErrorAction } from '../api/api-actions';
 import { store } from '../store';
-import { setError } from '../store/actions';
+import { setError } from '../store/reducer/data/reducer';
+
+export const TIMEOUT_SHOW_ERROR = 2000;
 
 export const processErrorHandle = (error: ErrorType): void => {
   if (error.details?.length > 0) {
@@ -11,3 +13,13 @@ export const processErrorHandle = (error: ErrorType): void => {
   }
   store.dispatch(clearErrorAction());
 };
+
+export const clearErrorAction = createAsyncThunk(
+  'game/clearError',
+  () => {
+    setTimeout(
+      () => store.dispatch(setError(null)),
+      TIMEOUT_SHOW_ERROR,
+    );
+  },
+);

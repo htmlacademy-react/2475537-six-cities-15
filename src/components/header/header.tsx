@@ -2,9 +2,10 @@ import { Link } from 'react-router-dom';
 import { signOut } from '../../api/api-actions';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
+import { Namespace } from '../../store/const';
 
 function AppHeader(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector((state) => state[Namespace.User].authorizationStatus);
   const dispatch = useAppDispatch();
 
   const handleLogout = (evt: React.MouseEvent) => {
