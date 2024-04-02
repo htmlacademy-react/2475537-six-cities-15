@@ -13,7 +13,7 @@ export const TIMEOUT_SHOW_ERROR = 2000;
 
 const createAppAsyncThunk = createAsyncThunk.withTypes<{ dispatch: AppDispatch; extra: AxiosInstance }>();
 
-export const fetchOffers = createAppAsyncThunk<OfferPreview[], undefined>(
+export const fetchOffers = createAppAsyncThunk<void, undefined>(
   'data/fetchOffers',
   async (_arg, { dispatch, extra: api }) => {
     dispatch(setDataLoading(true));
