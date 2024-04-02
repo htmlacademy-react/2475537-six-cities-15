@@ -4,18 +4,16 @@ import { AuthorizationStatus } from '../const';
 import { dropToken, saveToken } from '../services/token';
 import { fillOffers, setAuthorizationStatus, setDataLoading, setError } from '../store/actions';
 import { OfferPreview } from '../types/offer';
-import { AppDispatch, State } from '../types/state';
+import { AppDispatch } from '../types/state';
 import { Credentials, UserInfo } from '../types/user';
 import { APIRoutes } from './routes';
 import { store } from '../store';
 
 export const TIMEOUT_SHOW_ERROR = 2000;
 
-export const fetchOffers = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
+const createAppAsyncThunk = createAsyncThunk.withTypes<{ dispatch: AppDispatch; extra: AxiosInstance }>();
+
+export const fetchOffers = createAppAsyncThunk<OfferPreview[], undefined>(
   'data/fetchOffers',
   async (_arg, { dispatch, extra: api }) => {
     dispatch(setDataLoading(true));
@@ -25,11 +23,7 @@ export const fetchOffers = createAsyncThunk<void, undefined, {
   }
 );
 
-export const checkAuthorization = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
+export const checkAuthorization = createAppAsyncThunk<void, undefined>(
   'user/checkAuthorization',
   async (_arg, { dispatch, extra: api }) => {
     try {
@@ -41,11 +35,7 @@ export const checkAuthorization = createAsyncThunk<void, undefined, {
   }
 );
 
-export const authorize = createAsyncThunk<void, Credentials, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
+export const authorize = createAppAsyncThunk<void, Credentials>(
   'user/authorize',
   async ({ login: email, password }, { dispatch, extra: api }) => {
     try {
@@ -58,11 +48,7 @@ export const authorize = createAsyncThunk<void, Credentials, {
   }
 );
 
-export const signOut = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
+export const signOut = createAppAsyncThunk<void, undefined>(
   'user/signout',
   async (_arg, { dispatch, extra: api }) => {
     await api.get(APIRoutes.Logout);
