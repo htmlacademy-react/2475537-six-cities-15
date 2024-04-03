@@ -7,7 +7,7 @@ import NotLogged from './notLogged';
 import { Namespace } from '../../store/const';
 
 function AppHeader() {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector((state) => state[Namespace.User].authorizationStatus);
   const dispatch = useAppDispatch();
 
   const handleLogout = (evt: React.MouseEvent) => {
