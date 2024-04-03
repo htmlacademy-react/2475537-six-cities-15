@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { cities } from '../../../mocks/cities';
 import { City } from '../../../types/location';
-import { ApplicationProcess } from "../../../types/state";
+import { ApplicationProcess } from '../../../types/state';
 import { Namespace } from '../../const';
 
 

@@ -6,7 +6,7 @@ import { AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks/index';
 import { Review, NewReview } from '../../types/offer';
 import { fetchAddReview, fetchOfferReviews } from '../../api/api-calls';
-import { Namespace } from '../../store/const';
+import { useAuthorizationStatusSelector } from '../../store/reducer/user/selectors';
 
 type ReviewListProps = {
   offerId: string;
@@ -15,7 +15,7 @@ type ReviewListProps = {
 function ReviewList({ offerId }: ReviewListProps) {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [isOfferReviewsLoading, setIsOfferReviewsLoading] = useState(true);
-  const authorizationStatus = useAppSelector((state) => state[Namespace.User].authorizationStatus);
+  const authorizationStatus = useAppSelector(useAuthorizationStatusSelector);
 
   const reviewAdded = (newReview: NewReview) => {
     fetchAddReview(offerId, newReview)

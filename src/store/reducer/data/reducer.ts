@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchOffers } from '../../../api/api-actions';
 import { OfferPreview } from '../../../types/offer';
-import { DataProcess } from "../../../types/state";
+import { DataProcess } from '../../../types/state';
 import { Namespace } from '../../const';
 
 

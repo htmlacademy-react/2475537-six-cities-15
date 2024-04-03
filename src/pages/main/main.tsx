@@ -10,7 +10,8 @@ import { fetchSetFavoriteStatus } from '../../api/api-calls';
 import { OfferPreview } from '../../types/offer';
 import { changeOffer } from '../../store/reducer/data/reducer';
 import { store } from '../../store/index';
-import { Namespace } from '../../store/const';
+import { useCurrentCitySelector } from '../../store/reducer/application/selectors';
+import { useIsDataLoadingSelector, useOffersSelector } from '../../store/reducer/data/selectors';
 
 type MainProps = {
   cardsCount: number;
@@ -19,12 +20,9 @@ type MainProps = {
 function Main({ cardsCount }: MainProps) {
   const [activeCard, setActiveCard] = useState<string | null>(null);
   const [currentSorting, setCurrentSorting] = useState(allowedSorting[0]);
-
-  const { offers, currentCity, isDataLoading } = useAppSelector((state) => ({
-    currentCity: state[Namespace.Application].currentCity,
-    offers: state[Namespace.Data].offers.filter((o) => o.city.name === state[Namespace.Application].currentCity.code),
-    isDataLoading: state[Namespace.Data].isDataLoading,
-  }));
+  const currentCity = useAppSelector(useCurrentCitySelector);
+  const offers = useAppSelector(useOffersSelector);
+  const isDataLoading = useAppSelector(useIsDataLoadingSelector);
 
   const filteredOffers = sortOffers(offers, currentSorting);
 

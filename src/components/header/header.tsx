@@ -4,10 +4,10 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import Logged from './logged';
 import NotLogged from './notLogged';
-import { Namespace } from '../../store/const';
+import { useAuthorizationStatusSelector } from '../../store/reducer/user/selectors';
 
 function AppHeader() {
-  const authorizationStatus = useAppSelector((state) => state[Namespace.User].authorizationStatus);
+  const authorizationStatus = useAppSelector(useAuthorizationStatusSelector);
   const dispatch = useAppDispatch();
 
   const handleLogout = (evt: React.MouseEvent) => {

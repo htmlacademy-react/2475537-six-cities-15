@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosError, AxiosResponse } from 'axios';
 import { getToken } from '../services/token';
-// import { processErrorHandle } from '../services/errorHandler';
+import { toast } from 'react-toastify';
 import { StatusCodes } from 'http-status-codes';
 
 export type ErrorType = {
@@ -22,6 +22,12 @@ const StatusCodeMapping: Record<number, boolean> = {
 };
 
 const shouldDisplayError = (response: AxiosResponse) => !!StatusCodeMapping[response.status];
+const getErrorMessage = (error: ErrorType): string => {
+  if (error.details?.length > 0) {
+    return error.details[0].messages?.[0] ?? error.message;
+  }
+  return error.message;
+};
 
 const BASE_URL = 'https://15.design.htmlacademy.pro/six-cities';
 const TIMEOUT = 5000;
@@ -44,8 +50,8 @@ export const createApi = (): AxiosInstance => {
     (response) => response,
     (error: AxiosError<ErrorType>) => {
       if (error.response && shouldDisplayError(error.response)) {
-        //const detailMessage = (error.response.data);
-        //processErrorHandle(detailMessage);
+        const detailMessage = getErrorMessage(error.response.data);
+        toast.error(detailMessage);
       }
       throw error;
     }

@@ -12,14 +12,14 @@ import ScrollTop from '../scrollTop/scrollTop';
 import Loader from '../loader/loader';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { fetchOffers } from '../../api/api-actions';
-import { Namespace } from '../../store/const';
+import { useAuthorizationStatusSelector } from '../../store/reducer/user/selectors';
 
 type AppProps = {
   cardsCount: number;
 };
 
 function App({ cardsCount }: AppProps) {
-  const authorizationStatus = useAppSelector((state) => state[Namespace.User].authorizationStatus);
+  const authorizationStatus = useAppSelector(useAuthorizationStatusSelector);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
