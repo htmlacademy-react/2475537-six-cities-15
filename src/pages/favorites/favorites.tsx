@@ -1,19 +1,34 @@
+import { useEffect, useState } from 'react';
+import { fetchFavorites, fetchSetFavoriteStatus } from '../../api/api-calls';
 import FavoriteGroup from '../../components/favoriteGroup/favoriteGroup';
 import Loader from '../../components/loader/loader';
-import { useAppSelector } from '../../hooks';
 import { OfferPreview } from '../../types/offer';
 
 function Favorites() {
-  const { offers, isDataLoading } = useAppSelector((state) => ({
-    offers: state.offers.filter((o) => o.isFavorite),
-    isDataLoading: state.isDataLoading,
-  }));
+  const [isFavoritesLoading, setIsFavoritesLoading] = useState(true);
+  const [favorites, setFavorites] = useState<OfferPreview[]>([]);
+
+  useEffect(() => {
+    fetchFavorites()
+      .then((data) => {
+        setIsFavoritesLoading(false);
+        setFavorites(data);
+      })
+      .catch(() => setIsFavoritesLoading(false));
+  }, []);
+
+  const handleFavoriteStatusChanged = (offerId: string, isFavorite: boolean) => {
+    fetchSetFavoriteStatus(offerId, isFavorite)
+      .then(() => {
+        setFavorites(favorites.filter((f) => f.id !== offerId));
+      });
+  };
 
   const groupOffers = () => {
-    const cities = new Set(offers.map((o) => o.city.name));
+    const cities = new Set(favorites.map((o) => o.city.name));
     const groupedOffers = new Map<string, OfferPreview[]>();
     for (const city of cities) {
-      groupedOffers.set(city, offers.filter((o) => o.city.name === city));
+      groupedOffers.set(city, favorites.filter((o) => o.city.name === city));
     }
 
     return groupedOffers;
@@ -24,14 +39,14 @@ function Favorites() {
     for (const [city, cityOffers] of groupOffers()) {
       result.push(
         <li className="favorites__locations-items" key={`group_${city}`}>
-          <FavoriteGroup city={city} offers={cityOffers} />
+          <FavoriteGroup city={city} offers={cityOffers} onFavoriteStatusChanged={handleFavoriteStatusChanged} />
         </li>
       );
     }
     return result;
   };
 
-  if (isDataLoading) {
+  if (isFavoritesLoading) {
     return (<Loader />);
   }
 

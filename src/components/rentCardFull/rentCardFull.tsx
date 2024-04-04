@@ -1,21 +1,14 @@
 import { PropsWithChildren } from 'react';
-import { Navigate } from 'react-router-dom';
-import { AppRoute } from '../../const';
-import { OfferInfo, Review } from '../../types/offer';
+import { OfferInfo } from '../../types/offer';
 import HostCard from '../hostCard/hostCard';
 import Rating from '../rating/rating';
 import ReviewList from '../reviewList/reviewList';
 
 type RentCardFullProps = {
-  offer: OfferInfo | null;
-  reviews: Review[];
+  offer: OfferInfo;
 };
 
-function RentCardFull({ offer, reviews, children }: PropsWithChildren<RentCardFullProps>) {
-  if (!offer) {
-    return (<Navigate to={AppRoute.Root} />);
-  }
-
+function RentCardFull({ offer, children }: PropsWithChildren<RentCardFullProps>) {
   return (
     <section className="offer">
       <div className="offer__gallery-container container">
@@ -64,7 +57,7 @@ function RentCardFull({ offer, reviews, children }: PropsWithChildren<RentCardFu
             </ul>
           </div>
           <HostCard host={offer.host} />
-          <ReviewList reviews={reviews}/>
+          <ReviewList offerId={offer.id} />
         </div>
       </div>
       {children}

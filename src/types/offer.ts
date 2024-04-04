@@ -44,17 +44,19 @@ export type OfferImage = {
 
 export type Host = {
   name: string;
-  image: string;
-  isFavorite: boolean;
-  category: string;
-  description: string;
-}
+  avatarUrl: string;
+  isPro: boolean;
+};
 
 export type Review = {
-  id?: number;
-  authorName: string;
-  authorImage: string;
+  id: string;
+  date: string;
+  user: Host;
+  comment: string;
   rating: number;
-  review: string;
-  date: Date;
+};
+
+export type NewReview = {
+  comment: string;
+  rating: number;
 }

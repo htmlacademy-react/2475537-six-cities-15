@@ -1,18 +1,40 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReviewCard from '../../components/reviewCard/reviewCard';
 import ReviewForm from '../../components/reviewForm/reviewForm';
-import { Review } from '../../types/offer';
+import Loader from '../../components/loader/loader';
+import { AuthorizationStatus } from '../../const';
+import { useAppSelector } from '../../hooks/index';
+import { Review, NewReview } from '../../types/offer';
+import { fetchAddReview, fetchOfferReviews } from '../../api/api-calls';
 
 type ReviewListProps = {
-  reviews: Review[];
+  offerId: string;
 };
 
-function ReviewList(props: ReviewListProps) {
-  const [reviews, setReviews] = useState(props.reviews);
+function ReviewList({ offerId }: ReviewListProps) {
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [isOfferReviewsLoading, setIsOfferReviewsLoading] = useState(true);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
-  const reviewAdded = (newReview: Review) => {
-    setReviews([...reviews, ...[newReview]]);
+  const reviewAdded = (newReview: NewReview) => {
+    fetchAddReview(offerId, newReview)
+      .then((createdReview) => {
+        setReviews([...reviews, ...[createdReview]]);
+      });
   };
+
+  useEffect(() => {
+    fetchOfferReviews(offerId)
+      .then((data) => {
+        setIsOfferReviewsLoading(false);
+        setReviews(data);
+      })
+      .catch(() => setIsOfferReviewsLoading(false));
+  }, [offerId]);
+
+  if (isOfferReviewsLoading) {
+    return (<Loader />);
+  }
 
   return (
     <section className="offer__reviews reviews">
@@ -26,7 +48,9 @@ function ReviewList(props: ReviewListProps) {
           </li>
         ))}
       </ul>
-      <ReviewForm onReviewAdded={reviewAdded}/>
+      {authorizationStatus === AuthorizationStatus.Auth && (
+        <ReviewForm onReviewAdded={reviewAdded} />
+      )}
     </section>
   );
 }

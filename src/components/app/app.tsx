@@ -51,7 +51,7 @@ function App({ cardsCount }: AppProps) {
           />
           <Route
             path={AppRoute.Offer}
-            element={<Offer reviews={[]}/>}
+            element={<Offer />}
           />
         </Route>
         <Route

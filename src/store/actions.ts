@@ -7,6 +7,7 @@ import { UserInfo } from '../types/user';
 export const changeCity = createAction<City>('app/changeCity');
 
 export const fillOffers = createAction<OfferPreview[]>('data/fillOffers');
+export const changeOffer = createAction<OfferPreview>('data/changeOffer');
 export const setDataLoading = createAction<boolean>('data/setDataLoading');
 export const setError = createAction<string | null>('data/setError');
 

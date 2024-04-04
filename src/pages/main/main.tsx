@@ -6,6 +6,10 @@ import { useAppSelector } from '../../hooks';
 import { sortOffers } from './utils';
 import { allowedSorting, SortOrder } from '../../types/sort';
 import OfferSorting from '../../components/offerSorting/offerSorting';
+import { fetchSetFavoriteStatus } from '../../api/api-calls';
+import { OfferPreview } from '../../types/offer';
+import { changeOffer } from '../../store/actions';
+import { store } from '../../store/index';
 
 type MainProps = {
   cardsCount: number;
@@ -23,12 +27,20 @@ function Main({ cardsCount }: MainProps) {
 
   const filteredOffers = sortOffers(offers, currentSorting);
 
-  const handleCardChanged = (newActiveCard: string | null) => {
+  const handleActiveCardChanged = (newActiveCard: string | null) => {
     setActiveCard(newActiveCard);
   };
 
   const handleSortingChanged = (newSorting: SortOrder) => {
     setCurrentSorting(newSorting);
+  };
+
+  const handleFavoriteStatusChanged = (offerId: string, isFavorite: boolean) => {
+    fetchSetFavoriteStatus(offerId, isFavorite)
+      .then(() => {
+        const changedOffer = offers.find((o) => o.id === offerId) as OfferPreview;
+        store.dispatch(changeOffer({ ...changedOffer, isFavorite }));
+      });
   };
 
   if (isDataLoading) {
@@ -43,7 +55,7 @@ function Main({ cardsCount }: MainProps) {
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">{filteredOffers.length} places to stay in {currentCity.title}</b>
             <OfferSorting allowedSorting={allowedSorting} currentSorting={currentSorting} onSortChanged={handleSortingChanged} />
-            <RentCardList cardsCount={cardsCount} offers={filteredOffers} onActiveCardChanged={handleCardChanged}/>
+            <RentCardList cardsCount={cardsCount} offers={filteredOffers} onActiveCardChanged={handleActiveCardChanged} onFavoriteStatusChanged={handleFavoriteStatusChanged}/>
           </section>
           <div className="cities__right-section">
             <Map offers={filteredOffers} activeOffer={activeCard} className="cities" center={currentCity.location} />

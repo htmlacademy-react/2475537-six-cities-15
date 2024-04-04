@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, fillOffers, setAuthorizationStatus, setDataLoading, setError, setUserInfo } from './actions';
+import { changeCity, changeOffer, fillOffers, setAuthorizationStatus, setDataLoading, setError, setUserInfo } from './actions';
 import { cities } from '../mocks/cities';
 import { OfferPreview } from '../types/offer';
 import { City } from '../types/location';
@@ -10,18 +10,18 @@ type InitialState = {
   currentCity: City;
   offers: OfferPreview[];
   authorizationStatus: AuthorizationStatus;
-  isDataLoading: boolean;
   user: UserInfo | null;
   error: string | null;
+  isDataLoading: boolean;
 }
 
 const initialState: InitialState = {
   currentCity: cities.find((c) => c.code === 'Paris') as City,
   offers: [],
   authorizationStatus: AuthorizationStatus.Unknown,
-  isDataLoading: false,
   user: null,
   error: null,
+  isDataLoading: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -31,6 +31,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(fillOffers, (state, action) => {
       state.offers = action.payload;
+    })
+    .addCase(changeOffer, (state, action) => {
+      state.offers = state.offers.map((offer) => offer.id === action.payload.id ? action.payload : offer);
     })
     .addCase(setAuthorizationStatus, (state, action) => {
       state.authorizationStatus = action.payload;
