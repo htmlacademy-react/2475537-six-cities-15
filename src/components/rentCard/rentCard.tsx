@@ -21,8 +21,8 @@ function RentCard({ offer, onActiveCardChanged, onFavoriteStatusChanged, cardTyp
     onActiveCardChanged?.(null);
   };
 
-  const handleFavoriteStatusChanged = (offer: OfferPreview) => {
-    onFavoriteStatusChanged?.(offer);
+  const handleFavoriteStatusChanged = (changedOffer: OfferPreview) => {
+    onFavoriteStatusChanged?.(changedOffer);
   };
 
   const className = cardType === CardType.Regular ? 'cities' : 'favorites';

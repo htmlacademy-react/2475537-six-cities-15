@@ -24,11 +24,11 @@ function Offer() {
     setActiveCard(newActiveCard);
   };
 
-  const handleFavoriteStatusChanged = useCallback((offer: OfferPreview) => {
-    if (offer.isFavorite) {
-      dispatch(fetchSetNotFavoriteStatus(offer.id));
+  const handleFavoriteStatusChanged = useCallback((changedOffer: OfferPreview) => {
+    if (changedOffer.isFavorite) {
+      dispatch(fetchSetNotFavoriteStatus(changedOffer.id));
     } else {
-      dispatch(fetchSetFavoriteStatus(offer.id));
+      dispatch(fetchSetFavoriteStatus(changedOffer.id));
     }
   }, [dispatch]);
 

@@ -45,7 +45,7 @@ function Main({ cardsCount }: MainProps) {
   if (isDataLoading) {
     return (<Loader />);
   }
- 
+
   return (
     <main className="page__main page__main--index">
       <div className="cities">

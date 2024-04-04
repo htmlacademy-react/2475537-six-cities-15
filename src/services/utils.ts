@@ -1,4 +1,4 @@
-import { AuthorizationStatus } from "../const";
+import { AuthorizationStatus } from '../const';
 
 export const isAuthorized = (authorizationStatus: AuthorizationStatus) => authorizationStatus === AuthorizationStatus.Auth;
 
