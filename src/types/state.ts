@@ -1,7 +1,7 @@
 import { AuthorizationStatus } from '../const';
 import { store } from '../store/index';
 import { City } from './location';
-import { OfferPreview } from './offer';
+import { OfferPreview, OfferInfo, Review } from './offer';
 import { UserInfo } from './user';
 
 export type ApplicationProcess = {
@@ -10,8 +10,16 @@ export type ApplicationProcess = {
 
 export type DataProcess = {
   offers: OfferPreview[];
+  singleOffer: OfferInfo | null;
+  nearOffers: OfferPreview[];
+  favorites: OfferPreview[];
   error: string | null;
   isDataLoading: boolean;
+  isSingleOfferLoading: boolean;
+  isNearOffersLoading: boolean;
+  offerReviews: Review[];
+  isOfferReviewsLoading: boolean;
+  isFavoritesLoading: boolean;
 };
 
 export type UserProcess = {

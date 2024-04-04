@@ -3,10 +3,11 @@ import { NewReview } from '../../types/offer';
 import EditableRating from '../editabeRating/editableRating';
 
 type ReviewFormProps = {
+  offerId: string;
   onReviewAdded: (newReview: NewReview) => void;
 };
 
-function ReviewForm({ onReviewAdded }: ReviewFormProps) {
+function ReviewForm({ offerId, onReviewAdded }: ReviewFormProps) {
   const emptyReview = { text: '', rating: 0 };
 
   const [review, setReview] = useState(emptyReview);
@@ -16,6 +17,7 @@ function ReviewForm({ onReviewAdded }: ReviewFormProps) {
     onReviewAdded({
       comment: review.text,
       rating: review.rating,
+      offerId,
     });
     setReview(emptyReview);
   };

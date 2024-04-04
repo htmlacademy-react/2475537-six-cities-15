@@ -1,13 +1,14 @@
 import { Navigate } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks/index';
 import LoginForm from '../../components/loginForm/loginForm';
 import { useAuthorizationStatusSelector } from '../../store/reducer/user/selectors';
+import { isAuthorized } from '../../services/utils';
 
 function Login() {
   const authorizationStatus = useAppSelector(useAuthorizationStatusSelector);
 
-  if (authorizationStatus === AuthorizationStatus.Auth) {
+  if (isAuthorized(authorizationStatus)) {
     return (<Navigate to={AppRoute.Root} />);
   }
 

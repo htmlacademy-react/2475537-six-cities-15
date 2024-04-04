@@ -2,14 +2,12 @@ import { useState, useCallback } from 'react';
 import RentCardList from '../../components/rentCardList/rentCardList';
 import Map from '../../components/map/map';
 import Loader from '../../components/loader/loader';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks';
 import { sortOffers } from './utils';
 import { allowedSorting, SortOrder } from '../../types/sort';
 import OfferSorting from '../../components/offerSorting/offerSorting';
-import { fetchSetFavoriteStatus } from '../../api/api-calls';
+import { fetchSetFavoriteStatus, fetchSetNotFavoriteStatus } from '../../api/api-actions';
 import { OfferPreview } from '../../types/offer';
-import { changeOffer } from '../../store/reducer/data/reducer';
-import { store } from '../../store/index';
 import { useCurrentCitySelector } from '../../store/reducer/application/selectors';
 import { useIsDataLoadingSelector, useOffersSelector } from '../../store/reducer/data/selectors';
 
@@ -18,6 +16,8 @@ type MainProps = {
 };
 
 function Main({ cardsCount }: MainProps) {
+  const dispatch = useAppDispatch();
+
   const [activeCard, setActiveCard] = useState<string | null>(null);
   const [currentSorting, setCurrentSorting] = useState(allowedSorting[0]);
   const currentCity = useAppSelector(useCurrentCitySelector);
@@ -35,11 +35,12 @@ function Main({ cardsCount }: MainProps) {
   }, []);
 
   const handleFavoriteStatusChanged = useCallback((offer: OfferPreview) => {
-    fetchSetFavoriteStatus(offer.id, !offer.isFavorite)
-      .then(() => {
-        store.dispatch(changeOffer({ ...offer, isFavorite: !offer.isFavorite}));
-      });
-  }, []);
+    if (offer.isFavorite) {
+      dispatch(fetchSetNotFavoriteStatus(offer.id));
+    } else {
+      dispatch(fetchSetFavoriteStatus(offer.id));
+    }
+  }, [dispatch]);
 
   if (isDataLoading) {
     return (<Loader />);

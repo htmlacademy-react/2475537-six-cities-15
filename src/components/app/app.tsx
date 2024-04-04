@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute } from '../../const';
 import Layout from '../layout/layout';
 import PrivateRoute from '../privateRoute/privateRoute';
 import Main from '../../pages/main/main';
@@ -13,6 +13,7 @@ import Loader from '../loader/loader';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { fetchOffers } from '../../api/api-actions';
 import { useAuthorizationStatusSelector } from '../../store/reducer/user/selectors';
+import { isCheckingAuthorization } from '../../services/utils';
 
 type AppProps = {
   cardsCount: number;
@@ -26,7 +27,7 @@ function App({ cardsCount }: AppProps) {
     dispatch(fetchOffers());
   }, [dispatch]);
 
-  if (authorizationStatus === AuthorizationStatus.Unknown) {
+  if (isCheckingAuthorization(authorizationStatus)) {
     return (<Loader />);
   }
 

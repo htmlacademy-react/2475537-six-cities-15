@@ -14,21 +14,15 @@ type RentCardProps = {
 
 function RentCard({ offer, onActiveCardChanged, onFavoriteStatusChanged, cardType }: RentCardProps) {
   const handleMouseOver = () => {
-    if (onActiveCardChanged) {
-      onActiveCardChanged(offer.id);
-    }
+    onActiveCardChanged?.(offer.id);
   };
 
   const handleMouseOut = () => {
-    if (onActiveCardChanged) {
-      onActiveCardChanged(null);
-    }
+    onActiveCardChanged?.(null);
   };
 
   const handleFavoriteStatusChanged = (offer: OfferPreview) => {
-    if (onFavoriteStatusChanged) {
-      onFavoriteStatusChanged(offer);
-    }
+    onFavoriteStatusChanged?.(offer);
   };
 
   const className = cardType === CardType.Regular ? 'cities' : 'favorites';

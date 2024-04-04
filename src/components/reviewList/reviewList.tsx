@@ -1,37 +1,31 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import ReviewCard from '../../components/reviewCard/reviewCard';
 import ReviewForm from '../../components/reviewForm/reviewForm';
 import Loader from '../../components/loader/loader';
-import { AuthorizationStatus } from '../../const';
-import { useAppSelector } from '../../hooks/index';
-import { Review, NewReview } from '../../types/offer';
-import { fetchAddReview, fetchOfferReviews } from '../../api/api-calls';
+import { NewReview } from '../../types/offer';
 import { useAuthorizationStatusSelector } from '../../store/reducer/user/selectors';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { useIsOfferReviewsLoading, useOfferReviews } from '../../store/reducer/data/selectors';
+import { fetchOfferReviews, fetchAddReview } from '../../api/api-actions';
+import { isAuthorized } from '../../services/utils';
 
 type ReviewListProps = {
   offerId: string;
 };
 
 function ReviewList({ offerId }: ReviewListProps) {
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const [isOfferReviewsLoading, setIsOfferReviewsLoading] = useState(true);
+  const dispatch = useAppDispatch();
+  const reviews = useAppSelector(useOfferReviews);
+  const isOfferReviewsLoading = useAppSelector(useIsOfferReviewsLoading);
   const authorizationStatus = useAppSelector(useAuthorizationStatusSelector);
 
   const reviewAdded = (newReview: NewReview) => {
-    fetchAddReview(offerId, newReview)
-      .then((createdReview) => {
-        setReviews([...reviews, ...[createdReview]]);
-      });
+    dispatch(fetchAddReview(newReview));
   };
 
   useEffect(() => {
-    fetchOfferReviews(offerId)
-      .then((data) => {
-        setIsOfferReviewsLoading(false);
-        setReviews(data);
-      })
-      .catch(() => setIsOfferReviewsLoading(false));
-  }, [offerId]);
+    dispatch(fetchOfferReviews(offerId));
+  }, [dispatch, offerId]);
 
   if (isOfferReviewsLoading) {
     return (<Loader />);
@@ -49,8 +43,8 @@ function ReviewList({ offerId }: ReviewListProps) {
           </li>
         ))}
       </ul>
-      {authorizationStatus === AuthorizationStatus.Auth && (
-        <ReviewForm onReviewAdded={reviewAdded} />
+      {isAuthorized(authorizationStatus) && (
+        <ReviewForm onReviewAdded={reviewAdded} offerId={offerId} />
       )}
     </section>
   );
