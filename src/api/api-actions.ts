@@ -16,7 +16,7 @@ export const fetchOffers = createAppAsyncThunk<OfferPreview[], undefined>(
   }
 );
 
-export const fetchSingleOffer = createAppAsyncThunk<OfferInfo, string | null>(
+export const fetchSingleOffer = createAppAsyncThunk<OfferInfo | null, string | undefined>(
   'data/fetchSingleOffer',
   async (offerId, { extra: api }) => {
     if (!offerId) {
@@ -28,7 +28,7 @@ export const fetchSingleOffer = createAppAsyncThunk<OfferInfo, string | null>(
   }
 );
 
-export const fetchNearOffers = createAppAsyncThunk<OfferPreview[], string | null>(
+export const fetchNearOffers = createAppAsyncThunk<OfferPreview[], string | undefined>(
   'data/fetchNearOffers',
   async (offerId, { extra: api }) => {
     if (!offerId) {
@@ -40,7 +40,7 @@ export const fetchNearOffers = createAppAsyncThunk<OfferPreview[], string | null
   }
 );
 
-export const fetchOfferReviews = createAppAsyncThunk<Review[], string | null>(
+export const fetchOfferReviews = createAppAsyncThunk<Review[], string>(
   'data/fetchOfferReviews',
   async (offerId, { extra: api }) => {
     if (!offerId) {
@@ -96,6 +96,7 @@ export const authorize = createAppAsyncThunk<UserInfo, Credentials>(
   async ({ login: email, password }, { extra: api }) => {
     const { data } = await api.post<UserInfo>(APIRoutes.Login, { email, password });
     saveToken(data.token);
+    return data;
   }
 );
 
