@@ -40,7 +40,7 @@ export const fetchNearOffers = createAppAsyncThunk<void, string | null>(
   }
 );
 
-export const fetchOfferReviews = createAppAsyncThunk<void, string | undefined>(
+export const fetchOfferReviews = createAppAsyncThunk<void, string | null>(
   'data/fetchOfferReviews',
   async (offerId, { extra: api }) => {
     if (!offerId) {
