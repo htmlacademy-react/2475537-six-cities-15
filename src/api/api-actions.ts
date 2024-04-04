@@ -8,7 +8,7 @@ import { APIRoutes } from './routes';
 
 const createAppAsyncThunk = createAsyncThunk.withTypes<{ dispatch: AppDispatch; extra: AxiosInstance }>();
 
-export const fetchOffers = createAppAsyncThunk<void, undefined>(
+export const fetchOffers = createAppAsyncThunk<OfferPreview[], undefined>(
   'data/fetchOffers',
   async (_arg, { extra: api }) => {
     const { data } = await api.get<OfferPreview[]>(APIRoutes.OffersList);
@@ -16,7 +16,7 @@ export const fetchOffers = createAppAsyncThunk<void, undefined>(
   }
 );
 
-export const fetchSingleOffer = createAppAsyncThunk<void, string | null>(
+export const fetchSingleOffer = createAppAsyncThunk<OfferInfo, string | null>(
   'data/fetchSingleOffer',
   async (offerId, { extra: api }) => {
     if (!offerId) {
@@ -28,7 +28,7 @@ export const fetchSingleOffer = createAppAsyncThunk<void, string | null>(
   }
 );
 
-export const fetchNearOffers = createAppAsyncThunk<void, string | null>(
+export const fetchNearOffers = createAppAsyncThunk<OfferPreview[], string | null>(
   'data/fetchNearOffers',
   async (offerId, { extra: api }) => {
     if (!offerId) {
@@ -40,7 +40,7 @@ export const fetchNearOffers = createAppAsyncThunk<void, string | null>(
   }
 );
 
-export const fetchOfferReviews = createAppAsyncThunk<void, string | null>(
+export const fetchOfferReviews = createAppAsyncThunk<Review[], string | null>(
   'data/fetchOfferReviews',
   async (offerId, { extra: api }) => {
     if (!offerId) {
@@ -52,7 +52,7 @@ export const fetchOfferReviews = createAppAsyncThunk<void, string | null>(
   }
 );
 
-export const fetchAddReview = createAppAsyncThunk<void, NewReview>(
+export const fetchAddReview = createAppAsyncThunk<Review, NewReview>(
   'data/fetchAddReview',
   async ({ offerId, comment, rating }, { extra: api }) => {
     const { data } = await api.post<Review>(APIRoutes.Comments.replace('{offerId}', offerId), { comment, rating });
@@ -60,7 +60,7 @@ export const fetchAddReview = createAppAsyncThunk<void, NewReview>(
   }
 );
 
-export const fetchFavorites = createAppAsyncThunk<void, undefined>(
+export const fetchFavorites = createAppAsyncThunk<OfferPreview[], undefined>(
   'data/fetchFavorites',
   async (_arg, { extra: api }) => {
     const { data } = await api.get<OfferPreview[]>(APIRoutes.Favorites);
@@ -68,7 +68,7 @@ export const fetchFavorites = createAppAsyncThunk<void, undefined>(
   }
 );
 
-export const fetchSetFavoriteStatus = createAppAsyncThunk<void, string>(
+export const fetchSetFavoriteStatus = createAppAsyncThunk<OfferPreview, string>(
   'data/fetchSetFavoriteStatus',
   async (offerId, { extra: api }) => {
     const { data } = await api.post<OfferPreview>(APIRoutes.SetFavoriteStatus.replace('{offerId}', offerId).replace('{status}', '1'));
@@ -76,7 +76,7 @@ export const fetchSetFavoriteStatus = createAppAsyncThunk<void, string>(
   }
 );
 
-export const fetchSetNotFavoriteStatus = createAppAsyncThunk<void, string>(
+export const fetchSetNotFavoriteStatus = createAppAsyncThunk<OfferPreview, string>(
   'data/fetchSetNotFavoriteStatus',
   async (offerId, { extra: api }) => {
     const { data } = await api.post<OfferPreview>(APIRoutes.SetFavoriteStatus.replace('{offerId}', offerId).replace('{status}', '0'));
@@ -91,7 +91,7 @@ export const checkAuthorization = createAppAsyncThunk<void, undefined>(
   }
 );
 
-export const authorize = createAppAsyncThunk<void, Credentials>(
+export const authorize = createAppAsyncThunk<UserInfo, Credentials>(
   'user/authorize',
   async ({ login: email, password }, { extra: api }) => {
     const { data } = await api.post<UserInfo>(APIRoutes.Login, { email, password });
