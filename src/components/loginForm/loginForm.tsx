@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { authorize } from '../../api/api-actions';
+import { authorize, fetchFavorites } from '../../api/api-actions';
 import { useAppDispatch } from '../../hooks/index';
 
 function LoginForm() {
@@ -8,7 +8,8 @@ function LoginForm() {
 
   const handleSubmit = (evt: React.MouseEvent) => {
     evt.preventDefault();
-    dispatch(authorize(credentials));
+    dispatch(authorize(credentials))
+      .then(() => dispatch(fetchFavorites()));
   };
 
   return (

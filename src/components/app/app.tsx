@@ -11,9 +11,9 @@ import Offer from '../../pages/offer/offer';
 import ScrollTop from '../scrollTop/scrollTop';
 import Loader from '../loader/loader';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { fetchOffers } from '../../api/api-actions';
+import { fetchFavorites, fetchOffers } from '../../api/api-actions';
 import { useAuthorizationStatusSelector } from '../../store/reducer/user/selectors';
-import { isCheckingAuthorization } from '../../services/utils';
+import { isAuthorized, isCheckingAuthorization } from '../../services/utils';
 
 type AppProps = {
   cardsCount: number;
@@ -25,7 +25,10 @@ function App({ cardsCount }: AppProps) {
 
   useEffect(() => {
     dispatch(fetchOffers());
-  }, [dispatch]);
+    if (isAuthorized(authorizationStatus)) {
+      dispatch(fetchFavorites());
+    }
+  }, [dispatch, authorizationStatus]);
 
   if (isCheckingAuthorization(authorizationStatus)) {
     return (<Loader />);

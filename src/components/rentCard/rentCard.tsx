@@ -1,8 +1,11 @@
 import { memo } from 'react';
-import { Link } from 'react-router-dom';
-import { CardType } from '../../const';
+import { Link, useNavigate } from 'react-router-dom';
+import { AppRoute, CardType } from '../../const';
+import { isAuthorized } from '../../services/utils';
 import { OfferPreview } from '../../types/offer';
 import Rating from '../rating/rating';
+import { useAppSelector } from '../../hooks/index';
+import { useAuthorizationStatusSelector } from '../../store/reducer/user/selectors';
 
 type RentCardProps = {
   offer: OfferPreview;
@@ -13,6 +16,9 @@ type RentCardProps = {
 
 
 function RentCard({ offer, onActiveCardChanged, onFavoriteStatusChanged, cardType }: RentCardProps) {
+  const authorizationStatus = useAppSelector(useAuthorizationStatusSelector);
+  const navigate = useNavigate();
+
   const handleMouseOver = () => {
     onActiveCardChanged?.(offer.id);
   };
@@ -22,6 +28,9 @@ function RentCard({ offer, onActiveCardChanged, onFavoriteStatusChanged, cardTyp
   };
 
   const handleFavoriteStatusChanged = (changedOffer: OfferPreview) => {
+    if (!isAuthorized(authorizationStatus)) {
+      navigate(AppRoute.Login);
+    }
     onFavoriteStatusChanged?.(changedOffer);
   };
 

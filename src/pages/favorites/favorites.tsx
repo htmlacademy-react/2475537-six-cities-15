@@ -1,19 +1,14 @@
-import { useEffect } from 'react';
-import { fetchFavorites, fetchSetNotFavoriteStatus } from '../../api/api-actions';
+import { fetchSetNotFavoriteStatus } from '../../api/api-actions';
 import FavoriteGroup from '../../components/favoriteGroup/favoriteGroup';
 import Loader from '../../components/loader/loader';
 import { OfferPreview } from '../../types/offer';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { useFavorites, useIsFavoritesLoading } from '../../store/reducer/data/selectors';
+import { useFavoritesSelector, useIsFavoritesLoadingSelector } from '../../store/reducer/data/selectors';
 
 function Favorites() {
   const dispatch = useAppDispatch();
-  const favorites = useAppSelector(useFavorites);
-  const isFavoritesLoading = useAppSelector(useIsFavoritesLoading);
-
-  useEffect(() => {
-    dispatch(fetchFavorites());
-  }, [dispatch]);
+  const favorites = useAppSelector(useFavoritesSelector);
+  const isFavoritesLoading = useAppSelector(useIsFavoritesLoadingSelector);
 
   const handleFavoriteStatusChanged = (offer: OfferPreview) => {
     dispatch(fetchSetNotFavoriteStatus(offer.id));
