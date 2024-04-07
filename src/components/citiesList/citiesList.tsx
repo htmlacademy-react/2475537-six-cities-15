@@ -1,13 +1,14 @@
 import { City } from '../../types/location';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeCity } from '../../store/actions';
+import { changeCity } from '../../store/reducer/application/reducer';
+import { useCurrentCitySelector } from '../../store/reducer/application/selectors';
 
 type CitiesListProps = {
   cities: City[];
 };
 
 function CitiesList({ cities }: CitiesListProps) {
-  const activeCity = useAppSelector((state) => state.currentCity);
+  const activeCity = useAppSelector(useCurrentCitySelector);
   const dispatch = useAppDispatch();
 
   return (

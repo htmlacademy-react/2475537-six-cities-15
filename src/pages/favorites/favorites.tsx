@@ -1,27 +1,22 @@
-import { useEffect, useState } from 'react';
-import { fetchFavorites, fetchSetFavoriteStatus } from '../../api/api-calls';
+import { useEffect } from 'react';
+import { fetchFavorites, fetchSetNotFavoriteStatus } from '../../api/api-actions';
 import FavoriteGroup from '../../components/favoriteGroup/favoriteGroup';
 import Loader from '../../components/loader/loader';
 import { OfferPreview } from '../../types/offer';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { useFavorites, useIsFavoritesLoading } from '../../store/reducer/data/selectors';
 
 function Favorites() {
-  const [isFavoritesLoading, setIsFavoritesLoading] = useState(true);
-  const [favorites, setFavorites] = useState<OfferPreview[]>([]);
+  const dispatch = useAppDispatch();
+  const favorites = useAppSelector(useFavorites);
+  const isFavoritesLoading = useAppSelector(useIsFavoritesLoading);
 
   useEffect(() => {
-    fetchFavorites()
-      .then((data) => {
-        setIsFavoritesLoading(false);
-        setFavorites(data);
-      })
-      .catch(() => setIsFavoritesLoading(false));
-  }, []);
+    dispatch(fetchFavorites());
+  }, [dispatch]);
 
-  const handleFavoriteStatusChanged = (offerId: string, isFavorite: boolean) => {
-    fetchSetFavoriteStatus(offerId, isFavorite)
-      .then(() => {
-        setFavorites(favorites.filter((f) => f.id !== offerId));
-      });
+  const handleFavoriteStatusChanged = (offer: OfferPreview) => {
+    dispatch(fetchSetNotFavoriteStatus(offer.id));
   };
 
   const groupOffers = () => {

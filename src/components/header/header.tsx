@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom';
 import { signOut } from '../../api/api-actions';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import Logged from './logged';
 import NotLogged from './notLogged';
+import { useAuthorizationStatusSelector } from '../../store/reducer/user/selectors';
+import { isAuthorized } from '../../services/utils';
 
 function AppHeader() {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(useAuthorizationStatusSelector);
   const dispatch = useAppDispatch();
 
   const handleLogout = (evt: React.MouseEvent) => {
@@ -25,7 +27,7 @@ function AppHeader() {
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
-              {authorizationStatus === AuthorizationStatus.Auth ? <Logged onLogout={handleLogout} /> : <NotLogged />}
+              {isAuthorized(authorizationStatus) ? <Logged onLogout={handleLogout} /> : <NotLogged />}
             </ul>
           </nav>
         </div>

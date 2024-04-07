@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { SortOrder } from '../../types/sort';
 
 type OfferSortingProps = {
@@ -36,4 +36,4 @@ function OfferSorting({ allowedSorting, currentSorting, onSortChanged }: OfferSo
   );
 }
 
-export default OfferSorting;
+export default memo(OfferSorting);

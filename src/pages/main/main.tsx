@@ -1,47 +1,46 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import RentCardList from '../../components/rentCardList/rentCardList';
 import Map from '../../components/map/map';
 import Loader from '../../components/loader/loader';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks';
 import { sortOffers } from './utils';
 import { allowedSorting, SortOrder } from '../../types/sort';
 import OfferSorting from '../../components/offerSorting/offerSorting';
-import { fetchSetFavoriteStatus } from '../../api/api-calls';
+import { fetchSetFavoriteStatus, fetchSetNotFavoriteStatus } from '../../api/api-actions';
 import { OfferPreview } from '../../types/offer';
-import { changeOffer } from '../../store/actions';
-import { store } from '../../store/index';
+import { useCurrentCitySelector } from '../../store/reducer/application/selectors';
+import { useIsDataLoadingSelector, useOffersSelector } from '../../store/reducer/data/selectors';
 
 type MainProps = {
   cardsCount: number;
 };
 
 function Main({ cardsCount }: MainProps) {
+  const dispatch = useAppDispatch();
+
   const [activeCard, setActiveCard] = useState<string | null>(null);
   const [currentSorting, setCurrentSorting] = useState(allowedSorting[0]);
-
-  const { offers, currentCity, isDataLoading } = useAppSelector((state) => ({
-    currentCity: state.currentCity,
-    offers: state.offers.filter((o) => o.city.name === state.currentCity.code),
-    isDataLoading: state.isDataLoading,
-  }));
+  const currentCity = useAppSelector(useCurrentCitySelector);
+  const offers = useAppSelector(useOffersSelector);
+  const isDataLoading = useAppSelector(useIsDataLoadingSelector);
 
   const filteredOffers = sortOffers(offers, currentSorting);
 
-  const handleActiveCardChanged = (newActiveCard: string | null) => {
+  const handleActiveCardChanged = useCallback((newActiveCard: string | null) => {
     setActiveCard(newActiveCard);
-  };
+  }, []);
 
-  const handleSortingChanged = (newSorting: SortOrder) => {
+  const handleSortingChanged = useCallback((newSorting: SortOrder) => {
     setCurrentSorting(newSorting);
-  };
+  }, []);
 
-  const handleFavoriteStatusChanged = (offerId: string, isFavorite: boolean) => {
-    fetchSetFavoriteStatus(offerId, isFavorite)
-      .then(() => {
-        const changedOffer = offers.find((o) => o.id === offerId) as OfferPreview;
-        store.dispatch(changeOffer({ ...changedOffer, isFavorite }));
-      });
-  };
+  const handleFavoriteStatusChanged = useCallback((offer: OfferPreview) => {
+    if (offer.isFavorite) {
+      dispatch(fetchSetNotFavoriteStatus(offer.id));
+    } else {
+      dispatch(fetchSetFavoriteStatus(offer.id));
+    }
+  }, [dispatch]);
 
   if (isDataLoading) {
     return (<Loader />);

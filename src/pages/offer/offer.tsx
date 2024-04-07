@@ -1,18 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
-import { OfferInfo, OfferPreview } from '../../types/offer';
 import { AppRoute, CardType } from '../../const';
 import RentCardFull from '../../components/rentCardFull/rentCardFull';
 import RentCard from '../../components/rentCard/rentCard';
 import Map from '../../components/map/map';
 import Loader from '../../components/loader/loader';
-import { fetchNearOffers, fetchSingleOffer } from '../../api/api-calls';
+import { fetchSingleOffer, fetchNearOffers, fetchSetNotFavoriteStatus, fetchSetFavoriteStatus } from '../../api/api-actions';
+import { useIsNearOffersLoadingSelector, useIsSingleOfferLoadingSelector, useNearOffersSelector, useSingleOfferSelector } from '../../store/reducer/data/selectors';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { OfferPreview } from '../../types/offer';
 
 function Offer() {
-  const [isOfferLoading, setIsOfferLoading] = useState(true);
-  const [isNearOffersLoading, setIsNearOffersLoading] = useState(true);
-  const [offer, setOffer] = useState<OfferInfo | null>(null);
-  const [nearOffers, setNearOffers] = useState<OfferPreview[]>([]);
+  const dispatch = useAppDispatch();
+  const offer = useAppSelector(useSingleOfferSelector);
+  const isOfferLoading = useAppSelector(useIsSingleOfferLoadingSelector);
+  const nearOffers = useAppSelector(useNearOffersSelector);
+  const isNearOffersLoading = useAppSelector(useIsNearOffersLoadingSelector);
   const [activeCard, setActiveCard] = useState<string | null>(null);
 
   const { id } = useParams();
@@ -21,23 +24,21 @@ function Offer() {
     setActiveCard(newActiveCard);
   };
 
-  useEffect(() => {
-    fetchSingleOffer(id)
-      .then((data) => {
-        setIsOfferLoading(false);
-        setOffer(data);
-      })
-      .catch(() => setIsOfferLoading(false));
-  }, []);
+  const handleFavoriteStatusChanged = useCallback((changedOffer: OfferPreview) => {
+    if (changedOffer.isFavorite) {
+      dispatch(fetchSetNotFavoriteStatus(changedOffer.id));
+    } else {
+      dispatch(fetchSetFavoriteStatus(changedOffer.id));
+    }
+  }, [dispatch]);
 
   useEffect(() => {
-    fetchNearOffers(id)
-      .then((data) => {
-        setIsNearOffersLoading(false);
-        setNearOffers(data);
-      })
-      .catch(() => setIsNearOffersLoading(false));
-  }, [offer]);
+    dispatch(fetchSingleOffer(id));
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    dispatch(fetchNearOffers(id));
+  }, [dispatch, id]);
 
   if (isOfferLoading) {
     return (<Loader />);
@@ -61,7 +62,7 @@ function Offer() {
           {isNearOffersLoading && (<Loader />)}
           {!isNearOffersLoading && (
             <div className="near-places__list places__list">
-              {nearOffers.map((o) => (<RentCard offer={o} key={o.id} cardType={CardType.Regular} onActiveCardChanged={handleCardChanged} />))}
+              {nearOffers.map((o) => (<RentCard offer={o} key={o.id} cardType={CardType.Regular} onActiveCardChanged={handleCardChanged} onFavoriteStatusChanged={handleFavoriteStatusChanged} />))}
             </div>
           )}
         </section>

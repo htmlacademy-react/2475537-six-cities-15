@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import RentCard from '../../components/rentCard/rentCard';
 import { CardType } from '../../const';
 import { OfferPreview } from '../../types/offer';
@@ -6,7 +7,7 @@ type RentCardListProps = {
   cardsCount: number;
   offers: OfferPreview[];
   onActiveCardChanged?: (activeCard: string | null) => void;
-  onFavoriteStatusChanged?: (offerId: string, isFavorite: boolean) => void;
+  onFavoriteStatusChanged?: (offer: OfferPreview) => void;
 };
 
 function RentCardList({ cardsCount, offers, onActiveCardChanged, onFavoriteStatusChanged }: RentCardListProps) {
@@ -18,4 +19,4 @@ function RentCardList({ cardsCount, offers, onActiveCardChanged, onFavoriteStatu
     </div>);
 }
 
-export default RentCardList;
+export default memo(RentCardList);
