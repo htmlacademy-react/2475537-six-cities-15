@@ -87,7 +87,7 @@ export const fetchSetNotFavoriteStatus = createAppAsyncThunk<OfferPreview, strin
 export const checkAuthorization = createAppAsyncThunk<UserInfo, undefined>(
   'user/checkAuthorization',
   async (_arg, { extra: api }) => {
-    const { data } = await api.get(APIRoutes.Login);
+    const { data } = await api.get<UserInfo>(APIRoutes.Login);
     return data;
   }
 );

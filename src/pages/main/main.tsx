@@ -16,7 +16,7 @@ function Main({ cardsCount }: MainProps) {
     return (<Loader />);
   }
 
-  const isEmpty = offers.length == 0;
+  const isEmpty = offers.length === 0;
 
   return (
     <main className={`page__main page__main--index ${isEmpty ? 'page__main--index-empty' : ''}`}>
