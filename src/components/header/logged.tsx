@@ -17,7 +17,7 @@ function Logged({ onLogout }: LoggedProps) {
       <li className="header__nav-item user">
         <Link to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile">
           <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-          <span className="header__user-name user__name">{user.email}</span>
+          <span className="header__user-name user__name">{user?.email}</span>
           <span className="header__favorite-count">{favorites.length}</span>
         </Link>
       </li>
