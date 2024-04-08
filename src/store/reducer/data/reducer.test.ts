@@ -134,7 +134,7 @@ describe('DataProcess Slice', () => {
 
   it('should add new review with "fetchAddReview.fulfilled" action', () => {
     const expectedReviews = [makeFakeReview()];
-    const { offerReviews } = dataProcess.reducer(undefined, fetchAddReview.fulfilled(expectedReviews[0], '', undefined));
+    const { offerReviews } = dataProcess.reducer(undefined, fetchAddReview.fulfilled(expectedReviews[0], '', { offerId: '', comment: '', rating: 0 }));
 
     expect(offerReviews).toStrictEqual(expectedReviews);
   });

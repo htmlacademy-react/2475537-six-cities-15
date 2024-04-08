@@ -41,7 +41,7 @@ describe('UserProcess Slice', () => {
   it('should set "Auth" status and user with "authorize.fulfilled" action', () => {
     const expectedState = { authorizationStatus: AuthorizationStatus.Auth, user: makeFakeUser() };
 
-    const result = userProcess.reducer(undefined, authorize.fulfilled(expectedState.user, '', undefined));
+    const result = userProcess.reducer(undefined, authorize.fulfilled(expectedState.user, '', { login:'', password: '' }));
 
     expect(result).toEqual(expectedState);
   });
