@@ -33,6 +33,9 @@ export const dataProcess = createSlice({
   reducers: {
     setError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
+    },
+    clearFavorites: (state) => {
+      state.favorites = [];
     }
   },
   extraReducers(builder) {
@@ -97,6 +100,7 @@ export const dataProcess = createSlice({
       .addCase(fetchSetFavoriteStatus.fulfilled, (state, action) => {
         state.offers = state.offers.map((offer) => offer.id === action.payload.id ? action.payload : offer);
         state.nearOffers = state.nearOffers.map((offer) => offer.id === action.payload.id ? action.payload : offer);
+        state.favorites.push(action.payload);
       })
       .addCase(fetchSetNotFavoriteStatus.fulfilled, (state, action) => {
         state.favorites = state.favorites.filter((f) => f.id !== action.payload.id);
@@ -106,4 +110,4 @@ export const dataProcess = createSlice({
   }
 });
 
-export const { setError } = dataProcess.actions;
+export const { setError, clearFavorites } = dataProcess.actions;

@@ -5,7 +5,7 @@ import Loader from '../../components/loader/loader';
 import { NewReview } from '../../types/offer';
 import { useAuthorizationStatusSelector } from '../../store/reducer/user/selectors';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { useIsOfferReviewsLoading, useOfferReviews } from '../../store/reducer/data/selectors';
+import { useIsOfferReviewsLoadingSelector, useOfferReviewsSelector } from '../../store/reducer/data/selectors';
 import { fetchOfferReviews, fetchAddReview } from '../../api/api-actions';
 import { isAuthorized } from '../../services/utils';
 
@@ -15,8 +15,8 @@ type ReviewListProps = {
 
 function ReviewList({ offerId }: ReviewListProps) {
   const dispatch = useAppDispatch();
-  const reviews = useAppSelector(useOfferReviews);
-  const isOfferReviewsLoading = useAppSelector(useIsOfferReviewsLoading);
+  const reviews = useAppSelector(useOfferReviewsSelector);
+  const isOfferReviewsLoading = useAppSelector(useIsOfferReviewsLoadingSelector);
   const authorizationStatus = useAppSelector(useAuthorizationStatusSelector);
 
   const reviewAdded = (newReview: NewReview) => {
