@@ -113,7 +113,7 @@ describe('DataProcess Slice', () => {
 
   it('should set offer reviews with "fetchOfferReviews.fulfilled" action', () => {
     const expectedReviews = [makeFakeReview()];
-    const { offerReviews, isOfferReviewsLoading } = dataProcess.reducer('', fetchOfferReviews.fulfilled(expectedReviews, '', undefined));
+    const { offerReviews, isOfferReviewsLoading } = dataProcess.reducer(undefined, fetchOfferReviews.fulfilled(expectedReviews, '', undefined));
 
     expect(offerReviews).toStrictEqual(expectedReviews);
     expect(isOfferReviewsLoading).toBe(false);

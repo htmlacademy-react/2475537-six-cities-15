@@ -3,7 +3,7 @@ import EditableRating from './editableRating';
 
 describe('EditableRating', () => {
   it('should render EditableRating component', () => {
-    render(<EditableRating />);
+    render(<EditableRating onRatingChanged={() => void} value={2}/>);
 
     expect(screen.getByTestId('rating-wrapper')).toBeInTheDocument();
   });
