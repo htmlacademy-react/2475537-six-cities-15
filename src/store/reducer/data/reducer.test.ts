@@ -113,7 +113,7 @@ describe('DataProcess Slice', () => {
 
   it('should set offer reviews with "fetchOfferReviews.fulfilled" action', () => {
     const expectedReviews = [makeFakeReview()];
-    const { offerReviews, isOfferReviewsLoading } = dataProcess.reducer(undefined, fetchOfferReviews.fulfilled(expectedReviews, '', undefined));
+    const { offerReviews, isOfferReviewsLoading } = dataProcess.reducer(undefined, fetchOfferReviews.fulfilled(expectedReviews, '', ''));
 
     expect(offerReviews).toStrictEqual(expectedReviews);
     expect(isOfferReviewsLoading).toBe(false);
@@ -163,7 +163,7 @@ describe('DataProcess Slice', () => {
   it('should add new favorite with "fetchSetFavoriteStatus.fulfilled" action', () => {
     const newFavorite = makeFakeOfferPreview();
 
-    const { offers, nearOffers, favorites } = dataProcess.reducer(undefined, fetchSetFavoriteStatus.fulfilled(newFavorite, '', undefined));
+    const { offers, nearOffers, favorites } = dataProcess.reducer(undefined, fetchSetFavoriteStatus.fulfilled(newFavorite, '', ''));
 
     expect(favorites).toStrictEqual([newFavorite]);
     expect(offers).toStrictEqual([]);
@@ -185,7 +185,7 @@ describe('DataProcess Slice', () => {
       isFavoritesLoading: true,
     };
 
-    const { offers, nearOffers, favorites } = dataProcess.reducer(initialState, fetchSetNotFavoriteStatus.fulfilled(favorite, '', undefined));
+    const { offers, nearOffers, favorites } = dataProcess.reducer(initialState, fetchSetNotFavoriteStatus.fulfilled(favorite, '', ''));
 
     expect(favorites).toStrictEqual([]);
     expect(offers).toStrictEqual([favorite]);
