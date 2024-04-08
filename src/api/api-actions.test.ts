@@ -152,7 +152,7 @@ describe('Async actions', () => {
     });
 
     it('should dispatch "fetchOfferReviews.pending" and "fetchOfferReviews.fulfilled" with thunk fetchOfferReviews if no id passed', async () => {
-      await store.dispatch(fetchOfferReviews());
+      await store.dispatch(fetchOfferReviews(''));
       const actions = extractActionsTypes(store.getActions());
 
       expect(actions).toEqual([
