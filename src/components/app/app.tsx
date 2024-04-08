@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { AppRoute } from '../../const';
 import Layout from '../layout/layout';
 import PrivateRoute from '../privateRoute/privateRoute';
@@ -10,10 +10,9 @@ import NotFound from '../../pages/notFound/notFound';
 import Offer from '../../pages/offer/offer';
 import ScrollTop from '../scrollTop/scrollTop';
 import Loader from '../loader/loader';
-import { useAppSelector, useAppDispatch } from '../../hooks';
-import { fetchFavorites, fetchOffers } from '../../api/api-actions';
+import { useAppSelector } from '../../hooks';
 import { useAuthorizationStatusSelector } from '../../store/reducer/user/selectors';
-import { isAuthorized, isCheckingAuthorization } from '../../services/utils';
+import { isCheckingAuthorization } from '../../services/utils';
 
 type AppProps = {
   cardsCount: number;
@@ -21,21 +20,13 @@ type AppProps = {
 
 function App({ cardsCount }: AppProps) {
   const authorizationStatus = useAppSelector(useAuthorizationStatusSelector);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchOffers());
-    if (isAuthorized(authorizationStatus)) {
-      dispatch(fetchFavorites());
-    }
-  }, [dispatch, authorizationStatus]);
 
   if (isCheckingAuthorization(authorizationStatus)) {
     return (<Loader />);
   }
 
   return (
-    <BrowserRouter>
+    <HelmetProvider>
       <ScrollTop />
       <Routes>
         <Route
@@ -68,7 +59,7 @@ function App({ cardsCount }: AppProps) {
           element={<NotFound />}
         />
       </Routes>
-    </BrowserRouter>);
+    </HelmetProvider>);
 }
 
 export default App;

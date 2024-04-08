@@ -17,7 +17,7 @@ function EditableRating({ value, onRatingChanged }: EditableRatingProps) {
   };
 
   return (
-    <div className="reviews__rating-form form__rating">
+    <div className="reviews__rating-form form__rating" data-testid='rating-wrapper'>
       {renderStars()}
     </div>
   );

@@ -22,6 +22,7 @@ export const userProcess = createSlice({
       })
       .addCase(checkAuthorization.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
+        state.user = null;
       })
       .addCase(authorize.fulfilled, (state, action) => {
         state.authorizationStatus = AuthorizationStatus.Auth;
@@ -29,9 +30,11 @@ export const userProcess = createSlice({
       })
       .addCase(authorize.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
+        state.user = null;
       })
       .addCase(signOut.fulfilled, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
+        state.user = null;
       });
   }
 });

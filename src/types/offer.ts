@@ -31,15 +31,10 @@ export type OfferInfo = {
   rating: number;
   description: string;
   bedrooms: number;
-  goods: [string];
+  goods: string[];
   host: Host;
-  images: [string];
+  images: string[];
   maxAdults: number;
-};
-
-export type OfferImage = {
-  src: string;
-  description: string;
 };
 
 export type Host = {

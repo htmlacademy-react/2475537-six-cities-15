@@ -13,7 +13,6 @@ export type DataProcess = {
   singleOffer: OfferInfo | null;
   nearOffers: OfferPreview[];
   favorites: OfferPreview[];
-  error: string | null;
   isDataLoading: boolean;
   isSingleOfferLoading: boolean;
   isNearOffersLoading: boolean;

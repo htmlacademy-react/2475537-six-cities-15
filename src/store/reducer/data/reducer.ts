@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice} from '@reduxjs/toolkit';
 import {
   fetchOffers,
   fetchSingleOffer,
@@ -19,7 +19,6 @@ const initialState: DataProcess = {
   singleOffer: null,
   offerReviews: [],
   favorites: [],
-  error: null,
   isDataLoading: true,
   isSingleOfferLoading: true,
   isNearOffersLoading: true,
@@ -31,9 +30,6 @@ export const dataProcess = createSlice({
   name: Namespace.Data,
   initialState,
   reducers: {
-    setError: (state, action: PayloadAction<string>) => {
-      state.error = action.payload;
-    },
     clearFavorites: (state) => {
       state.favorites = [];
     }
@@ -110,4 +106,4 @@ export const dataProcess = createSlice({
   }
 });
 
-export const { setError, clearFavorites } = dataProcess.actions;
+export const { clearFavorites } = dataProcess.actions;
