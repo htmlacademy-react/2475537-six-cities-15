@@ -62,7 +62,7 @@ function RentCardFull({ children, onFavoriteStatusChanged }: PropsWithChildren<R
           </div>
           <Rating rating={offer.rating} className="offer" showNumberValue />
           <ul className="offer__features">
-            <li className="offer__feature offer__feature--entire">Apartment</li>
+            <li className="offer__feature offer__feature--entire">{offer.type}</li>
             <li className="offer__feature offer__feature--bedrooms">
               {offer.bedrooms} Bedrooms
             </li>
@@ -80,7 +80,7 @@ function RentCardFull({ children, onFavoriteStatusChanged }: PropsWithChildren<R
               {offer.goods.map((item) => (<li className="offer__inside-item" key={Math.random()}>{item}</li>))}
             </ul>
           </div>
-          <HostCard host={offer.host} />
+          <HostCard host={offer.host} description={offer.description} />
           <ReviewList offerId={offer.id} />
         </div>
       </div>

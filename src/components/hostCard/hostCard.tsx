@@ -2,10 +2,11 @@ import { Host } from '../../types/offer';
 
 type HostCardProps = {
   host: Host;
+  description: string;
 };
 
 
-function HostCard({ host }: HostCardProps) {
+function HostCard({ host, description }: HostCardProps) {
   return (
     <div className="offer__host">
       <h2 className="offer__host-title">Meet the host</h2>
@@ -22,7 +23,7 @@ function HostCard({ host }: HostCardProps) {
         <span className="offer__user-name">{host.name}</span>
         <span className="offer__user-status"></span>
       </div>
-      <div className="offer__description"></div>
+      <div className="offer__description">{description}</div>
     </div>
   );
 }
