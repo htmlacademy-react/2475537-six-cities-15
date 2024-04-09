@@ -7,7 +7,7 @@ import Rating from '../rating/rating';
 import ReviewList from '../reviewList/reviewList';
 import { useAppSelector } from '../../hooks/index';
 import { useAuthorizationStatusSelector } from '../../store/reducer/user/selectors';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import { useSingleOfferSelector } from '../../store/reducer/data/selectors';
 
 type RentCardFullProps = {
@@ -25,6 +25,10 @@ function RentCardFull({ children, onFavoriteStatusChanged }: PropsWithChildren<R
     }
     onFavoriteStatusChanged?.(changedOffer);
   };
+
+  if (!offer) {
+    return (<Navigate to={AppRoute.NotFound} />);
+  }
 
   return (
     <section className="offer">
