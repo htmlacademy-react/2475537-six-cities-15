@@ -8,7 +8,7 @@ describe('HostCard', () => {
       avatarUrl: 'url',
       isPro: false,
     };
-    render(<HostCard host={host} />);
+    render(<HostCard host={host} description='' />);
 
     expect(screen.getByText(host.name)).toBeInTheDocument();
   });
@@ -19,7 +19,7 @@ describe('HostCard', () => {
       avatarUrl: 'url',
       isPro: true,
     };
-    render(<HostCard host={host} />);
+    render(<HostCard host={host} description=''/>);
 
     expect(screen.getByTestId('host-pro')).toHaveClass('offer__avatar-wrapper--pro');
   });
