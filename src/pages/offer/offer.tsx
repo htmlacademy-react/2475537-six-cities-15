@@ -6,7 +6,7 @@ import RentCard from '../../components/rentCard/rentCard';
 import Map from '../../components/map/map';
 import Loader from '../../components/loader/loader';
 import { fetchSingleOffer, fetchNearOffers, fetchSetNotFavoriteStatus, fetchSetFavoriteStatus } from '../../api/api-actions';
-import { useIsNearOffersLoadingSelector, useIsSingleOfferLoadingSelector, useNearOffersSelector, useSingleOfferSelector } from '../../store/reducer/data/selectors';
+import { useIsNearOffersLoadingSelector, useIsSingleOfferLoadingSelector, useNearOffersSelector, useOffersSelector, useSingleOfferSelector } from '../../store/reducer/data/selectors';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 
 function Offer() {
