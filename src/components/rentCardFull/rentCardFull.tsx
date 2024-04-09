@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { AppRoute } from '../../const';
 import { isAuthorized } from '../../services/utils';
-import { OfferInfo, OfferPreview } from '../../types/offer';
+import { OfferPreview } from '../../types/offer';
 import HostCard from '../hostCard/hostCard';
 import Rating from '../rating/rating';
 import ReviewList from '../reviewList/reviewList';

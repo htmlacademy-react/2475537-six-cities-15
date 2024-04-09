@@ -32,8 +32,16 @@ function ReviewList({ offerId }: ReviewListProps) {
   }
 
   const reviewsToShow = reviews
-    .map(r => r)
-    .sort((a, b) => (a.date > b.date) ? -1 : ((b.date > a.date) ? 1 : 0)).slice(0, 10);
+    .map((r) => r)
+    .sort((a, b) => {
+      if (a.date > b.date) {
+        return -1;
+      }
+      if (b.date > a.date) {
+        return 1;
+      }
+      return 0;
+    }).slice(0, 10);
 
   return (
     <section className="offer__reviews reviews">

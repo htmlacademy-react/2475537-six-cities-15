@@ -16,7 +16,7 @@ function Offer() {
   const isOfferLoading = useAppSelector(useIsSingleOfferLoadingSelector);
   const nearOffers = useAppSelector(useNearOffersSelector);
   const isNearOffersLoading = useAppSelector(useIsNearOffersLoadingSelector);
-  
+
   const { id } = useParams();
 
   const handleFavoriteStatusChanged = useCallback((changedOffer: OfferPreview) => {
