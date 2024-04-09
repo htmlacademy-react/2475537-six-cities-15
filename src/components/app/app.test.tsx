@@ -62,7 +62,7 @@ describe('Application Routing', () => {
     expect(screen.getByText(/Favorites page/i)).toBeInTheDocument();
   });
 
-  it('should render "NotFoundScreen" when user navigate to non-existent route', () => {
+  it('should render not found page when user navigate to non-existent route', () => {
     const { withStoreComponent } = withStore(<App cardsCount={1} />, { [Namespace.User]: { authorizationStatus: AuthorizationStatus.Auth, user: null } });
     const withHistoryComponent = withHistory(withStoreComponent, mockHistory);
 

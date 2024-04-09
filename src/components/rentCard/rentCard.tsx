@@ -39,7 +39,7 @@ function RentCard({ offer, onActiveCardChanged, onFavoriteStatusChanged, cardTyp
   const imageHeight = cardType === CardType.Regular ? 200 : 110;
 
   return (
-    <article className={`${className}__card place-card`} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+    <article className={`${className}__card place-card`} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} data-testid='card-wrapper'>
       {offer.isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
@@ -66,6 +66,7 @@ function RentCard({ offer, onActiveCardChanged, onFavoriteStatusChanged, cardTyp
             className={`place-card__bookmark-button button ${offer.isFavorite ? 'place-card__bookmark-button--active' : ''}`}
             type="button"
             onClick={() => handleFavoriteStatusChanged(offer)}
+            data-testid='offer-is-favorite'
           >
             <svg
               className="place-card__bookmark-icon"

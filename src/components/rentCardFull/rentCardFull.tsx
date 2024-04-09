@@ -29,7 +29,7 @@ function RentCardFull({ offer, children }: PropsWithChildren<RentCardFullProps>)
           )}
           <div className="offer__name-wrapper">
             <h1 className="offer__name">{offer.title}</h1>
-            <button className={`offer__bookmark-button button ${offer.isFavorite ? 'offer__bookmark-button--active' : ''}`} type="button">
+            <button className={`offer__bookmark-button button ${offer.isFavorite ? 'offer__bookmark-button--active' : ''}`} type="button" data-testid='offer-is-favorite'>
               <svg className="offer__bookmark-icon" width={31} height={33}>
                 <use xlinkHref="#icon-bookmark" />
               </svg>

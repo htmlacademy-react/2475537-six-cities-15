@@ -3,14 +3,18 @@ import { useAppSelector } from '../../hooks';
 import { useUserSelector } from '../../store/reducer/user/selectors';
 import { useFavoritesSelector } from '../../store/reducer/data/selectors';
 import { AppRoute } from '../../const';
+import { signOut } from '../../api/api-actions';
+import { useAppDispatch } from '../../hooks/index';
 
-type LoggedProps = {
-  onLogout: (evt: React.MouseEvent) => void;
-};
-
-function Logged({ onLogout }: LoggedProps) {
+function Logged() {
   const user = useAppSelector(useUserSelector);
   const favorites = useAppSelector(useFavoritesSelector);
+  const dispatch = useAppDispatch();
+
+  const handleLogout = (evt: React.MouseEvent) => {
+    evt.preventDefault();
+    dispatch(signOut());
+  };
 
   return (
     <>
@@ -22,7 +26,7 @@ function Logged({ onLogout }: LoggedProps) {
         </Link>
       </li>
       <li className="header__nav-item">
-        <a className="header__nav-link" href="#" onClick={onLogout}>
+        <a className="header__nav-link" href="#" onClick={handleLogout} data-testid='sign-out-button'>
           <span className="header__signout">Sign out</span>
         </a>
       </li>

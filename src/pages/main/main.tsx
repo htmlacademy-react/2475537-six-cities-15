@@ -6,6 +6,7 @@ import CityOffers from '../../components/cityOffers/cityOffers';
 import CityOffersEmpty from '../../components/cityOffers/cityOffersEmpty';
 import { fetchOffers } from '../../api/api-actions';
 import { useAuthorizationStatusSelector } from '../../store/reducer/user/selectors';
+import { AuthorizationStatus } from '../../const';
 
 type MainProps = {
   cardsCount: number;
@@ -18,7 +19,9 @@ function Main({ cardsCount }: MainProps) {
   const offers = useAppSelector(useOffersSelector);
 
   useEffect(() => {
-    dispatch(fetchOffers());
+    if (authorizationStatus !== AuthorizationStatus.Unknown) {
+      dispatch(fetchOffers());
+    }
   }, [dispatch, authorizationStatus]);
 
   if (isDataLoading) {
