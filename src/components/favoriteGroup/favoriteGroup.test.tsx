@@ -1,9 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import { OfferPreview } from '../../types/offer';
 import FavoriteGroup from './favoriteGroup';
 
 describe('FavoriteGroup', () => {
-  const onFavoriteStatusChanged = (offerId: string, isFavorite: boolean) => isFavorite ? offerId : offerId;
+  const onFavoriteStatusChanged = (offerId: string) => offerId;
 
   it('should render FavoriteGroup component with selected city', () => {
     const expectedCity = 'City';

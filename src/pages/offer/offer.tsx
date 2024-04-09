@@ -12,6 +12,7 @@ import { useAppSelector, useAppDispatch } from '../../hooks';
 function Offer() {
   const dispatch = useAppDispatch();
   const offer = useAppSelector(useSingleOfferSelector);
+  const offers = useAppSelector(useOffersSelector);
   const isOfferLoading = useAppSelector(useIsSingleOfferLoadingSelector);
   const nearOffers = useAppSelector(useNearOffersSelector);
   const isNearOffersLoading = useAppSelector(useIsNearOffersLoadingSelector);
@@ -49,7 +50,7 @@ function Offer() {
       {!offer && (<Navigate to={AppRoute.Root} />)}
       {offer && (
         <RentCardFull onFavoriteStatusChanged={handleFavoriteStatusChanged}>
-          <Map activeOffer={offer.id} className="offer" offers={[...nearOffersToShow, offer]} center={offer.city.location} />
+          <Map activeOffer={offer.id} className="offer" offers={[...nearOffersToShow, offers.find((o) => o.id === offer.id)]} center={offer.city.location} />
         </RentCardFull>
       )}
       <div className="container">
