@@ -48,6 +48,7 @@ describe('ReviewList', () => {
     const { withStoreComponent } = withStore(<ReviewList offerId={offerId} />, makeFakeStore({
       [Namespace.User]: {
         authorizationStatus: AuthorizationStatus.Auth,
+        user: null,
       },
       [Namespace.Data]: {
         offerReviews: [],

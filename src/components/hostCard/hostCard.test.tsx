@@ -5,7 +5,7 @@ describe('HostCard', () => {
   it('should render HostCard component', () => {
     const host = {
       name: 'someName',
-      avatar: 'url',
+      avatarUrl: 'url',
       isPro: false,
     };
     render(<HostCard host={host} />);
@@ -16,7 +16,7 @@ describe('HostCard', () => {
   it('should render HostCard component with isPro mark', () => {
     const host = {
       name: 'someName',
-      avatar: 'url',
+      avatarUrl: 'url',
       isPro: true,
     };
     render(<HostCard host={host} />);
