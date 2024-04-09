@@ -1,14 +1,34 @@
 import { PropsWithChildren } from 'react';
-import { OfferInfo } from '../../types/offer';
+import { AppRoute } from '../../const';
+import { isAuthorized } from '../../services/utils';
 import HostCard from '../hostCard/hostCard';
 import Rating from '../rating/rating';
 import ReviewList from '../reviewList/reviewList';
+import { useAppSelector } from '../../hooks/index';
+import { useAuthorizationStatusSelector } from '../../store/reducer/user/selectors';
+import { useNavigate, Navigate } from 'react-router-dom';
+import { useSingleOfferSelector } from '../../store/reducer/data/selectors';
 
 type RentCardFullProps = {
-  offer: OfferInfo;
+  onFavoriteStatusChanged?: (offerId: string, isFavorite: boolean) => void;
 };
 
-function RentCardFull({ offer, children }: PropsWithChildren<RentCardFullProps>) {
+function RentCardFull({ children, onFavoriteStatusChanged }: PropsWithChildren<RentCardFullProps>) {
+  const authorizationStatus = useAppSelector(useAuthorizationStatusSelector);
+  const navigate = useNavigate();
+  const offer = useAppSelector(useSingleOfferSelector);
+
+  const handleFavoriteStatusChanged = (offerId: string, isFavorite: boolean) => {
+    if (!isAuthorized(authorizationStatus)) {
+      navigate(AppRoute.Login);
+    }
+    onFavoriteStatusChanged?.(offerId, isFavorite);
+  };
+
+  if (!offer) {
+    return (<Navigate to={AppRoute.NotFound} />);
+  }
+
   return (
     <section className="offer">
       <div className="offer__gallery-container container">
@@ -29,7 +49,11 @@ function RentCardFull({ offer, children }: PropsWithChildren<RentCardFullProps>)
           )}
           <div className="offer__name-wrapper">
             <h1 className="offer__name">{offer.title}</h1>
-            <button className={`offer__bookmark-button button ${offer.isFavorite ? 'offer__bookmark-button--active' : ''}`} type="button" data-testid='offer-is-favorite'>
+            <button className={`offer__bookmark-button button ${offer.isFavorite ? 'offer__bookmark-button--active' : ''}`}
+              type="button"
+              data-testid='offer-is-favorite'
+              onClick={() => handleFavoriteStatusChanged(offer.id, offer.isFavorite)}
+            >
               <svg className="offer__bookmark-icon" width={31} height={33}>
                 <use xlinkHref="#icon-bookmark" />
               </svg>

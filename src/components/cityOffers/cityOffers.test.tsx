@@ -4,26 +4,21 @@ import { fetchSetFavoriteStatus, fetchSetNotFavoriteStatus } from '../../api/api
 import { withStore } from '../../mocks/mockComponents';
 import { extractActionsTypes, makeFakeCity, makeFakeOfferPreview } from '../../mocks/mocks';
 import { Namespace } from '../../store/const';
-import { OfferPreview } from '../../types/offer';
 import CityOffers from './cityOffers';
 
 
 type RentCardListMockType = {
-  onFavoriteStatusChanged: (offer: OfferPreview) => void;
+  onFavoriteStatusChanged: (offerId: string, isFavorite: boolean) => void;
 };
 vi.mock('../rentCardList/rentCardList', () => ({
   default: ({ onFavoriteStatusChanged }: RentCardListMockType) => {
-    const favoriteOffer = makeFakeOfferPreview();
-    favoriteOffer.isFavorite = true;
-
-    const notFavoriteOffer = makeFakeOfferPreview();
-    notFavoriteOffer.isFavorite = false;
+    const offer = makeFakeOfferPreview();
 
     return (
       <>
         <p>Rent card list</p>
-        <button data-testid='test-button-set-favorite' onClick={() => onFavoriteStatusChanged(notFavoriteOffer)}></button>
-        <button data-testid='test-button-set-not-favorite' onClick={() => onFavoriteStatusChanged(favoriteOffer)}></button>
+        <button data-testid='test-button-set-favorite' onClick={() => onFavoriteStatusChanged(offer.id, false)}></button>
+        <button data-testid='test-button-set-not-favorite' onClick={() => onFavoriteStatusChanged(offer.id, true)}></button>
       </>);
   }
 }));

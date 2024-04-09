@@ -31,13 +31,25 @@ function ReviewList({ offerId }: ReviewListProps) {
     return (<Loader />);
   }
 
+  const reviewsToShow = reviews
+    .map((r) => r)
+    .sort((a, b) => {
+      if (a.date > b.date) {
+        return -1;
+      }
+      if (b.date > a.date) {
+        return 1;
+      }
+      return 0;
+    }).slice(0, 10);
+
   return (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">
         Reviews · <span className="reviews__amount">{reviews.length}</span>
       </h2>
       <ul className="reviews__list">
-        {reviews.map((r) => (
+        {reviewsToShow.map((r) => (
           <li className="reviews__item" key={r.id}>
             <ReviewCard review={r} />
           </li>

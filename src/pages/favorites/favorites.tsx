@@ -10,8 +10,8 @@ function Favorites() {
   const favorites = useAppSelector(useFavoritesSelector);
   const isFavoritesLoading = useAppSelector(useIsFavoritesLoadingSelector);
 
-  const handleFavoriteStatusChanged = (offer: OfferPreview) => {
-    dispatch(fetchSetNotFavoriteStatus(offer.id));
+  const handleFavoriteStatusChanged = (offerId: string) => {
+    dispatch(fetchSetNotFavoriteStatus(offerId));
   };
 
   const groupOffers = () => {

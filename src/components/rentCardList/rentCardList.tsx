@@ -7,7 +7,7 @@ type RentCardListProps = {
   cardsCount: number;
   offers: OfferPreview[];
   onActiveCardChanged?: (activeCard: string | null) => void;
-  onFavoriteStatusChanged?: (offer: OfferPreview) => void;
+  onFavoriteStatusChanged?: (offerId: string, isFavorite: boolean) => void;
 };
 
 function RentCardList({ cardsCount, offers, onActiveCardChanged, onFavoriteStatusChanged }: RentCardListProps) {
