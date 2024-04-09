@@ -36,6 +36,14 @@ describe('ReviewList', () => {
       [Namespace.Data]: {
         offerReviews: [makeFakeReview(), makeFakeReview()],
         isOfferReviewsLoading: false,
+        offers: [],
+        nearOffers: [],
+        singleOffer: null,
+        favorites: [],
+        isDataLoading: true,
+        isSingleOfferLoading: true,
+        isNearOffersLoading: true,
+        isFavoritesLoading: true,
       }
     }));
 
@@ -51,8 +59,16 @@ describe('ReviewList', () => {
         user: null,
       },
       [Namespace.Data]: {
+        offers: [],
+        nearOffers: [],
+        singleOffer: null,
         offerReviews: [],
+        favorites: [],
+        isDataLoading: true,
+        isSingleOfferLoading: true,
+        isNearOffersLoading: true,
         isOfferReviewsLoading: false,
+        isFavoritesLoading: true,
       },
     }));
 
