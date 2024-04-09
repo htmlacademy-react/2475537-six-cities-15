@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { AppRoute, CardType } from '../../const';
 import RentCardFull from '../../components/rentCardFull/rentCardFull';
@@ -16,13 +16,8 @@ function Offer() {
   const isOfferLoading = useAppSelector(useIsSingleOfferLoadingSelector);
   const nearOffers = useAppSelector(useNearOffersSelector);
   const isNearOffersLoading = useAppSelector(useIsNearOffersLoadingSelector);
-  const [activeCard, setActiveCard] = useState<string | null>(null);
-
+  
   const { id } = useParams();
-
-  const handleCardChanged = (newActiveCard: string | null) => {
-    setActiveCard(newActiveCard);
-  };
 
   const handleFavoriteStatusChanged = useCallback((changedOffer: OfferPreview) => {
     if (changedOffer.isFavorite) {
@@ -48,12 +43,14 @@ function Offer() {
     return (<Navigate to={AppRoute.NotFound} />);
   }
 
+  const nearOffersToShow = nearOffers.slice(0, 3);
+
   return (
     <main className="page__main page__main--offer">
       {!offer && (<Navigate to={AppRoute.Root} />)}
       {offer && (
-        <RentCardFull offer={offer} >
-          <Map activeOffer={activeCard} className="offer" offers={nearOffers} center={offer.city.location} />
+        <RentCardFull offer={offer.id} onFavoriteStatusChanged={handleFavoriteStatusChanged}>
+          <Map activeOffer={offer.id} className="offer" offers={[...nearOffersToShow, offer]} center={offer.city.location} />
         </RentCardFull>
       )}
       <div className="container">
@@ -62,7 +59,7 @@ function Offer() {
           {isNearOffersLoading && (<Loader />)}
           {!isNearOffersLoading && (
             <div className="near-places__list places__list">
-              {nearOffers.map((o) => (<RentCard offer={o} key={o.id} cardType={CardType.Regular} onActiveCardChanged={handleCardChanged} onFavoriteStatusChanged={handleFavoriteStatusChanged} />))}
+              {nearOffersToShow.map((o) => (<RentCard offer={o} key={o.id} cardType={CardType.Regular} onFavoriteStatusChanged={handleFavoriteStatusChanged} />))}
             </div>
           )}
         </section>

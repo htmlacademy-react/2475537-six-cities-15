@@ -1,5 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import { makeFakeOfferInfo } from '../../mocks/mocks';
+import { withHistory, withStore } from '../../mocks/mockComponents';
+import { makeFakeOfferInfo, makeFakeStore } from '../../mocks/mocks';
+import { Namespace } from '../../store/const';
 import RentCardFull from './rentCardFull';
 
 vi.mock('../reviewList/reviewList', () => ({
@@ -10,7 +12,22 @@ describe('RentCardFull', () => {
   const offer = makeFakeOfferInfo();
 
   it('should render RentCardFull component', () => {
-    render(<RentCardFull offer={offer} />);
+    const { withStoreComponent } = withStore(<RentCardFull />, makeFakeStore({
+      [Namespace.Data]: {
+        offers: [],
+        nearOffers: [],
+        singleOffer: offer,
+        offerReviews: [],
+        favorites: [],
+        isDataLoading: true,
+        isSingleOfferLoading: false,
+        isNearOffersLoading: true,
+        isOfferReviewsLoading: true,
+        isFavoritesLoading: true,
+      },
+    }));
+    const withHistoryComponent = withHistory(withStoreComponent);
+    render(withHistoryComponent);
 
     expect(screen.getByText(offer.title)).toBeInTheDocument();
     expect(screen.getByText(`${offer.bedrooms} Bedrooms`)).toBeInTheDocument();
@@ -19,14 +36,44 @@ describe('RentCardFull', () => {
 
   it('should render RentCardFull component with isFavorite mark', () => {
     offer.isFavorite = true;
-    render(<RentCardFull offer={offer} />);
+    const { withStoreComponent } = withStore(<RentCardFull />, makeFakeStore({
+      [Namespace.Data]: {
+        offers: [],
+        nearOffers: [],
+        singleOffer: offer,
+        offerReviews: [],
+        favorites: [],
+        isDataLoading: true,
+        isSingleOfferLoading: false,
+        isNearOffersLoading: true,
+        isOfferReviewsLoading: true,
+        isFavoritesLoading: true,
+      },
+    }));
+    const withHistoryComponent = withHistory(withStoreComponent);
+    render(withHistoryComponent);
 
     expect(screen.getByTestId('offer-is-favorite')).toBeInTheDocument();
   });
 
   it('should render RentCardFull component with isPremium mark', () => {
     offer.isPremium = true;
-    render(<RentCardFull offer={offer} />);
+    const { withStoreComponent } = withStore(<RentCardFull />, makeFakeStore({
+      [Namespace.Data]: {
+        offers: [],
+        nearOffers: [],
+        singleOffer: offer,
+        offerReviews: [],
+        favorites: [],
+        isDataLoading: true,
+        isSingleOfferLoading: false,
+        isNearOffersLoading: true,
+        isOfferReviewsLoading: true,
+        isFavoritesLoading: true,
+      },
+    }));
+    const withHistoryComponent = withHistory(withStoreComponent);
+    render(withHistoryComponent);
 
     expect(screen.getByText('Premium')).toBeInTheDocument();
   });

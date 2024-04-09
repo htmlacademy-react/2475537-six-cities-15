@@ -97,11 +97,17 @@ export const dataProcess = createSlice({
         state.offers = state.offers.map((offer) => offer.id === action.payload.id ? action.payload : offer);
         state.nearOffers = state.nearOffers.map((offer) => offer.id === action.payload.id ? action.payload : offer);
         state.favorites.push(action.payload);
+        if (state.singleOffer) {
+          state.singleOffer.isFavorite = true;
+        }
       })
       .addCase(fetchSetNotFavoriteStatus.fulfilled, (state, action) => {
         state.favorites = state.favorites.filter((f) => f.id !== action.payload.id);
         state.offers = state.offers.map((offer) => offer.id === action.payload.id ? action.payload : offer);
         state.nearOffers = state.nearOffers.map((offer) => offer.id === action.payload.id ? action.payload : offer);
+        if (state.singleOffer) {
+          state.singleOffer.isFavorite = false;
+        }
       });
   }
 });
