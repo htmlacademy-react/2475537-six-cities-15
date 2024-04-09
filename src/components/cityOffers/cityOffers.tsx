@@ -8,19 +8,18 @@ import OfferSorting from '../offerSorting/offerSorting';
 import { fetchSetFavoriteStatus, fetchSetNotFavoriteStatus } from '../../api/api-actions';
 import { OfferPreview } from '../../types/offer';
 import { useCurrentCitySelector } from '../../store/reducer/application/selectors';
-import { useOffersSelector } from '../../store/reducer/data/selectors';
 
 type CityOffersProps = {
   cardsCount: number;
+  offers: OfferPreview[];
 };
 
-function CityOffers({ cardsCount }: CityOffersProps) {
+function CityOffers({ cardsCount, offers }: CityOffersProps) {
   const dispatch = useAppDispatch();
 
   const [activeCard, setActiveCard] = useState<string | null>(null);
   const [currentSorting, setCurrentSorting] = useState(allowedSorting[0]);
   const currentCity = useAppSelector(useCurrentCitySelector);
-  const offers = useAppSelector(useOffersSelector);
 
   const filteredOffers = sortOffers(offers, currentSorting);
 

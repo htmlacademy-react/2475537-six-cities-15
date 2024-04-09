@@ -6,7 +6,6 @@ import Logged from './logged';
 import NotLogged from './notLogged';
 import { useAuthorizationStatusSelector } from '../../store/reducer/user/selectors';
 import { isAuthorized } from '../../services/utils';
-import { clearFavorites } from '../../store/reducer/data/reducer';
 
 function AppHeader() {
   const authorizationStatus = useAppSelector(useAuthorizationStatusSelector);
@@ -14,8 +13,7 @@ function AppHeader() {
 
   const handleLogout = (evt: React.MouseEvent) => {
     evt.preventDefault();
-    dispatch(signOut())
-      .then(() => dispatch(clearFavorites()));
+    dispatch(signOut());
   };
 
   return (
