@@ -48,7 +48,7 @@ function Offer() {
     <main className="page__main page__main--offer">
       {!offer && (<Navigate to={AppRoute.Root} />)}
       {offer && (
-        <RentCardFull offer={offer.id} onFavoriteStatusChanged={handleFavoriteStatusChanged}>
+        <RentCardFull onFavoriteStatusChanged={handleFavoriteStatusChanged}>
           <Map activeOffer={offer.id} className="offer" offers={[...nearOffersToShow, offer]} center={offer.city.location} />
         </RentCardFull>
       )}

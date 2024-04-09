@@ -3,7 +3,7 @@ import { OfferPreview } from '../../types/offer';
 import FavoriteGroup from './favoriteGroup';
 
 describe('FavoriteGroup', () => {
-  const onFavoriteStatusChanged = (props: OfferPreview) => props;
+  const onFavoriteStatusChanged = (offerId: string, isFavorite: boolean) => isFavorite ? offerId : offerId;
 
   it('should render FavoriteGroup component with selected city', () => {
     const expectedCity = 'City';
