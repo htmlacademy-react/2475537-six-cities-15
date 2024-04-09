@@ -8,6 +8,7 @@ import Loader from '../../components/loader/loader';
 import { fetchSingleOffer, fetchNearOffers, fetchSetNotFavoriteStatus, fetchSetFavoriteStatus } from '../../api/api-actions';
 import { useIsNearOffersLoadingSelector, useIsSingleOfferLoadingSelector, useNearOffersSelector, useOffersSelector, useSingleOfferSelector } from '../../store/reducer/data/selectors';
 import { useAppSelector, useAppDispatch } from '../../hooks';
+import { OfferPreview } from '../../types/offer';
 
 function Offer() {
   const dispatch = useAppDispatch();
@@ -50,7 +51,7 @@ function Offer() {
       {!offer && (<Navigate to={AppRoute.Root} />)}
       {offer && (
         <RentCardFull onFavoriteStatusChanged={handleFavoriteStatusChanged}>
-          <Map activeOffer={offer.id} className="offer" offers={[...nearOffersToShow, offers.find((o) => o.id === offer.id)]} center={offer.city.location} />
+          <Map activeOffer={offer.id} className="offer" offers={[...nearOffersToShow, offers.find((o) => o.id === offer.id) as OfferPreview]} center={offer.city.location} />
         </RentCardFull>
       )}
       <div className="container">
