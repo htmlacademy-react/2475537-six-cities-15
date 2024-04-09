@@ -31,11 +31,11 @@ function CityOffers({ cardsCount, offers }: CityOffersProps) {
     setCurrentSorting(newSorting);
   }, []);
 
-  const handleFavoriteStatusChanged = useCallback((offer: OfferPreview) => {
-    if (offer.isFavorite) {
-      dispatch(fetchSetNotFavoriteStatus(offer.id));
+  const handleFavoriteStatusChanged = useCallback((offerId: string, isFavorite: boolean) => {
+    if (isFavorite) {
+      dispatch(fetchSetNotFavoriteStatus(offerId));
     } else {
-      dispatch(fetchSetFavoriteStatus(offer.id));
+      dispatch(fetchSetFavoriteStatus(offerId));
     }
   }, [dispatch]);
 

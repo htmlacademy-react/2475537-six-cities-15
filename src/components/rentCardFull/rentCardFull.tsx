@@ -1,7 +1,6 @@
 import { PropsWithChildren } from 'react';
 import { AppRoute } from '../../const';
 import { isAuthorized } from '../../services/utils';
-import { OfferPreview } from '../../types/offer';
 import HostCard from '../hostCard/hostCard';
 import Rating from '../rating/rating';
 import ReviewList from '../reviewList/reviewList';
@@ -11,7 +10,7 @@ import { useNavigate, Navigate } from 'react-router-dom';
 import { useSingleOfferSelector } from '../../store/reducer/data/selectors';
 
 type RentCardFullProps = {
-  onFavoriteStatusChanged?: (offer: OfferPreview) => void;
+  onFavoriteStatusChanged?: (offerId: string, isFavorite: boolean) => void;
 };
 
 function RentCardFull({ children, onFavoriteStatusChanged }: PropsWithChildren<RentCardFullProps>) {
@@ -19,11 +18,11 @@ function RentCardFull({ children, onFavoriteStatusChanged }: PropsWithChildren<R
   const navigate = useNavigate();
   const offer = useAppSelector(useSingleOfferSelector);
 
-  const handleFavoriteStatusChanged = (changedOffer: OfferPreview) => {
+  const handleFavoriteStatusChanged = (offerId: string, isFavorite: boolean) => {
     if (!isAuthorized(authorizationStatus)) {
       navigate(AppRoute.Login);
     }
-    onFavoriteStatusChanged?.(changedOffer);
+    onFavoriteStatusChanged?.(offerId, isFavorite);
   };
 
   if (!offer) {
@@ -53,7 +52,7 @@ function RentCardFull({ children, onFavoriteStatusChanged }: PropsWithChildren<R
             <button className={`offer__bookmark-button button ${offer.isFavorite ? 'offer__bookmark-button--active' : ''}`}
               type="button"
               data-testid='offer-is-favorite'
-              onClick={() => handleFavoriteStatusChanged(offer)}
+              onClick={() => handleFavoriteStatusChanged(offer.id, offer.isFavorite)}
             >
               <svg className="offer__bookmark-icon" width={31} height={33}>
                 <use xlinkHref="#icon-bookmark" />

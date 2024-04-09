@@ -5,10 +5,17 @@ import RentCard from '../rentCard/rentCard';
 type FavoriteGroupProps = {
   offers: OfferPreview[];
   city: string;
-  onFavoriteStatusChanged?: (offer: OfferPreview) => void;
+  onFavoriteStatusChanged?: (offerId: string) => void;
 };
 
 function FavoriteGroup({ offers, city, onFavoriteStatusChanged }: FavoriteGroupProps) {
+
+  const handleFavoriteStatusChanged = (offerId: string, isFavorite: boolean) => {
+    if (isFavorite) {
+      onFavoriteStatusChanged?.(offerId);
+    }
+  };
+
   return (
     <>
       <div className="favorites__locations locations locations--current">
@@ -19,7 +26,7 @@ function FavoriteGroup({ offers, city, onFavoriteStatusChanged }: FavoriteGroupP
         </div>
       </div>
       <div className="favorites__places">
-        {offers.map((o) => (<RentCard offer={o} key={o.id} cardType={CardType.Favorite} onFavoriteStatusChanged={onFavoriteStatusChanged} />))}
+        {offers.map((o) => (<RentCard offer={o} key={o.id} cardType={CardType.Favorite} onFavoriteStatusChanged={handleFavoriteStatusChanged} />))}
       </div>
     </>
   );

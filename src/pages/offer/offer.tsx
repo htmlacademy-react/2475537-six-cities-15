@@ -8,7 +8,6 @@ import Loader from '../../components/loader/loader';
 import { fetchSingleOffer, fetchNearOffers, fetchSetNotFavoriteStatus, fetchSetFavoriteStatus } from '../../api/api-actions';
 import { useIsNearOffersLoadingSelector, useIsSingleOfferLoadingSelector, useNearOffersSelector, useSingleOfferSelector } from '../../store/reducer/data/selectors';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { OfferPreview } from '../../types/offer';
 
 function Offer() {
   const dispatch = useAppDispatch();
@@ -19,11 +18,11 @@ function Offer() {
 
   const { id } = useParams();
 
-  const handleFavoriteStatusChanged = useCallback((changedOffer: OfferPreview) => {
-    if (changedOffer.isFavorite) {
-      dispatch(fetchSetNotFavoriteStatus(changedOffer.id));
+  const handleFavoriteStatusChanged = useCallback((offerId: string, isFavorite: boolean) => {
+    if (isFavorite) {
+      dispatch(fetchSetNotFavoriteStatus(offerId));
     } else {
-      dispatch(fetchSetFavoriteStatus(changedOffer.id));
+      dispatch(fetchSetFavoriteStatus(offerId));
     }
   }, [dispatch]);
 

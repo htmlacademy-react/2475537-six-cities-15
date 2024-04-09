@@ -10,7 +10,7 @@ import { useAuthorizationStatusSelector } from '../../store/reducer/user/selecto
 type RentCardProps = {
   offer: OfferPreview;
   onActiveCardChanged?: (activeCard: string | null) => void;
-  onFavoriteStatusChanged?: (offer: OfferPreview) => void;
+  onFavoriteStatusChanged?: (offerId: string, isFavorite: boolean) => void;
   cardType: CardType;
 };
 
@@ -27,11 +27,11 @@ function RentCard({ offer, onActiveCardChanged, onFavoriteStatusChanged, cardTyp
     onActiveCardChanged?.(null);
   };
 
-  const handleFavoriteStatusChanged = (changedOffer: OfferPreview) => {
+  const handleFavoriteStatusChanged = (offerId: string, isFavorite: boolean) => {
     if (!isAuthorized(authorizationStatus)) {
       navigate(AppRoute.Login);
     }
-    onFavoriteStatusChanged?.(changedOffer);
+    onFavoriteStatusChanged?.(offerId, isFavorite);
   };
 
   const className = cardType === CardType.Regular ? 'cities' : 'favorites';
@@ -65,7 +65,7 @@ function RentCard({ offer, onActiveCardChanged, onFavoriteStatusChanged, cardTyp
           <button
             className={`place-card__bookmark-button button ${offer.isFavorite ? 'place-card__bookmark-button--active' : ''}`}
             type="button"
-            onClick={() => handleFavoriteStatusChanged(offer)}
+            onClick={() => handleFavoriteStatusChanged(offer.id, offer.isFavorite)}
             data-testid='offer-is-favorite'
           >
             <svg
