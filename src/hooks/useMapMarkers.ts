@@ -19,15 +19,17 @@ function useMapMarkers(map: Map | null, offers: OfferPreview[], activeOffer: str
   useEffect(() => {
     if (map) {
       offers.forEach((offer) => {
-        const marker = new Marker({
-          lat: offer.location.latitude,
-          lng: offer.location.longitude,
-        }, {
-          icon: (offer.id === activeOffer)
-            ? currentCustomIcon
-            : defaultCustomIcon,
-        });
-        marker.addTo(map);
+        if (offer) {
+          const marker = new Marker({
+            lat: offer.location.latitude,
+            lng: offer.location.longitude,
+          }, {
+            icon: (offer.id === activeOffer)
+              ? currentCustomIcon
+              : defaultCustomIcon,
+          });
+          marker.addTo(map);
+        }
       });
     }
   }, [map, offers, activeOffer]);
