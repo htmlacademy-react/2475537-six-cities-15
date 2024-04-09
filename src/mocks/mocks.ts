@@ -6,6 +6,8 @@ import { Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { createApi } from '../api/api';
 import { State } from '../types/state';
+import { AuthorizationStatus } from '../const';
+import { Namespace } from '../store/const';
 
 export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createApi>, Action>;
 
@@ -88,7 +90,7 @@ export const makeFakeOfferInfo = (): OfferInfo => ({
 
 export const makeFakeReview = (): Review => ({
   id: random.alpha(),
-  date: random.alpha(),
+  date: new Date().toISOString(),
   user: {
     name: name.title(),
     avatarUrl: internet.avatar(),
@@ -97,3 +99,21 @@ export const makeFakeReview = (): Review => ({
   comment: random.alpha(),
   rating: random.number(),
 } as Review);
+
+export const makeFakeStore = (initialState?: Partial<State>): State => ({
+  [Namespace.Application]: { currentCity: makeFakeCity() },
+  [Namespace.Data]: {
+    offers: [],
+    nearOffers: [],
+    singleOffer: null,
+    offerReviews: [],
+    favorites: [],
+    isDataLoading: true,
+    isSingleOfferLoading: true,
+    isNearOffersLoading: true,
+    isOfferReviewsLoading: true,
+    isFavoritesLoading: true,
+  },
+  [Namespace.User]: { authorizationStatus: AuthorizationStatus.Unknown, user: null },
+  ...initialState ?? {},
+});

@@ -10,7 +10,7 @@ function HostCard({ host }: HostCardProps) {
     <div className="offer__host">
       <h2 className="offer__host-title">Meet the host</h2>
       <div className="offer__host-user user">
-        <div className={`offer__avatar-wrapper user__avatar-wrapper ${host.isPro ? 'offer__avatar-wrapper--pro' : ''}`}>
+        <div className={`offer__avatar-wrapper user__avatar-wrapper ${host.isPro ? 'offer__avatar-wrapper--pro' : ''}`} data-testid='host-pro'>
           <img
             className="offer__avatar user__avatar"
             src={host.avatarUrl}

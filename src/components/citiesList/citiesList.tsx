@@ -16,8 +16,11 @@ function CitiesList({ cities }: CitiesListProps) {
       <section className="locations container">
         <ul className="locations__list tabs__list">
           {cities.map((city) => (
-            <li className="locations__item" key={city.code}>
-              <a className={`locations__item-link tabs__item ${city.code === activeCity?.code ? 'tabs__item--active' : ''}`} href="#" onClick={() => dispatch(changeCity(city))}>
+            <li className="locations__item" key={city.code} data-testid='city-wrapper'>
+              <a className={`locations__item-link tabs__item ${city.code === activeCity?.code ? 'tabs__item--active' : ''}`} href="#"
+                onClick={() => dispatch(changeCity(city))}
+                data-testid={city.title}
+              >
                 <span>{city.title}</span>
               </a>
             </li>

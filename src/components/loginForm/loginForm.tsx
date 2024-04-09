@@ -23,6 +23,7 @@ function LoginForm() {
           value={credentials.login}
           onChange={(evt) => setCredentials({ ...credentials, login: evt.target.value })}
           required
+          data-testid='email'
         />
       </div>
       <div className="login__input-wrapper form__input-wrapper">
@@ -35,9 +36,10 @@ function LoginForm() {
           value={credentials.password}
           onChange={(evt) => setCredentials({ ...credentials, password: evt.target.value })}
           required
+          data-testid='password'
         />
       </div>
-      <button className="login__submit form__submit button" type="submit" onClick={handleSubmit}>
+      <button className="login__submit form__submit button" type="submit" onClick={handleSubmit} data-testid='sign-in-button'>
         Sign in
       </button>
     </form>

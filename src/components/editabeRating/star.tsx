@@ -31,7 +31,7 @@ function Star({ rating, value, onRatingChanged }: StarProps) {
         type="radio"
         checked={rating === value}
         onChange={() => onRatingChanged(rating)}
-        data-testId='rating-star'
+        data-testid='rating-star'
       />
       <label
         htmlFor={`${rating}-stars`}

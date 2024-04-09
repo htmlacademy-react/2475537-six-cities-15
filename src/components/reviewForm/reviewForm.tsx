@@ -39,6 +39,7 @@ function ReviewForm({ offerId, onReviewAdded }: ReviewFormProps) {
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={review.text}
         onChange={(evt) => setReview({ ...review, text: evt.target.value })}
+        data-testid='review-comment'
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

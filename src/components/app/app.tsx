@@ -40,7 +40,7 @@ function App({ cardsCount }: AppProps) {
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute>
+              <PrivateRoute authorizationStatus={authorizationStatus}>
                 <Favorites />
               </PrivateRoute>
             }
