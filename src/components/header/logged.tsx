@@ -26,7 +26,7 @@ function Logged() {
         </Link>
       </li>
       <li className="header__nav-item">
-        <a className="header__nav-link" href="#" onClick={handleLogout} data-testid='sign-out-button'>
+        <a className="header__nav-link" onClick={handleLogout} data-testid='sign-out-button'>
           <span className="header__signout">Sign out</span>
         </a>
       </li>

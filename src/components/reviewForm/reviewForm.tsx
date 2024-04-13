@@ -1,30 +1,33 @@
 import { useState } from 'react';
-import { NewReview } from '../../types/offer';
+import { fetchAddReview } from '../../api/api-actions';
+import { useAppDispatch } from '../../hooks/index';
 import EditableRating from '../editabeRating/editableRating';
 
 type ReviewFormProps = {
   offerId: string;
-  onReviewAdded: (newReview: NewReview) => void;
 };
 
-function ReviewForm({ offerId, onReviewAdded }: ReviewFormProps) {
+function ReviewForm({ offerId }: ReviewFormProps) {
   const emptyReview = { text: '', rating: 0 };
+  const dispatch = useAppDispatch();
 
   const [review, setReview] = useState(emptyReview);
 
   const handleSubmit = (evt: React.MouseEvent) => {
     evt.preventDefault();
-    onReviewAdded({
+    dispatch(fetchAddReview({
       comment: review.text,
       rating: review.rating,
       offerId,
-    });
-    setReview(emptyReview);
+    }))
+      .then(() => setReview(emptyReview));
   };
 
   const handleRatingChanged = (newRating: number) => {
     setReview({ ...review, rating: newRating });
   };
+
+  const isSubmitDisabled = review.text.length < 50 || review.rating < 1;
 
   return (
     <form className="reviews__form form" action="#" method="post">
@@ -50,7 +53,7 @@ function ReviewForm({ offerId, onReviewAdded }: ReviewFormProps) {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={review.text.length < 50}
+          disabled={isSubmitDisabled}
           onClick={handleSubmit}
         >
           Submit

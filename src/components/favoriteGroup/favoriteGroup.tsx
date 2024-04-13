@@ -1,6 +1,7 @@
-import { CardType } from '../../const';
+import { AppRoute, CardType } from '../../const';
 import { OfferPreview } from '../../types/offer';
 import RentCard from '../rentCard/rentCard';
+import { Link } from 'react-router-dom';
 
 type FavoriteGroupProps = {
   offers: OfferPreview[];
@@ -20,9 +21,9 @@ function FavoriteGroup({ offers, city, onFavoriteStatusChanged }: FavoriteGroupP
     <>
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <a className="locations__item-link" href="#">
+          <Link className="locations__item-link" to={`${AppRoute.Root}?city=${city}`}>
             <span>{city}</span>
-          </a>
+          </Link>
         </div>
       </div>
       <div className="favorites__places">

@@ -62,12 +62,12 @@ function RentCardFull({ children, onFavoriteStatusChanged }: PropsWithChildren<R
           </div>
           <Rating rating={offer.rating} className="offer" showNumberValue />
           <ul className="offer__features">
-            <li className="offer__feature offer__feature--entire">{offer.type}</li>
+            <li className="offer__feature offer__feature--entire" style={{ textTransform: 'capitalize' }}>{offer.type}</li>
             <li className="offer__feature offer__feature--bedrooms">
-              {offer.bedrooms} Bedrooms
+              {offer.bedrooms} Bedroom{offer.bedrooms > 1 ? 's' : ''}
             </li>
             <li className="offer__feature offer__feature--adults">
-              Max {offer.maxAdults} adults
+              Max {offer.maxAdults} adult{offer.maxAdults > 1 ? 's' : ''}
             </li>
           </ul>
           <div className="offer__price">

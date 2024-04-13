@@ -14,11 +14,7 @@ import { useAppSelector } from '../../hooks';
 import { useAuthorizationStatusSelector } from '../../store/reducer/user/selectors';
 import { isCheckingAuthorization } from '../../services/utils';
 
-type AppProps = {
-  cardsCount: number;
-};
-
-function App({ cardsCount }: AppProps) {
+function App() {
   const authorizationStatus = useAppSelector(useAuthorizationStatusSelector);
 
   if (isCheckingAuthorization(authorizationStatus)) {
@@ -35,7 +31,7 @@ function App({ cardsCount }: AppProps) {
         >
           <Route
             index
-            element={<Main cardsCount={cardsCount} />}
+            element={<Main />}
           />
           <Route
             path={AppRoute.Favorites}

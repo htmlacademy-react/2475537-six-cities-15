@@ -7,12 +7,10 @@ import CityOffersEmpty from '../../components/cityOffers/cityOffersEmpty';
 import { fetchOffers } from '../../api/api-actions';
 import { useAuthorizationStatusSelector } from '../../store/reducer/user/selectors';
 import { AuthorizationStatus } from '../../const';
+import CitiesList from '../../components/citiesList/citiesList';
+import { cities } from '../../mocks/cities';
 
-type MainProps = {
-  cardsCount: number;
-};
-
-function Main({ cardsCount }: MainProps) {
+function Main() {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(useAuthorizationStatusSelector);
   const isDataLoading = useAppSelector(useIsDataLoadingSelector);
@@ -31,11 +29,14 @@ function Main({ cardsCount }: MainProps) {
   const isEmpty = offers.length === 0;
 
   return (
-    <main className={`page__main page__main--index ${isEmpty ? 'page__main--index-empty' : ''}`}>
-      <div className="cities">
-        {isEmpty ? <CityOffersEmpty /> : <CityOffers cardsCount={cardsCount} offers={offers}/> }
-      </div>
-    </main>);
+    <>
+      <CitiesList cities={cities} />
+      <main className={`page__main page__main--index ${isEmpty ? 'page__main--index-empty' : ''}`}>
+        <div className="cities">
+          {isEmpty ? <CityOffersEmpty /> : <CityOffers offers={offers}/> }
+        </div>
+      </main>
+    </>);
 }
 
 export default Main;

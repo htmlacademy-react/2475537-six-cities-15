@@ -13,10 +13,6 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-const AppSettings = {
-  cardsCount: 6
-} as const;
-
 store.dispatch(checkAuthorization());
 
 root.render(
@@ -24,7 +20,7 @@ root.render(
     <Provider store={store}>
       <HistoryRouter history={browserHistory}>
         <ToastContainer />
-        <App cardsCount={AppSettings.cardsCount} />
+        <App />
       </HistoryRouter>
     </Provider>
   </React.StrictMode>

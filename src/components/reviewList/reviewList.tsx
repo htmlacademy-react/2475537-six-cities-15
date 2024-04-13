@@ -2,11 +2,10 @@ import { useEffect } from 'react';
 import ReviewCard from '../../components/reviewCard/reviewCard';
 import ReviewForm from '../../components/reviewForm/reviewForm';
 import Loader from '../../components/loader/loader';
-import { NewReview } from '../../types/offer';
 import { useAuthorizationStatusSelector } from '../../store/reducer/user/selectors';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { useIsOfferReviewsLoadingSelector, useOfferReviewsSelector } from '../../store/reducer/data/selectors';
-import { fetchOfferReviews, fetchAddReview } from '../../api/api-actions';
+import { fetchOfferReviews } from '../../api/api-actions';
 import { isAuthorized } from '../../services/utils';
 
 type ReviewListProps = {
@@ -18,10 +17,6 @@ function ReviewList({ offerId }: ReviewListProps) {
   const reviews = useAppSelector(useOfferReviewsSelector);
   const isOfferReviewsLoading = useAppSelector(useIsOfferReviewsLoadingSelector);
   const authorizationStatus = useAppSelector(useAuthorizationStatusSelector);
-
-  const reviewAdded = (newReview: NewReview) => {
-    dispatch(fetchAddReview(newReview));
-  };
 
   useEffect(() => {
     dispatch(fetchOfferReviews(offerId));
@@ -56,7 +51,7 @@ function ReviewList({ offerId }: ReviewListProps) {
         ))}
       </ul>
       {isAuthorized(authorizationStatus) && (
-        <ReviewForm onReviewAdded={reviewAdded} offerId={offerId} />
+        <ReviewForm offerId={offerId} />
       )}
     </section>
   );

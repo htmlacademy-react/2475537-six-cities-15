@@ -21,7 +21,7 @@ function HostCard({ host, description }: HostCardProps) {
           />
         </div>
         <span className="offer__user-name">{host.name}</span>
-        <span className="offer__user-status"></span>
+        {host.isPro && (<span className="offer__user-status">Pro</span>)}
       </div>
       <div className="offer__description">{description}</div>
     </div>

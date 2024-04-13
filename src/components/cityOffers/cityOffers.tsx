@@ -10,11 +10,10 @@ import { OfferPreview } from '../../types/offer';
 import { useCurrentCitySelector } from '../../store/reducer/application/selectors';
 
 type CityOffersProps = {
-  cardsCount: number;
   offers: OfferPreview[];
 };
 
-function CityOffers({ cardsCount, offers }: CityOffersProps) {
+function CityOffers({ offers }: CityOffersProps) {
   const dispatch = useAppDispatch();
 
   const [activeCard, setActiveCard] = useState<string | null>(null);
@@ -45,7 +44,7 @@ function CityOffers({ cardsCount, offers }: CityOffersProps) {
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">{sortedOffers.length} places to stay in {currentCity.title}</b>
         <OfferSorting allowedSorting={allowedSorting} currentSorting={currentSorting} onSortChanged={handleSortingChanged} />
-        <RentCardList cardsCount={cardsCount} offers={sortedOffers} onActiveCardChanged={handleActiveCardChanged} onFavoriteStatusChanged={handleFavoriteStatusChanged} />
+        <RentCardList offers={sortedOffers} onActiveCardChanged={handleActiveCardChanged} onFavoriteStatusChanged={handleFavoriteStatusChanged} />
       </section>
       <div className="cities__right-section">
         <Map offers={sortedOffers} activeOffer={activeCard} className="cities" center={currentCity.location} />

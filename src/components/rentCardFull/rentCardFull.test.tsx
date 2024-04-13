@@ -30,8 +30,8 @@ describe('RentCardFull', () => {
     render(withHistoryComponent);
 
     expect(screen.getByText(offer.title)).toBeInTheDocument();
-    expect(screen.getByText(`${offer.bedrooms} Bedrooms`)).toBeInTheDocument();
-    expect(screen.getByText(`Max ${offer.maxAdults} adults`)).toBeInTheDocument();
+    expect(screen.getByText(`${offer.bedrooms} Bedroom${offer.bedrooms > 1 ? 's' : ''}`)).toBeInTheDocument();
+    expect(screen.getByText(`Max ${offer.maxAdults} adult${offer.maxAdults > 1 ? 's' : ''}`)).toBeInTheDocument();
   });
 
   it('should render RentCardFull component with isFavorite mark', () => {

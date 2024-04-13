@@ -82,7 +82,7 @@ function RentCard({ offer, onActiveCardChanged, onFavoriteStatusChanged, cardTyp
         <h2 className="place-card__name">
           <Link to={`/offer/${offer.id}`}>{offer.title}</Link>
         </h2>
-        <p className="place-card__type">{offer.type}</p>
+        <p className="place-card__type" style={{ textTransform: 'capitalize' }}>{offer.type}</p>
       </div>
     </article>
   );

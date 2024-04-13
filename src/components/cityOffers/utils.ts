@@ -6,10 +6,10 @@ export function sortOffers(offers: OfferPreview[], order: SortOrder) {
     case SortType.Popular:
       return offers;
     case SortType.PriceLowToHigh:
-      return offers.sort((a, b) => a.price - b.price);
+      return [...offers].sort((a, b) => a.price - b.price);
     case SortType.PriceHighToLow:
-      return offers.sort((a, b) => b.price - a.price);
+      return [...offers].sort((a, b) => b.price - a.price);
     case SortType.Rating:
-      return offers.sort((a, b) => b.rating - a.rating);
+      return [...offers].sort((a, b) => b.rating - a.rating);
   }
 }

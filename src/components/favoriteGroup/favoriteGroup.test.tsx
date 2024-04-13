@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { withHistory } from '../../mocks/mockComponents';
 import FavoriteGroup from './favoriteGroup';
 
 describe('FavoriteGroup', () => {
@@ -6,7 +7,8 @@ describe('FavoriteGroup', () => {
 
   it('should render FavoriteGroup component with selected city', () => {
     const expectedCity = 'City';
-    render(<FavoriteGroup offers={[]} city={expectedCity} onFavoriteStatusChanged={onFavoriteStatusChanged} />);
+    const withHistoryComponent = withHistory(<FavoriteGroup offers={[]} city={expectedCity} onFavoriteStatusChanged={onFavoriteStatusChanged} />); 
+    render(withHistoryComponent);
 
     expect(screen.getByText(expectedCity)).toBeInTheDocument();
   });
