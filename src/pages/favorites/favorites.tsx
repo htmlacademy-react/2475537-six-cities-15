@@ -1,5 +1,5 @@
 import { fetchSetNotFavoriteStatus } from '../../api/api-actions';
-import FavoriteGroup from '../../components/favoriteGroup/favoriteGroup';
+import FavoriteGroup from '../../components/favorite-group/favorite-group';
 import Loader from '../../components/loader/loader';
 import { OfferPreview } from '../../types/offer';
 import { useAppSelector, useAppDispatch } from '../../hooks';

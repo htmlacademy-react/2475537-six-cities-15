@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryHistory, createMemoryHistory } from 'history';
 import { Outlet } from 'react-router-dom';
 import App from './app';
-import { withHistory, withStore } from '../../mocks/mockComponents';
+import { withHistory, withStore } from '../../mocks/mock-components';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { Namespace } from '../../store/const';
 

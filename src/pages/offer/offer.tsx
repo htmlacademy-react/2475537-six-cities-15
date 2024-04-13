@@ -1,8 +1,8 @@
 import { useEffect, useCallback } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { AppRoute, CardType } from '../../const';
-import RentCardFull from '../../components/rentCardFull/rentCardFull';
-import RentCard from '../../components/rentCard/rentCard';
+import RentCardFull from '../../components/rent-card-full/rent-card-full';
+import RentCard from '../../components/rent-card/rent-card';
 import Map from '../../components/map/map';
 import Loader from '../../components/loader/loader';
 import { fetchSingleOffer, fetchNearOffers, fetchSetNotFavoriteStatus, fetchSetFavoriteStatus } from '../../api/api-actions';

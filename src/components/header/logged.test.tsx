@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Logged from './logged';
-import { withHistory, withStore } from '../../mocks/mockComponents';
+import { withHistory, withStore } from '../../mocks/mock-components';
 import { AuthorizationStatus } from '../../const';
 import { Namespace } from '../../store/const';
 import { extractActionsTypes, makeFakeStore, makeFakeUser } from '../../mocks/mocks';

@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import 'leaflet/dist/leaflet.css';
-import useMap from '../../hooks/useMap';
-import useMapMarkers from '../../hooks/useMapMarkers';
+import useMap from '../../hooks/use-map';
+import useMapMarkers from '../../hooks/use-map-markers';
 import { OfferPreview } from '../../types/offer';
 import { Coords } from '../../types/location';
 

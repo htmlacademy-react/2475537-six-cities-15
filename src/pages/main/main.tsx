@@ -2,12 +2,12 @@ import Loader from '../../components/loader/loader';
 import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { useIsDataLoadingSelector, useOffersSelector } from '../../store/reducer/data/selectors';
-import CityOffers from '../../components/cityOffers/cityOffers';
-import CityOffersEmpty from '../../components/cityOffers/cityOffersEmpty';
+import CityOffers from '../../components/city-offers/city-offers';
+import CityOffersEmpty from '../../components/city-offers/city-offers-empty';
 import { fetchOffers } from '../../api/api-actions';
 import { useAuthorizationStatusSelector } from '../../store/reducer/user/selectors';
 import { AuthorizationStatus } from '../../const';
-import CitiesList from '../../components/citiesList/citiesList';
+import CitiesList from '../../components/cities-list/cities-list';
 import { cities } from '../../mocks/cities';
 
 function Main() {

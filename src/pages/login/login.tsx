@@ -1,7 +1,7 @@
 import { Navigate, Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks/index';
-import LoginForm from '../../components/loginForm/loginForm';
+import LoginForm from '../../components/login-form/login-form';
 import { useAuthorizationStatusSelector } from '../../store/reducer/user/selectors';
 import { isAuthorized } from '../../services/utils';
 import { cities } from '../../mocks/cities';
