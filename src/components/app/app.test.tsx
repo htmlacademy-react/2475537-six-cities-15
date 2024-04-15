@@ -30,7 +30,7 @@ describe('Application Routing', () => {
   });
 
   it('should render main page when user navigate to "/"', () => {
-    const { withStoreComponent } = withStore(<App cardsCount={1} />, { [Namespace.User]: { authorizationStatus: AuthorizationStatus.NoAuth, user: null } });
+    const { withStoreComponent } = withStore(<App />, { [Namespace.User]: { authorizationStatus: AuthorizationStatus.NoAuth, user: null } });
     const withHistoryComponent = withHistory(withStoreComponent, mockHistory);
 
     mockHistory.push(AppRoute.Root);
@@ -41,7 +41,7 @@ describe('Application Routing', () => {
   });
 
   it('should render offer page when user navigate to "/offer"', () => {
-    const { withStoreComponent } = withStore(<App cardsCount={1} />, { [Namespace.User]: { authorizationStatus: AuthorizationStatus.NoAuth, user: null } });
+    const { withStoreComponent } = withStore(<App />, { [Namespace.User]: { authorizationStatus: AuthorizationStatus.NoAuth, user: null } });
     const withHistoryComponent = withHistory(withStoreComponent, mockHistory);
 
     mockHistory.push(AppRoute.Offer);
@@ -52,7 +52,7 @@ describe('Application Routing', () => {
   });
 
   it('should render favorites page when user navigate to "/favorites"', () => {
-    const { withStoreComponent } = withStore(<App cardsCount={1} />, { [Namespace.User]: { authorizationStatus: AuthorizationStatus.Auth, user: null } });
+    const { withStoreComponent } = withStore(<App />, { [Namespace.User]: { authorizationStatus: AuthorizationStatus.Auth, user: null } });
     const withHistoryComponent = withHistory(withStoreComponent, mockHistory);
 
     mockHistory.push(AppRoute.Favorites);
@@ -63,7 +63,7 @@ describe('Application Routing', () => {
   });
 
   it('should render not found page when user navigate to non-existent route', () => {
-    const { withStoreComponent } = withStore(<App cardsCount={1} />, { [Namespace.User]: { authorizationStatus: AuthorizationStatus.Auth, user: null } });
+    const { withStoreComponent } = withStore(<App />, { [Namespace.User]: { authorizationStatus: AuthorizationStatus.Auth, user: null } });
     const withHistoryComponent = withHistory(withStoreComponent, mockHistory);
 
     mockHistory.push('/unknown-route');

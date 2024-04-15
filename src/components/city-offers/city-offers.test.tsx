@@ -36,7 +36,7 @@ describe('CityOffers', () => {
   const currentCity = makeFakeCity();
 
   it('should render CityOffers component', () => {
-    const { withStoreComponent } = withStore(<CityOffers cardsCount={1} offers={[]} />, { [Namespace.Application]: { currentCity } });
+    const { withStoreComponent } = withStore(<CityOffers offers={[]} />, { [Namespace.Application]: { currentCity } });
     render(withStoreComponent);
 
     expect(screen.getByText('Offer sorting')).toBeInTheDocument();
@@ -50,14 +50,14 @@ describe('CityOffers', () => {
       offers.push(makeFakeOfferPreview());
     }
 
-    const { withStoreComponent } = withStore(<CityOffers cardsCount={1} offers={offers} />, { [Namespace.Application]: { currentCity } });
+    const { withStoreComponent } = withStore(<CityOffers offers={offers} />, { [Namespace.Application]: { currentCity } });
     render(withStoreComponent);
 
     expect(screen.getByText(`${offers.length} places to stay in ${currentCity.title}`)).toBeInTheDocument();
   });
 
   it('should handle change favorite status on CityOffers component', async () => {
-    const { withStoreComponent, mockStore, mockAxiosAdapter } = withStore(<CityOffers cardsCount={1} offers={[]} />, { [Namespace.Application]: { currentCity } });
+    const { withStoreComponent, mockStore, mockAxiosAdapter } = withStore(<CityOffers offers={[]} />, { [Namespace.Application]: { currentCity } });
     mockAxiosAdapter.onPost(/\/favorite\/*/).reply(200);
 
     render(withStoreComponent);
@@ -71,7 +71,7 @@ describe('CityOffers', () => {
   });
 
   it('should handle change favorite status on CityOffers component', async () => {
-    const { withStoreComponent, mockStore, mockAxiosAdapter } = withStore(<CityOffers cardsCount={1} offers={[]} />, { [Namespace.Application]: { currentCity } });
+    const { withStoreComponent, mockStore, mockAxiosAdapter } = withStore(<CityOffers offers={[]} />, { [Namespace.Application]: { currentCity } });
     mockAxiosAdapter.onPost(/\/favorite\/*/).reply(200);
 
     render(withStoreComponent);
