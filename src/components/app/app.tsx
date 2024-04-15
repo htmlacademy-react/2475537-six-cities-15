@@ -2,23 +2,19 @@ import { Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AppRoute } from '../../const';
 import Layout from '../layout/layout';
-import PrivateRoute from '../privateRoute/privateRoute';
+import PrivateRoute from '../private-route/private-route';
 import Main from '../../pages/main/main';
 import Favorites from '../../pages/favorites/favorites';
 import Login from '../../pages/login/login';
-import NotFound from '../../pages/notFound/notFound';
+import NotFound from '../../pages/not-found/not-found';
 import Offer from '../../pages/offer/offer';
-import ScrollTop from '../scrollTop/scrollTop';
+import ScrollTop from '../scroll-top/scroll-top';
 import Loader from '../loader/loader';
 import { useAppSelector } from '../../hooks';
 import { useAuthorizationStatusSelector } from '../../store/reducer/user/selectors';
 import { isCheckingAuthorization } from '../../services/utils';
 
-type AppProps = {
-  cardsCount: number;
-};
-
-function App({ cardsCount }: AppProps) {
+function App() {
   const authorizationStatus = useAppSelector(useAuthorizationStatusSelector);
 
   if (isCheckingAuthorization(authorizationStatus)) {
@@ -35,7 +31,7 @@ function App({ cardsCount }: AppProps) {
         >
           <Route
             index
-            element={<Main cardsCount={cardsCount} />}
+            element={<Main />}
           />
           <Route
             path={AppRoute.Favorites}

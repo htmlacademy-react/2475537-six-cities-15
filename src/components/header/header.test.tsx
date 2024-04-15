@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import Header from './header';
-import { withHistory, withStore } from '../../mocks/mockComponents';
+import { withHistory, withStore } from '../../mocks/mock-components';
 import { AuthorizationStatus } from '../../const';
 import { Namespace } from '../../store/const';
 
@@ -8,7 +8,7 @@ vi.mock('./logged', () => ({
   default: () => (<p>Logged</p>)
 }));
 
-vi.mock('./notLogged', () => ({
+vi.mock('./not-logged', () => ({
   default: () => (<p>Not Logged</p>)
 }));
 

@@ -6,16 +6,12 @@ import App from './components/app/app';
 import { store } from './store';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import HistoryRouter from './components/historyRoute/historyRoute';
-import browserHistory from './services/browserHistory';
+import HistoryRouter from './components/history-route/history-route';
+import browserHistory from './services/browser-history';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-
-const AppSettings = {
-  cardsCount: 6
-} as const;
 
 store.dispatch(checkAuthorization());
 
@@ -24,7 +20,7 @@ root.render(
     <Provider store={store}>
       <HistoryRouter history={browserHistory}>
         <ToastContainer />
-        <App cardsCount={AppSettings.cardsCount} />
+        <App />
       </HistoryRouter>
     </Provider>
   </React.StrictMode>

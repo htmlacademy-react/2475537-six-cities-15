@@ -1,9 +1,10 @@
 import { Navigate, Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks/index';
-import LoginForm from '../../components/loginForm/loginForm';
+import LoginForm from '../../components/login-form/login-form';
 import { useAuthorizationStatusSelector } from '../../store/reducer/user/selectors';
 import { isAuthorized } from '../../services/utils';
+import { cities } from '../../mocks/cities';
 
 function Login() {
   const authorizationStatus = useAppSelector(useAuthorizationStatusSelector);
@@ -11,6 +12,8 @@ function Login() {
   if (isAuthorized(authorizationStatus)) {
     return (<Navigate to={AppRoute.Root} />);
   }
+
+  const randomCity = cities[Math.floor(Math.random() * (cities.length + 1))];
 
   return (
     <div className="page page--gray page--login">
@@ -34,9 +37,9 @@ function Login() {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <Link className="locations__item-link" to={`${AppRoute.Root}?city=${randomCity.code}`}>
+                <span>{randomCity.title}</span>
+              </Link>
             </div>
           </section>
         </div>

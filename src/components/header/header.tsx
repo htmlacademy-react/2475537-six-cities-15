@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks/index';
 import Logged from './logged';
-import NotLogged from './notLogged';
+import NotLogged from './not-logged';
 import { useAuthorizationStatusSelector } from '../../store/reducer/user/selectors';
 import { isAuthorized } from '../../services/utils';
 
